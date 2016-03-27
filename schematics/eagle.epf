@@ -1,0 +1,39 @@
+[Eagle]
+Version="07 05 00"
+Platform="Linux"
+Serial="62191E841E-LSR-WLM-1EL"
+Globals="Globals"
+Desktop="Desktop"
+
+[Globals]
+AutoSaveProject=1
+UsedLibrary="side-libs/SparkFun-Eagle-Libraries/GeekAmmo.lbr"
+UsedLibrary="side-libs/SparkFun-Eagle-Libraries/LilyPad-Wearables.lbr"
+UsedLibrary="side-libs/SparkFun-Eagle-Libraries/SparkFun-Aesthetics.lbr"
+UsedLibrary="side-libs/SparkFun-Eagle-Libraries/SparkFun-AnalogIC.lbr"
+UsedLibrary="side-libs/SparkFun-Eagle-Libraries/SparkFun-Boards.lbr"
+UsedLibrary="side-libs/SparkFun-Eagle-Libraries/SparkFun-Capacitors.lbr"
+UsedLibrary="side-libs/SparkFun-Eagle-Libraries/SparkFun-Connectors.lbr"
+UsedLibrary="side-libs/SparkFun-Eagle-Libraries/SparkFun-DigitalIC.lbr"
+UsedLibrary="side-libs/SparkFun-Eagle-Libraries/SparkFun-DiscreteSemi.lbr"
+UsedLibrary="side-libs/SparkFun-Eagle-Libraries/SparkFun-Displays.lbr"
+UsedLibrary="side-libs/SparkFun-Eagle-Libraries/SparkFun-Electromechanical.lbr"
+UsedLibrary="side-libs/SparkFun-Eagle-Libraries/SparkFun-FreqCtrl.lbr"
+UsedLibrary="side-libs/SparkFun-Eagle-Libraries/SparkFun-LED.lbr"
+UsedLibrary="side-libs/SparkFun-Eagle-Libraries/SparkFun-Passives.lbr"
+UsedLibrary="side-libs/SparkFun-Eagle-Libraries/SparkFun-PowerIC.lbr"
+UsedLibrary="side-libs/SparkFun-Eagle-Libraries/SparkFun-RF.lbr"
+UsedLibrary="side-libs/SparkFun-Eagle-Libraries/SparkFun-Resistors.lbr"
+UsedLibrary="side-libs/SparkFun-Eagle-Libraries/SparkFun-Retired.lbr"
+UsedLibrary="side-libs/SparkFun-Eagle-Libraries/SparkFun-Sensors.lbr"
+UsedLibrary="side-libs/SparkFun-Eagle-Libraries/User-Submitted.lbr"
+
+[Win_1]
+Type="Control Panel"
+Loc="452 198 1340 838"
+State=2
+Number=0
+
+[Desktop]
+Screen="2704 1050"
+Window="Win_1"
