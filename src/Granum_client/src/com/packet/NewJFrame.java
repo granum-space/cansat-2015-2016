@@ -6,7 +6,6 @@
 package com.packet;
 
 import javax.swing.JOptionPane;
-import jssc.*;
 
 /**
  *
