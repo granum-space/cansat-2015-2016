@@ -26,6 +26,8 @@ public class NewJFrame extends javax.swing.JFrame {
     public static String port = null;
     public static boolean isOpened = false;
     
+    public static byte pkt_number = 0;
+    
     private static SerialPort serialPort;
 
     
@@ -214,9 +216,15 @@ public class NewJFrame extends javax.swing.JFrame {
             
         }
         else {
-            isOpened = false;
-            jTextField1.setEditable(true);
-            jButton2.setText("Open");
+            try {
+                serialPort.closePort();
+                isOpened = false;
+                jTextField1.setEditable(true);
+                jButton2.setText("Open");
+            }
+            catch (SerialPortException ex) {
+                JOptionPane.showMessageDialog(rootPane, "Can't close (" + ex + ")");
+            }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -265,9 +273,12 @@ public class NewJFrame extends javax.swing.JFrame {
             public void run() {
                 new NewJFrame().setVisible(true);
             }
+        
         });
     }
-
+    public void set_text(String text) {
+        jButton1.setText(text);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
