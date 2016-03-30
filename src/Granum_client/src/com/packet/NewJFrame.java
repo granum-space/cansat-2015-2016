@@ -5,8 +5,7 @@
  */
 package com.packet;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.swing.JOptionPane;
 import jssc.SerialPort;
 import jssc.SerialPortEvent;
@@ -24,9 +23,10 @@ public class NewJFrame extends javax.swing.JFrame {
      * Creates new form NewJFrame
      */
     public static String port = null;
-    public static boolean isOpened = false;
     
-    public static byte pkt_number = 0;
+    static byte step = 1;
+    static dtpkt_t pkt = new dtpkt_t();
+    static int buf;
     
     private static SerialPort serialPort;
 
@@ -44,6 +44,7 @@ public class NewJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
@@ -59,7 +60,24 @@ public class NewJFrame extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("COM & Packet");
@@ -100,12 +118,19 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jLabel12.setText("Fell");
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+        jLabel13.setText("jLabel13");
+
+        jLabel14.setText("jLabel14");
+
+        jLabel15.setText("jLabel15");
+
+        jLabel16.setText("jLabel16");
+
+        jLabel17.setText("jLabel17");
+
+        jLabel18.setText("jLabel18");
+
+        jLabel19.setText("jLabel19");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -131,52 +156,73 @@ public class NewJFrame extends javax.swing.JFrame {
                             .addComponent(jLabel6)
                             .addComponent(jLabel7)
                             .addComponent(jLabel8))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING))
-                            .addComponent(jButton1))
-                        .addGap(0, 6, Short.MAX_VALUE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel13)
+                                    .addComponent(jLabel14)
+                                    .addComponent(jLabel15)
+                                    .addComponent(jLabel16)
+                                    .addComponent(jLabel17))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addGap(0, 69, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel18)
+                                    .addComponent(jLabel19))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton2)
-                                    .addComponent(jLabel3)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(29, 29, 29)
-                                .addComponent(jLabel10)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel9))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel11))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel12))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel6))
-                    .addComponent(jButton1))
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2)
+                            .addComponent(jLabel3)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(jLabel10)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(jLabel13))
+                    .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel8)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel14))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel15))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel16))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel17))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel18))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel19))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -195,7 +241,7 @@ public class NewJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if(isOpened == false) {
+        if(serialPort.isOpened() == false) {
             port = jTextField1.getText();
             jTextField1.setEditable(false);
             try {
@@ -206,7 +252,6 @@ public class NewJFrame extends javax.swing.JFrame {
                                      SerialPort.STOPBITS_1,
                                      SerialPort.PARITY_NONE);
                 serialPort.addEventListener(new PortReader(), SerialPort.MASK_RXCHAR);
-                isOpened = true;
                 jButton2.setText("Close");
             }
             catch (SerialPortException ex) {
@@ -218,7 +263,6 @@ public class NewJFrame extends javax.swing.JFrame {
         else {
             try {
                 serialPort.closePort();
-                isOpened = false;
                 jTextField1.setEditable(true);
                 jButton2.setText("Open");
             }
@@ -231,14 +275,6 @@ public class NewJFrame extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-            serialPort.writeByte((byte) 25);
-        } catch (SerialPortException ex) {
-            JOptionPane.showMessageDialog(rootPane, "Can't write (" + ex + ")");
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -268,6 +304,7 @@ public class NewJFrame extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
 
+        serialPort = new SerialPort("null");
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -276,16 +313,27 @@ public class NewJFrame extends javax.swing.JFrame {
         
         });
     }
-    public void set_text(String text) {
-        jButton1.setText(text);
-    }
+    
+    public void display_packet(dtpkt_t packet) {
+            jLabel13.setText(Integer.toString(packet.number));
+            jLabel14.setText(Integer.toString(packet.time));
+            float temperature = packet.temperature1/(float)16;
+            jLabel15.setText(Float.toString(temperature));
+        }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -295,16 +343,151 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
-     private static class PortReader implements SerialPortEventListener {
+     private class PortReader implements SerialPortEventListener {
 
         public void serialEvent(SerialPortEvent event) {
             if(event.isRXCHAR() && event.getEventValue() > 0){
                 try {
-                    //Получаем ответ от устройства, обрабатываем данные и т.д.
-                    byte[] data = serialPort.readBytes();
-                    JOptionPane.showMessageDialog(null, data[0]);
+                    while(serialPort.getInputBufferBytesCount()!=0) {
+                        byte[] data = serialPort.readBytes(1);
+                        int dataint = data[0] & 0xff;
+                        switch(step) {
+                            case 1:
+                                if(dataint == 0xff) {
+                                    step++;
+                                }
+                                break;
+                            case 2:
+                                if(dataint == 0xff) {
+                                    step++;
+                                }
+                                else {
+                                    step = 1;
+                                }
+                                break;
+                            case 3:
+                                buf = dataint;
+                                step++;
+                                break;
+                            case 4:
+                                pkt.number = (int)((dataint<<8)| buf);
+                                step++;
+                                break;
+                            case 5:
+                                buf = dataint;
+                                step++;
+                                break;
+                            case 6:
+                                pkt.time = (int)(dataint<<8 | buf);
+                                step++;
+                                break;
+                            case 7:
+                                buf = dataint;
+                                step++;
+                                break;
+                            case 8:
+                                pkt.time_part = (int)(dataint<<8 | buf);
+                                step++;
+                                break;
+                            case 9:
+                                buf = dataint;
+                                step++;
+                                break;
+                            case 10:
+                                pkt.temperature1 = (int)(dataint<<8 | buf);
+                                step++;
+                                break;
+                            case 11:
+                                buf = dataint;
+                                step++;
+                                break;
+                            case 12:
+                                pkt.temperature2 = (int)(dataint<<8 | buf);
+                                step++;
+                                break;
+                            case 13:
+                                buf = dataint;
+                                step++;
+                                break;
+                            case 14:
+                                pkt.pressure = (int)(dataint<<8 | buf);
+                                step++;
+                                break;
+                            case 15:
+                                buf = dataint;
+                                step++;
+                                break;
+                            case 16:
+                                pkt.humidity = (int)(dataint<<8 | buf);
+                                step++;
+                                break;
+                            case 17:
+                                buf = dataint;
+                                step++;
+                                break;
+                            case 18:
+                                pkt.O2 = (int)(dataint<<8 | buf);
+                                step++;
+                                break;
+                            case 19:
+                                buf = dataint;
+                                step++;
+                                break;
+                            case 20:
+                                pkt.CO2 = (int)(dataint<<8 | buf);
+                                step++;
+                                break;
+                            case 21:
+                                buf = dataint;
+                                step++;
+                                break;
+                            case 22:
+                                pkt.rezistance12 = (int)(dataint<<8 | buf);
+                                step++;
+                                break;
+                            case 23:
+                                buf = dataint;
+                                step++;
+                                break;
+                            case 24:
+                                pkt.rezistance23 = (int)(dataint<<8 | buf);
+                                step++;
+                                break;
+                            case 25:
+                                buf = dataint;
+                                step++;
+                                break;
+                            case 26:
+                                pkt.rezistance13 = (int)(dataint<<8 | buf);
+                                step++;
+                                break;
+                            case 27:
+                                pkt.legs = dataint;
+                                step++;
+                                break;
+                            case 28:
+                                pkt.parachute = dataint;
+                                step++;
+                                break;
+                            case 29:
+                                buf = dataint;
+                                step++;
+                                break;
+                            case 30:
+                                pkt.cntrl = (int)(dataint<<8 | buf);
+                                step = 1;
+                                System.out.println(pkt);
+                                display_packet(pkt);
+                                pkt = new dtpkt_t();
+                                break;
+                            
+                        }
+                    }
                 }
                 catch (SerialPortException ex) {
                     System.out.println(ex);
