@@ -6,6 +6,9 @@
 package com.packet;
 
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import javax.swing.JOptionPane;
 import jssc.SerialPort;
 import jssc.SerialPortEvent;
@@ -25,7 +28,7 @@ public class NewJFrame extends javax.swing.JFrame {
     public static String port = null;
     
     static byte step = 1;
-    static dtpkt_t pkt = new dtpkt_t();
+    static DataPacket pkt = new DataPacket();
     static int buf;
     
     private static SerialPort serialPort;
@@ -253,6 +256,15 @@ public class NewJFrame extends javax.swing.JFrame {
                                      SerialPort.PARITY_NONE);
                 serialPort.addEventListener(new PortReader(), SerialPort.MASK_RXCHAR);
                 jButton2.setText("Close");
+                /*try(FileOutputStream fos=new FileOutputStream("C://SomeDir//notes.txt")) {
+                    fos.write(0xff);
+                    File file = new File();
+                    file.
+                }
+                catch(IOException ex){
+                    System.out.println(ex.getMessage());
+                } */
+
             }
             catch (SerialPortException ex) {
                 JOptionPane.showMessageDialog(rootPane, "Can't open (" + ex + ")");
@@ -314,7 +326,7 @@ public class NewJFrame extends javax.swing.JFrame {
         });
     }
     
-    public void display_packet(dtpkt_t packet) {
+    public void display_packet(DataPacket packet) {
             jLabel13.setText(Integer.toString(packet.number));
             jLabel14.setText(Integer.toString(packet.time));
             float temperature = packet.temperature1/(float)16;
@@ -357,7 +369,6 @@ public class NewJFrame extends javax.swing.JFrame {
                         byte[] data = serialPort.readBytes(1);
                         int dataint = data[0] & 0xff;
                         pkt.truecntrl += dataint;
-                        System.out.println(Integer.toHexString(dataint));
                         switch(step) {
                             case 1:
                                 if(dataint == 0xff) {
@@ -486,14 +497,13 @@ public class NewJFrame extends javax.swing.JFrame {
                                 pkt.cntrl = (int)(dataint<<8 | buf);
                                 step = 1;
                                 if(pkt.check()) {
-                                System.out.println(pkt);
-                                display_packet(pkt);
+                                    display_packet(pkt);
+                                    System.out.println(pkt);
                                 }
-                                pkt = new dtpkt_t();
+                                pkt = new DataPacket();
                                 break;
                             
                         }
-                        System.out.println(Integer.toHexString(pkt.truecntrl));
                     }
                 }
                 catch (SerialPortException ex) {

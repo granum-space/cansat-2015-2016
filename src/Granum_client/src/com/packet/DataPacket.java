@@ -9,8 +9,9 @@ package com.packet;
  *
  * @author Kirs67
  */
-public class dtpkt_t {
-    int beacon; //must be 0xFFFF or 65535
+public class DataPacket {
+    final static int size = 30;
+    final static int beacon = 0xFFFF;
     int number;
     int time, time_part;
     int temperature1, temperature2,
