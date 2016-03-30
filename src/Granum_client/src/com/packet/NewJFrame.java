@@ -356,6 +356,8 @@ public class NewJFrame extends javax.swing.JFrame {
                     while(serialPort.getInputBufferBytesCount()!=0) {
                         byte[] data = serialPort.readBytes(1);
                         int dataint = data[0] & 0xff;
+                        pkt.truecntrl += dataint;
+                        System.out.println(Integer.toHexString(dataint));
                         switch(step) {
                             case 1:
                                 if(dataint == 0xff) {
@@ -476,17 +478,22 @@ public class NewJFrame extends javax.swing.JFrame {
                                 break;
                             case 29:
                                 buf = dataint;
+                                pkt.truecntrl -= dataint;
                                 step++;
                                 break;
                             case 30:
+                                pkt.truecntrl -= dataint;
                                 pkt.cntrl = (int)(dataint<<8 | buf);
                                 step = 1;
+                                if(pkt.check()) {
                                 System.out.println(pkt);
                                 display_packet(pkt);
+                                }
                                 pkt = new dtpkt_t();
                                 break;
                             
                         }
+                        System.out.println(Integer.toHexString(pkt.truecntrl));
                     }
                 }
                 catch (SerialPortException ex) {

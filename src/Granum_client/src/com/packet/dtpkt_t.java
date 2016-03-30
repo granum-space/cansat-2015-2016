@@ -20,10 +20,17 @@ public class dtpkt_t {
 		rezistance12, rezistance23, rezistance13;
     int legs, parachute;
     int cntrl;
+    int truecntrl;
     public String toString() {
         String str = new String();
         str+= "Data packet number";
         str+= Integer.toString(number);
         return str;
+    }
+    public boolean check() {
+        truecntrl &= 0xffff;
+        /*System.out.println(Integer.toHexString(cntrl));
+        System.out.println(Integer.toHexString(truecntrl));*/
+        return truecntrl==cntrl;
     }
 }
