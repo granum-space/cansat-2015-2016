@@ -6,9 +6,6 @@
 package com.packet;
 
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import javax.swing.JOptionPane;
 import jssc.SerialPort;
 import jssc.SerialPortEvent;
@@ -27,9 +24,12 @@ public class NewJFrame extends javax.swing.JFrame {
      */
     public static String port = null;
     
-    static byte step = 1;
+    byte step = 1;
     static DataPacket pkt = new DataPacket();
-    static int buf;
+    int buf;
+    
+    DisplayPacket display = new DisplayPacket();
+    PacketParser parser = new PacketParser(display);
     
     private static SerialPort serialPort;
 
@@ -304,21 +304,19 @@ public class NewJFrame extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        
         //</editor-fold>
         //</editor-fold>
 
         serialPort = new SerialPort("null");
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new NewJFrame().setVisible(true);
             }
@@ -326,7 +324,30 @@ public class NewJFrame extends javax.swing.JFrame {
         });
     }
     
-    public void display_packet(DataPacket packet) {
+    public void SetNumber(int arg) {
+        jLabel13.setText(Integer.toString(arg));
+    }
+    private void SetTime(int arg) {
+        jLabel14.setText(Integer.toString(arg));
+    }
+    private void SetTemperature1(int arg) {
+        jLabel15.setText(Integer.toString(arg));
+    }
+    private void SetPressure(int arg) {
+        jLabel16.setText(Integer.toString(arg));
+    }
+    private void SetHumidity(int arg) {
+        jLabel17.setText(Integer.toString(arg));
+    }
+    private void SetOxygen(int arg) {
+        jLabel18.setText(Integer.toString(arg));
+    }
+    private void SetCO2(int arg) {
+        jLabel19.setText(Integer.toString(arg));
+    }
+    
+    public void display_packet() {
+            DataPacket packet = display.datapacket;
             jLabel13.setText(Integer.toString(packet.number));
             jLabel14.setText(Integer.toString(packet.time));
             float temperature = packet.temperature1/(float)16;
@@ -339,13 +360,13 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
+    protected javax.swing.JLabel jLabel13;
+    protected javax.swing.JLabel jLabel14;
+    protected javax.swing.JLabel jLabel15;
+    protected javax.swing.JLabel jLabel16;
+    protected javax.swing.JLabel jLabel17;
+    protected javax.swing.JLabel jLabel18;
+    protected javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -356,158 +377,23 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
      private class PortReader implements SerialPortEventListener {
 
+        @Override
         public void serialEvent(SerialPortEvent event) {
             if(event.isRXCHAR() && event.getEventValue() > 0){
                 try {
                     while(serialPort.getInputBufferBytesCount()!=0) {
-                        byte[] data = serialPort.readBytes(1);
-                        int dataint = data[0] & 0xff;
-                        pkt.truecntrl += dataint;
-                        switch(step) {
-                            case 1:
-                                if(dataint == 0xff) {
-                                    step++;
-                                }
-                                break;
-                            case 2:
-                                if(dataint == 0xff) {
-                                    step++;
-                                }
-                                else {
-                                    step = 1;
-                                }
-                                break;
-                            case 3:
-                                buf = dataint;
-                                step++;
-                                break;
-                            case 4:
-                                pkt.number = (int)((dataint<<8)| buf);
-                                step++;
-                                break;
-                            case 5:
-                                buf = dataint;
-                                step++;
-                                break;
-                            case 6:
-                                pkt.time = (int)(dataint<<8 | buf);
-                                step++;
-                                break;
-                            case 7:
-                                buf = dataint;
-                                step++;
-                                break;
-                            case 8:
-                                pkt.time_part = (int)(dataint<<8 | buf);
-                                step++;
-                                break;
-                            case 9:
-                                buf = dataint;
-                                step++;
-                                break;
-                            case 10:
-                                pkt.temperature1 = (int)(dataint<<8 | buf);
-                                step++;
-                                break;
-                            case 11:
-                                buf = dataint;
-                                step++;
-                                break;
-                            case 12:
-                                pkt.temperature2 = (int)(dataint<<8 | buf);
-                                step++;
-                                break;
-                            case 13:
-                                buf = dataint;
-                                step++;
-                                break;
-                            case 14:
-                                pkt.pressure = (int)(dataint<<8 | buf);
-                                step++;
-                                break;
-                            case 15:
-                                buf = dataint;
-                                step++;
-                                break;
-                            case 16:
-                                pkt.humidity = (int)(dataint<<8 | buf);
-                                step++;
-                                break;
-                            case 17:
-                                buf = dataint;
-                                step++;
-                                break;
-                            case 18:
-                                pkt.O2 = (int)(dataint<<8 | buf);
-                                step++;
-                                break;
-                            case 19:
-                                buf = dataint;
-                                step++;
-                                break;
-                            case 20:
-                                pkt.CO2 = (int)(dataint<<8 | buf);
-                                step++;
-                                break;
-                            case 21:
-                                buf = dataint;
-                                step++;
-                                break;
-                            case 22:
-                                pkt.rezistance12 = (int)(dataint<<8 | buf);
-                                step++;
-                                break;
-                            case 23:
-                                buf = dataint;
-                                step++;
-                                break;
-                            case 24:
-                                pkt.rezistance23 = (int)(dataint<<8 | buf);
-                                step++;
-                                break;
-                            case 25:
-                                buf = dataint;
-                                step++;
-                                break;
-                            case 26:
-                                pkt.rezistance13 = (int)(dataint<<8 | buf);
-                                step++;
-                                break;
-                            case 27:
-                                pkt.legs = dataint;
-                                step++;
-                                break;
-                            case 28:
-                                pkt.parachute = dataint;
-                                step++;
-                                break;
-                            case 29:
-                                buf = dataint;
-                                pkt.truecntrl -= dataint;
-                                step++;
-                                break;
-                            case 30:
-                                pkt.truecntrl -= dataint;
-                                pkt.cntrl = (int)(dataint<<8 | buf);
-                                step = 1;
-                                if(pkt.check()) {
-                                    display_packet(pkt);
-                                    System.out.println(pkt);
-                                }
-                                pkt = new DataPacket();
-                                break;
-                            
-                        }
+                        byte[] bytes = serialPort.readBytes(1);
+                        Integer bigbyte = Byte.toUnsignedInt(bytes[0]);
+                        parser.addByte(bigbyte);
                     }
+                    display_packet();
                 }
                 catch (SerialPortException ex) {
-                    System.out.println(ex);
+                    System.err.println(ex);
                 }
             }
         }

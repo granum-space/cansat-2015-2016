@@ -17,7 +17,7 @@ public class PacketParser {
     private enum State
     {
         STATE_IN_SEARCH, // Состояние поиска макера начала пакета
-        STATE_FOUND_FF, //Состояние после нахождение первой части маркера
+        STATE_FOUND_FF, // Состояние после нахождение первой части маркера
         STATE_IN_ACCUMULATION // Состояние накопления данных пакета
     };
     
@@ -30,63 +30,64 @@ public class PacketParser {
     
     
     State _state = State.STATE_IN_SEARCH;
-    private ArrayList<Byte> _dataContainer;
+    private ArrayList<Integer> _dataContainer = new ArrayList<Integer>(DataPacket.size);
     private PacketAcceptor _acceptor = null;
 
     
-    public void addBytes(Byte[] bytes)
+    public void addByte(Integer byte1)
     {
-        Collections.addAll(_dataContainer, bytes);
-        for (Byte byte1 : bytes) {
-            switch (_state) {
-                case STATE_IN_SEARCH:
-                    if (byte1 == 0xff) {
-                        _state = State.STATE_FOUND_FF;
-                        _dataContainer.add(byte1);
-                    }
-                    break;
-                case STATE_FOUND_FF:
-                    if (byte1 == 0xff) {
-                        _state=State.STATE_IN_ACCUMULATION;
-                        _dataContainer.add(byte1);
+        System.out.println(Integer.toHexString(byte1));
+        switch (_state) {
+            case STATE_IN_SEARCH:
+                if (byte1 == (int)0x0ff) {
+                    _state = State.STATE_FOUND_FF;
+                    _dataContainer.add(byte1);
+                }
+                break;
+            case STATE_FOUND_FF:
+                if (byte1 == (int)0x0ff) {
+                    System.out.println("p");
+                    _state=State.STATE_IN_ACCUMULATION;
+                    _dataContainer.add(byte1);
+                }
+                else {
+                    _state = State.STATE_IN_SEARCH;
+                    _dataContainer.clear();
+                }
+                break;
+            case STATE_IN_ACCUMULATION:
+                _dataContainer.add(byte1);
+                if(_dataContainer.size()== DataPacket.size) {
+                    if(check(_dataContainer)) {
+                        System.out.println("Gone");
+                        onDataPacketFound(_dataContainer);
                     }
                     else {
+                        System.out.println("idiot");
+                        _dataContainer = new ArrayList<Integer>(DataPacket.size);
                         _state = State.STATE_IN_SEARCH;
-                        _dataContainer.clear();
                     }
-                case STATE_IN_ACCUMULATION:
-                    if(_dataContainer.size()== DataPacket.size) {
-                        if(check(_dataContainer)) {
-                            
-                        }
-                        else {
-                            _dataContainer.clear();
-                            _state = State.STATE_IN_SEARCH;
-                        }
-                    }
-                    else {
-                        _dataContainer.add(byte1);
-                    }
-            }
+                }
+                break;
         }
     }
 
 
-    static private boolean check(ArrayList<Byte> data)
+    static private boolean check(ArrayList<Integer> data)
     {
         int retval = 0;
         for (int i = 0; i < DataPacket.size-2;i++)
         {
-            retval += (int)data.get(i) & 0xFF;
+            retval += data.get(i);
         }
         retval &= 0xFFFF;
-        int cntrl = (int)(data.get(29)<<8 | data.get(28));
+        int cntrl = (int)(data.get(DataPacket.size-1)<<8) | data.get(DataPacket.size-2);
         return retval == cntrl;
     }
     
     // функции разбора пакетов. Переименовать на нужные
     // и заменить классы на правильные
-    private void onDataPacketFound(ArrayList<Byte> data)
+    private void onDataPacketFound(ArrayList<Integer> data)
     {
         DataPacket packet = new DataPacket();
         packet.number = (int)((data.get(3)<<8)| data.get(2));
@@ -125,6 +126,11 @@ public class PacketParser {
 
     
     void setAcceptor(PacketAcceptor acceptor)
+    {
+        _acceptor = acceptor;
+    }
+    
+    PacketParser(PacketAcceptor acceptor)
     {
         _acceptor = acceptor;
     }

@@ -22,6 +22,7 @@ public class DataPacket {
     int legs, parachute;
     int cntrl;
     int truecntrl;
+    @Override
     public String toString() {
         String str = new String();
         str+= "Data packet number";
