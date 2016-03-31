@@ -30,10 +30,10 @@ UsedLibrary="side-libs/SparkFun-Eagle-Libraries/User-Submitted.lbr"
 
 [Win_1]
 Type="Control Panel"
-Loc="452 198 1340 838"
+Loc="280 147 1184 681"
 State=2
 Number=0
 
 [Desktop]
-Screen="2704 1050"
+Screen="1280 920"
 Window="Win_1"
