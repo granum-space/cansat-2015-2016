@@ -18,6 +18,7 @@ public class DisplayPacket implements PacketAcceptor {
     @Override
     public void onDataPacket(DataPacket packet) {
         datapacket = packet;
+        System.out.println("Displayed");
     }
     @Override
     public void onAccPacket(AccPacket packet) {

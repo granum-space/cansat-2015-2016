@@ -393,7 +393,7 @@ public class NewJFrame extends javax.swing.JFrame {
                     display_packet();
                 }
                 catch (SerialPortException ex) {
-                    System.err.println(ex);
+                    System.out.println(ex);
                 }
             }
         }

@@ -61,6 +61,7 @@ public class PacketParser {
                     if(check(_dataContainer)) {
                         System.out.println("Gone");
                         onDataPacketFound(_dataContainer);
+                        _dataContainer.clear();
                     }
                     else {
                         System.out.println("idiot");
