@@ -62,7 +62,6 @@ public class NewJFrame extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -116,24 +115,10 @@ public class NewJFrame extends javax.swing.JFrame {
         jLabel8.setText("CO2");
 
         jLabel9.setText("Parachute");
+        jLabel9.setEnabled(false);
 
         jLabel11.setText("Legs");
-
-        jLabel12.setText("Fell");
-
-        jLabel13.setText("jLabel13");
-
-        jLabel14.setText("jLabel14");
-
-        jLabel15.setText("jLabel15");
-
-        jLabel16.setText("jLabel16");
-
-        jLabel17.setText("jLabel17");
-
-        jLabel18.setText("jLabel18");
-
-        jLabel19.setText("jLabel19");
+        jLabel11.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -168,11 +153,10 @@ public class NewJFrame extends javax.swing.JFrame {
                                     .addComponent(jLabel15)
                                     .addComponent(jLabel16)
                                     .addComponent(jLabel17))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING))
+                                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addGap(0, 69, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,7 +192,6 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel12)
                     .addComponent(jLabel15))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -330,11 +313,11 @@ public class NewJFrame extends javax.swing.JFrame {
     private void SetTime(int arg) {
         jLabel14.setText(Integer.toString(arg));
     }
-    private void SetTemperature1(int arg) {
-        jLabel15.setText(Integer.toString(arg));
+    private void SetTemperature1(float arg) {
+        jLabel15.setText(Float.toString(arg));
     }
-    private void SetPressure(int arg) {
-        jLabel16.setText(Integer.toString(arg));
+    private void SetPressure(float arg) {
+        jLabel16.setText(Float.toString(arg));
     }
     private void SetHumidity(int arg) {
         jLabel17.setText(Integer.toString(arg));
@@ -345,13 +328,27 @@ public class NewJFrame extends javax.swing.JFrame {
     private void SetCO2(int arg) {
         jLabel19.setText(Integer.toString(arg));
     }
+    private void SetParachute(int arg) {
+        jLabel9.setEnabled(arg!=0);
+    }
+    private void SetLegs(int arg) {
+        jLabel11.setEnabled(arg!=0);
+    }
     
     public void display_packet() {
             DataPacket packet = display.datapacket;
-            jLabel13.setText(Integer.toString(packet.number));
-            jLabel14.setText(Integer.toString(packet.time));
-            float temperature = packet.temperature1/(float)16;
-            jLabel15.setText(Float.toString(temperature));
+            SetNumber(packet.number);
+            SetTime(packet.time);
+            float temperature1 = packet.temperature1/(float)16;
+            SetTemperature1(temperature1);
+            float pressure = (packet.pressure/1023.0f+0.095f)/0.9f;
+            SetPressure(pressure);
+            SetHumidity(pkt.humidity);
+            SetOxygen(pkt.O2);
+            SetCO2(pkt.CO2);
+            SetParachute(pkt.parachute);
+            SetLegs(pkt.legs);
+            
         }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -359,7 +356,6 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     protected javax.swing.JLabel jLabel13;
     protected javax.swing.JLabel jLabel14;
     protected javax.swing.JLabel jLabel15;
