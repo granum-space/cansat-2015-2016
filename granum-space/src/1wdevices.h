@@ -16,21 +16,9 @@ typedef struct
 	uint16_t temperature;
 } HTData;
 
-HTData ow_getHTData ();
-uint16_t Temper()
-{
-	OneWireReset();
-	OneWireWriteByte(0xCC);
-	OneWireWriteByte(0x44);
-	_delay_ms(1000);
-	OneWireReset();
-	OneWireWriteByte(0xCC);
-	OneWireWriteByte(0xBE);
-	int str[9];
-	for(int i = 0; i<9 ;i++){
-		str[i] = OneWireReadByte();
-}
+uint16_t get_temperature();
+HTData get_dht_data();
 
-	#endif /* HUMIDITY_H_ */
+#endif /* HUMIDITY_H_ */
 
 
