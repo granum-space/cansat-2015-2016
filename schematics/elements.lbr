@@ -417,6 +417,27 @@
 <text x="2.032" y="-0.508" size="1.016" layer="25" ratio="12">&gt;NAME</text>
 <text x="2.032" y="-2.413" size="1.016" layer="27" ratio="12">&gt;VALUE</text>
 </package>
+<package name="SS-8">
+<pad name="COM" x="0" y="-3.81" drill="1" shape="long" rot="R90"/>
+<pad name="P2" x="3" y="-3.81" drill="1" shape="long" rot="R90"/>
+<pad name="P1" x="-3" y="-3.81" drill="1" shape="long" rot="R90"/>
+<pad name="CASE_L" x="-6.25" y="-3.81" drill="1" shape="long" rot="R90"/>
+<pad name="CASE_R" x="6.25" y="-3.81" drill="1" shape="long" rot="R90"/>
+<wire x1="-6.25" y1="-3.81" x2="-6.25" y2="2.99" width="0.127" layer="51"/>
+<wire x1="-6.25" y1="2.99" x2="-3.1" y2="2.99" width="0.127" layer="51"/>
+<wire x1="-3.1" y1="2.99" x2="-0.1" y2="2.99" width="0.127" layer="51"/>
+<wire x1="-0.1" y1="2.99" x2="0.1" y2="2.99" width="0.127" layer="51"/>
+<wire x1="3.1" y1="2.99" x2="6.25" y2="2.99" width="0.127" layer="51"/>
+<wire x1="6.25" y1="2.99" x2="6.25" y2="-3.81" width="0.127" layer="51"/>
+<wire x1="6.25" y1="-3.81" x2="-6.25" y2="-3.81" width="0.127" layer="51"/>
+<wire x1="0.1" y1="2.99" x2="0.1" y2="6.99" width="0.127" layer="51"/>
+<wire x1="0.1" y1="6.99" x2="3.1" y2="6.99" width="0.127" layer="51"/>
+<wire x1="3.1" y1="6.99" x2="3.1" y2="2.99" width="0.127" layer="51"/>
+<wire x1="3.1" y1="2.99" x2="0.1" y2="2.99" width="0.127" layer="51"/>
+<wire x1="-3.1" y1="6.99" x2="-0.1" y2="6.99" width="0.127" layer="51" style="shortdash"/>
+<wire x1="-3.1" y1="2.99" x2="-3.1" y2="6.99" width="0.127" layer="51" style="shortdash"/>
+<wire x1="-0.1" y1="6.99" x2="-0.1" y2="2.99" width="0.127" layer="51" style="shortdash"/>
+</package>
 </packages>
 <symbols>
 <symbol name="AD5241BRU100-REEL7">
@@ -642,6 +663,17 @@
 <pin name="S" x="0" y="-10.16" visible="off" length="middle" rot="R90"/>
 <pin name="D" x="0" y="10.16" visible="off" length="middle" rot="R270"/>
 </symbol>
+<symbol name="SS-8">
+<pin name="COM" x="0" y="-5.08" visible="off" length="middle" rot="R90"/>
+<pin name="P2" x="2.54" y="10.16" visible="off" length="middle" rot="R270"/>
+<pin name="P1" x="-2.54" y="10.16" visible="off" length="middle" rot="R270"/>
+<wire x1="2.54" y1="5.08" x2="1.27" y2="5.08" width="0.254" layer="94"/>
+<wire x1="-2.54" y1="5.08" x2="-1.27" y2="5.08" width="0.254" layer="94"/>
+<wire x1="0" y1="0" x2="1.27" y2="6.35" width="0.254" layer="94"/>
+<pin name="CASE" x="-7.62" y="2.54" visible="off" length="middle"/>
+<text x="-7.62" y="0" size="1.27" layer="95">CASE</text>
+<text x="-2.54" y="15.24" size="1.27" layer="95" font="vector">&gt;Name</text>
+</symbol>
 </symbols>
 <devicesets>
 <deviceset name="AD5241BRU1M-REEL7" prefix="U">
@@ -830,6 +862,29 @@ other applications.&lt;/P&gt;
 <connect gate="G$1" pin="D" pad="3"/>
 <connect gate="G$1" pin="G" pad="1"/>
 <connect gate="G$1" pin="S" pad="2"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="SS-8">
+<description>&lt;h3&gt;SS-8&lt;/h3&gt;
+&lt;p&gt;Наименование: Переключатель мини 3 конт. прям. уг.тип 8&lt;/p&gt;
+&lt;p&gt;Производитель: Тайвань (Китай)&lt;/p&gt;
+
+&lt;p&gt;&lt;a href='http://www.brownbear.ru/components/ss-8.html'&gt;http://www.brownbear.ru/components/ss-8.html&lt;/a&gt;&lt;/p&gt;</description>
+<gates>
+<gate name="G$1" symbol="SS-8" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="SS-8">
+<connects>
+<connect gate="G$1" pin="CASE" pad="CASE_L CASE_R"/>
+<connect gate="G$1" pin="COM" pad="COM"/>
+<connect gate="G$1" pin="P1" pad="P1"/>
+<connect gate="G$1" pin="P2" pad="P2"/>
 </connects>
 <technologies>
 <technology name=""/>
