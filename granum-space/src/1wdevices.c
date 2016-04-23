@@ -7,8 +7,8 @@
 
 #include "1wdevices.h"
 #include "onewire.h"
-
 #include <util/delay.h>
+
 
 uint16_t get_temperature()
 {
@@ -24,6 +24,7 @@ uint16_t get_temperature()
 	for(int i = 0; i<9 ;i++){
 		str[i] = OneWireReadByte();
 	}
+	// место для контрольной суммы
 
 	uint16_t value = str[0] | (str[1] << 8);
 	//float t = value / 16.0f;
@@ -36,3 +37,6 @@ HTData get_dht_data()
 {
 
 }
+
+
+

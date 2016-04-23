@@ -1,7 +1,6 @@
 #include <avr/io.h>
 #include <stdint.h>
 #include <util/delay.h>
-
 #include "onewire.h"
 
 #define ONE_WIRE_PORT PORTC
@@ -28,7 +27,10 @@ void OneWireSetBusOne()
 
 int OneWireReadBus()
 {
-	return ONE_WIRE_PPIN & (1 << ONE_WIRE_PIN);
+	if (ONE_WIRE_PPIN & (1 << ONE_WIRE_PIN) != 0)
+		return 1;
+	else
+		return 0;
 }
 
 int OneWireReset()
@@ -62,6 +64,7 @@ void OneWireWriteBit(int value)
 	_delay_us(60);
 	OneWireSetBusOne();
 }
+
 void OneWireWriteByte(uint8_t byte)
 {
 	for (uint8_t i = 0; i < 8; i++)
@@ -70,6 +73,7 @@ void OneWireWriteByte(uint8_t byte)
 		OneWireWriteBit(bit);
 	}
 }
+
 int OneWireReadBit ()
 {
 	OneWireSetBusZero();
@@ -87,8 +91,7 @@ uint8_t OneWireReadByte ()
 	for (uint8_t i = 0; i < 8; i++)
 	{
 		uint8_t bit = OneWireReadBit();
-		if (bit !=0) { bit = 1;}
-		retval = retval |(bit<<i);
+		retval = retval | (bit<<i);
 	}
 	return retval;
 }
