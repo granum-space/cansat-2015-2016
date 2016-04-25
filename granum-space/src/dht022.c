@@ -2,12 +2,15 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <util/delay.h>
-#include "onewire.h"
 
-#define DHT_PORT PORTC
-#define DHT_PPIN PINC
-#define DHT_DDR DDRC
-#define DHT_PIN 0
+#include "onewire.h"
+#include "dht022.h"
+
+#define DHT_PORT PORTC	// Регистр PORT порта, на котором подсоединен датчик DHT022
+#define DHT_PPIN PINC	// Регистр PIN порта на котором подсоединен датчик DHT022
+#define DHT_DDR DDRC	// Регистр ВВК порта на котором подсоединен датчик DHT022
+#define DHT_PIN 1		// Номер пина в порту
+
 
 void DHT_Init()
 {
@@ -15,30 +18,32 @@ void DHT_Init()
 	DHT_DDR &= ~(1 << DHT_PIN);
 }
 
+
 void DHT_SetBusZero()
 {
 	DHT_DDR |= (1 << DHT_PIN);
 }
+
 
 void DHT_SetBusOne()
 {
 	DHT_DDR &= ~(1 << DHT_PIN);
 }
 
+
 int DHT_ReadBus()
 {
-	if (DHT_PPIN & (1 << DHT_PIN) != 0)
+	if ((DHT_PPIN & (1 << DHT_PIN)) != 0)
 		return 1;
 	else
 		return 0;
 }
 
 
-
 // начало связи с dht
 // если все хорошо возвращает ноль
-// если устроиство не отвечает то возвращает 1
-// если линия не поднялась возвращает 2
+// если устроиство не отвечает то возвращает -1 * DHT_ERROR_NO_REPLY
+// если линия не поднялась после ответа за заданное время возвращает -1 * DHT_ERROR_REPLY_TOO_LONG
 int DHT_Reset()
 {
 	DHT_SetBusZero();
@@ -59,7 +64,7 @@ int DHT_Reset()
 	}
 
 	if (!isSomeoneHere)
-		return 1;
+		return DHT_ERROR_NO_REPLY;
 
 	for (int i = 0; i < 120; i++)
 	{
@@ -67,10 +72,11 @@ int DHT_Reset()
 			return 0;
 	}
 
-	return 2;
+	return DHT_ERROR_REPLY_TOO_LONG;
 }
 
-int DHT_wait_start(){
+
+int DHT_wait_bit_start(){
 
 	int value = 0;
 
@@ -82,41 +88,43 @@ int DHT_wait_start(){
 		_delay_us(1);
 	}
 
-	if(value) return 1;
+	if(!value) return DHT_ERROR_WAIT_TO_LONG;
 	return 0;
 }
 
 
-// если возвращет -1 то передача не началась
-// если возвращает -2 то передача не кончилась
+// если значение отрицательное, то это код ошибки:
+// 		DHT_ERROR_WAIT_TO_LONG -> передача бита не началась
+// 		DHT_ERROR_BIT_TO_LONG -> передача бита не кончилась
+// из положительных значений возвращает 0 или 1
 int DHT_read_bit()
 {
-	bool bitStarted = false;
+	bool bitStartedOrEnded = false;
 	for (int i = 0; i < 50; i++)
 	{
 		_delay_us(1);
 		if (DHT_ReadBus() != 0)
 		{
-			bitStarted = true;
+			bitStartedOrEnded = true;
 			break;
 		}
 	}
 
-	if (!bitStarted) return -1;
+	if (!bitStartedOrEnded) return DHT_ERROR_WAIT_TO_LONG;
 
-	bitStarted = false;
+	bitStartedOrEnded = false;
 	int i;
 	for (i = 0; i < 100; i++){
 		_delay_us(1);
 		if (DHT_ReadBus() == 0)
 		{
-			bitStarted = true;
+			bitStartedOrEnded = true;
 			break;
 		}
 	}
 
-	if (!bitStarted)
-		return -2;
+	if (!bitStartedOrEnded)
+		return DHT_ERROR_BIT_TO_LONG;
 
 	if(i > 50) return 1;
 	else return 0;
@@ -135,6 +143,10 @@ int DHT_read_byte(){
 
 	uint8_t retval = 0;
 	retval = num[0] << 7;
+
+	// FIXME: Этот цикл нужно внимательно проверить
+	// выражение i < 9, j > -1 не имеет смысла.
+	// и очень странным выглядит j = 6, j-- и i < 9. Похоже что j пойдет в отрицательные значения
 	for(int i = 1, j = 6; i < 9, j > -1;i++ , j--){
 		retval = retval | num[i] << j;
 	}
@@ -143,9 +155,12 @@ int DHT_read_byte(){
 }
 
 
-int DHT_Read(uint16_t * humidity, uint16_t * temp)
+int DHT_Read(uint16_t * humidity, int16_t * temp)
 {
-	DHT_wait_start();
+	int wait_start_status = DHT_wait_bit_start();
+	if (wait_start_status < 0)
+		return wait_start_status;
+
 	int sum[5];
 	for( int i = 0; i<5; i++){
 		sum[i] = DHT_read_byte();
@@ -159,6 +174,8 @@ int DHT_Read(uint16_t * humidity, uint16_t * temp)
 
 	*humidity = (sum[0] << 8) | sum[1];
 	*temp = (sum[2] << 8) | sum[3];
+	// FIXME: Температура может быть отрицательной.
+	// Нужно проверить правильно ли побитовый сдвиг отработает в этой ситуации
 
 	return 0;
 }
