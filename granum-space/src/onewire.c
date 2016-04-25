@@ -27,7 +27,7 @@ void OneWireSetBusOne()
 
 int OneWireReadBus()
 {
-	if (ONE_WIRE_PPIN & (1 << ONE_WIRE_PIN) != 0)
+	if ((ONE_WIRE_PPIN & (1 << ONE_WIRE_PIN)) != 0)
 		return 1;
 	else
 		return 0;

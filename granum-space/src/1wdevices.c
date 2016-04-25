@@ -33,10 +33,4 @@ uint16_t get_temperature()
 }
 
 
-HTData get_dht_data()
-{
-
-}
-
-
 
