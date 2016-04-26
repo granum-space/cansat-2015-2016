@@ -9,8 +9,9 @@
 #define SPI_H_
 
 void spi_init();
+uint8_t spi_sendbyte(uint8_t arg);
 
-void spi_send(const void * ptr, int size);
+
 
 
 #endif /* SPI_H_ */
