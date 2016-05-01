@@ -48,7 +48,7 @@ int i2c_write(const void * data_ptr, size_t data_size)
 }
 
 
-int i2c_read(void * data_ptr, size_t data_size)
+int i2c_read(void * data_ptr, size_t data_size, bool NACK_at_end)
 {
 	uint8_t * byte_ptr = (uint8_t * )data_ptr;
 
