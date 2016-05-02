@@ -1,23 +1,37 @@
 #include <avr/io.h>
 
-#define SPIDDR DDRB
-#define SPIPORT PORTB
-#define MOSI 2
-#define MISO 3
-#define SCLK 1
-#define SS 0
+#define SPI_PORTX PORTB
+#define SPI_DDRX DDRB
+
+#define SPI_MISO 3
+#define SPI_MOSI 2
+#define SPI_SCK 1
+#define SPI_SS 0
 
 void spi_init()
-	{
-	SPIDDR |= (1<<MOSI)|(1<<SS)|(1<<SCLK);
-	SPIPORT |= (1<<MOSI)|(1<<SS)|(1<<SCLK)|(1<<MISO);
-	SPCR |= (1<<SPE)|(1<<MSTR)|(1<<SPR1)|(1<<SPR0);
-	}
+{
+	   /*настройка портов ввода-вывода
+	   все выводы, кроме MISO выходы*/
+	   SPI_DDRX |= (1<<SPI_MOSI)|(1<<SPI_SCK)|(1<<SPI_SS)|(0<<SPI_MISO);
+	   SPI_PORTX |= (1<<SPI_MOSI)|(1<<SPI_SCK)|(1<<SPI_SS)|(1<<SPI_MISO);
+
+	   /*разрешение spi,старший бит вперед,мастер, режим 0*/
+	   SPCR = (1<<SPE)|(0<<DORD)|(1<<MSTR)|(0<<CPOL)|(0<<CPHA)|(1<<SPR1)|(0<<SPR0);
+	   SPSR = (0<<SPI2X);
+}
 
 uint8_t spi_sendbyte(uint8_t arg) {
-	SPIPORT &= ~(1<<SS);
 	SPDR = arg;
 	while(!(SPSR & (1<<SPIF)));
-	SPIPORT |= (1<<SS);
-	return SPDR;
+	arg = SPDR;
+	return arg;
+}
+
+void spi_exchange(const void* data, int length, uint8_t* retval) {
+	const uint8_t* ptr = (const uint8_t*)data;
+	for(int i = 0;i< length; i++){
+		SPDR = *(ptr+i);
+		while(!(SPSR & (1<<SPIF)));
+		if(retval) retval[i] = SPDR;
+	}
 }
