@@ -144,10 +144,8 @@ int DHT_read_byte(){
 	uint8_t retval = 0;
 	retval = num[0] << 7;
 
-	// FIXME: Этот цикл нужно внимательно проверить
-	// выражение i < 9, j > -1 не имеет смысла.
-	// и очень странным выглядит j = 6, j-- и i < 9. Похоже что j пойдет в отрицательные значения
-	for(int i = 1, j = 6; i < 9, j > -1;i++ , j--){
+
+	for(int i = 1, j = 6; i < 9 && j >= 0; i++ , j--){
 		retval = retval | num[i] << j;
 	}
 
@@ -171,6 +169,9 @@ int DHT_Read(uint16_t * humidity, int16_t * temp)
 	if (sum[0] + sum[1] + sum[2] + sum[3] != sum[4])
 		return -10;
 
+	uint8_t* tempptr = (uint8_t*)temp;
+	*tempptr + 0 = sum[2];
+	*tempptr + 1 = sum[3];
 
 	*humidity = (sum[0] << 8) | sum[1];
 	*temp = (sum[2] << 8) | sum[3];
