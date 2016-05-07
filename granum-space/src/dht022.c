@@ -170,8 +170,8 @@ int DHT_Read(uint16_t * humidity, int16_t * temp)
 		return -10;
 
 	uint8_t* tempptr = (uint8_t*)temp;
-	*tempptr + 0 = sum[2];
-	*tempptr + 1 = sum[3];
+	*(tempptr + 0) = sum[2];
+	*(tempptr + 1) = sum[3];
 
 	*humidity = (sum[0] << 8) | sum[1];
 	*temp = (sum[2] << 8) | sum[3];

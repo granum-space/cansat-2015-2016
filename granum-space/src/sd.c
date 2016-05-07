@@ -8,7 +8,7 @@
 #include <avr/io.h>
 #include <stdint.h>
 
-#include "uart_stdio.h"
+#include "uart-debug.h"
 #include "spi.h"
 
 #define SPIDDR DDRB

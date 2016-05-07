@@ -4,15 +4,16 @@
  *  Created on: 09 апр. 2016 г.
  *      Author: developer
  */
+
+#include <avr/io.h>
 #include <util/delay.h>
-#include "uart_stdio.h"
+#include "uart-debug.h"
 #include "sd.h"
 #include "spi.h"
+#include "i2c.h"
 
-int main()
+void spi_test_main()
 {
-	initUartStdio();
-
 	//while(1) {
 		_delay_ms(100);
 		while(1) {
@@ -47,6 +48,85 @@ int main()
 		answer = spi_sendbyte(0xFF);
 		DEBUG("It told %d\n", answer);
 		while(1)spi_sendbyte(0xFF);
-	//}
+	//
+}
+
+
+
+
+typedef struct {
+	int16_t ac1, ac2, ac3;
+	uint16_t ac4, ac5, ac6;
+	int16_t b1, b2;
+	int16_t mb, mc, md;
+
+} BMP085Calibration;
+
+
+void bmp085LoadCalibration(BMP085Calibration * cal) {
+
+	const uint8_t calRegAddr = 0xAA;
+	int status;
+
+	status = i2c_start();
+	if (status != 0) {
+		printf("i2cStart1 error %d\r\n", status);
+		return;
+	}
+	status = i2c_send_slaw(0x77, false);
+	if (status != 0) {
+		printf("i2cSendSLAW1 error %d\r\n", status);
+		return;
+	}
+	status = i2c_write(&calRegAddr, 1);
+	if (status != 0) {
+		printf("i2cWrite error %d\r\n", status);
+		return;
+	}
+
+
+	status = i2c_start();
+	if (status != 0) {
+		printf("i2cWrite start2 %d\r\n", status);
+		return;
+	}
+	status = i2c_send_slaw(0x77, true);
+	if (status != 0) {
+		printf("i2cSendSLAW2 error %d\r\n", status);
+		return;
+	}
+	status = i2c_read(cal, sizeof(*cal), true);
+	if (status != 0) {
+		printf("i2cRead error %d\r\n", status);
+		return;
+	}
+	status = i2c_stop();
+	if (status != 0) {
+		printf("i2cStop error %d\r\n", status);
+		return;
+	}
+}
+
+
+void i2c_test_main()
+{
+	initUartDebug();
+	DDRG = 0xFF;
+	while(1)
+	{
+		BMP085Calibration cal;
+		bmp085LoadCalibration(&cal);
+
+		printf("success!\r\n");
+		printf("%d %d %d %d %d %d\r\n", cal.ac1, cal.ac2, cal.ac3, cal.ac4, cal.ac5, cal.ac6);
+		printf("%d %d\r\n", cal.b1, cal.b2);
+		printf("%d %d %d\r\n", cal.mb, cal.mc, cal.md);
+	}
+}
+
+int main()
+{
+	//spi_test_main();
+	i2c_test_main();
 	return 0;
 }

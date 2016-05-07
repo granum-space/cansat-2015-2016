@@ -3,6 +3,7 @@
  *
  *  Created on: 19 марта 2016 г.
  *      Author: developer
+ *      http://aterlux.ru/index.php?page=article&art=1wire
  */
 
 #include "1wdevices.h"
