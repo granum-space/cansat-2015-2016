@@ -17,8 +17,10 @@
 #define I2C_WRITE_NO_ACK 0x30
 #define I2C_ARB_LOST 0x38
 
-#define I2C_TIMEOUT_COUNT 10
+#define I2C_TIMEOUT_COUNT 30
 #define I2C_TIMEOUT_US 10
+
+#define F_SCL 600000
 
 
 i2c_error_t i2c_status_to_error(uint8_t status)
@@ -44,7 +46,13 @@ i2c_error_t i2c_status_to_error(uint8_t status)
 
 void i2c_init()
 {
-	TWBR = 24; //3; // 8 для 16мгц
+	TWBR = (F_CPU/F_SCL - 16)/2/1;
+}
+
+
+void i2c_reset()
+{
+	TWCR &= ~(1 << TWEN);
 }
 
 
@@ -62,7 +70,6 @@ int i2c_start()
 			}
 		}
 	}
-
 	return I2C_timeout;
 }
 
@@ -70,15 +77,7 @@ int i2c_start()
 int i2c_stop()
 {
 	TWCR = (1<<TWINT)|(1<<TWEN)|(1<<TWSTO);
-
-	for(int i = 0; i < I2C_TIMEOUT_COUNT; i++){
-		if(TWCR & (1<<TWINT))
-			return 0;
-
-		_delay_us(I2C_TIMEOUT_US);
-	}
-
-	return  I2C_timeout;
+	return 0;
 }
 
 
@@ -87,10 +86,10 @@ int i2c_send_slaw(uint8_t slave_addr, bool read_access)
 	TWDR = (slave_addr << 1) | read_access;
 	TWCR = (1<<TWINT) | (1<<TWEN);
 
-	for(int i = 0;i < I2C_TIMEOUT_COUNT; i++ ) {
+	for(int i = 0; i < I2C_TIMEOUT_COUNT; i++ ) {
 		if (TWCR & (1<<TWINT)) {
 			uint8_t status = TWSR & 0xF8;
-			if (status == I2C_SLAW_ACK || status == I2C_SLAR_ACK)	{
+			if (status == I2C_SLAW_ACK || status == I2C_SLAR_ACK) {
 				return 0;
 			} else {
 				return i2c_status_to_error(status);
@@ -102,7 +101,6 @@ int i2c_send_slaw(uint8_t slave_addr, bool read_access)
 
 	return I2C_timeout;
 }
-
 
 
 int i2c_write(const void * data_ptr, size_t data_size)
@@ -120,7 +118,6 @@ int i2c_write(const void * data_ptr, size_t data_size)
 				if (status == I2C_WRITE_ACK) {
 					break;
 				} else {
-					DEBUG("status == 0x%X\r\n", status);
 					return i2c_status_to_error(status);
 				}
 			} else {
@@ -129,7 +126,6 @@ int i2c_write(const void * data_ptr, size_t data_size)
 		}
 
 		if(timeout)	return I2C_timeout;
-
 	}
 
 	return 0;
@@ -155,7 +151,6 @@ int i2c_read(void * data_ptr, size_t data_size, bool NACK_at_end)
 				if (status == I2C_READ_ACK || status == I2C_READ_NO_ACK) {
 					break;
 				} else {
-					DEBUG("status == 0x%X\r\n", status);
 					return i2c_status_to_error(status);
 				}
 			} else {

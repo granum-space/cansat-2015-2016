@@ -12,7 +12,7 @@ uint8_t du_init() {
 }
 
 void du_write(const void* data, int length) {
-	uint8_t* ptr = (uint8_t*) data;
+	const uint8_t* ptr = (const uint8_t*) data;
 	for(int i = 0; i < length; i++) {
 		if(bib == 0) {
 			uint8_t CMD24[] = {

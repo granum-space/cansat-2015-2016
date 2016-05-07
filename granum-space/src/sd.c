@@ -40,7 +40,7 @@ uint8_t sd_init() {
 	uint8_t answer;
 	for(int i = 0; i<8;i++) {
 		answer = spi_sendbyte(0xFF);
-		DEBUG("It answered %d\n", answer);
+		GR_DEBUG("It answered %d\n", answer);
 		if(answer != 0xFF) break;
 	}
 	if(answer != 0x01) return answer;
@@ -56,7 +56,7 @@ uint8_t sd_init() {
 		spi_exchange(CMD1, sizeof(CMD1),0);
 			while(1) {
 				answer = spi_sendbyte(0xFF);
-				DEBUG("It secondary answered %d\n", answer);
+				GR_DEBUG("It secondary answered %d\n", answer);
 				if(answer != 0xFF) break;
 			}
 		if(answer == 0x00) break;

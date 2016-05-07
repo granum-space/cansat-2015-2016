@@ -34,11 +34,11 @@ void spi_test_main()
 		uint8_t answer;
 		while(1) {
 			answer = spi_sendbyte(0xFF);
-			DEBUG("It sayed %d\n", answer);
+			GR_DEBUG("It sayed %d\n", answer);
 			if(answer == 0x00) break;
 		}
 		spi_sendbyte(0xFF);
-		DEBUG("Sending data\n");
+		GR_DEBUG("Sending data\n");
 		spi_sendbyte(~(1));
 		for(int i = 0;i<512;i++) {
 			spi_sendbyte((uint8_t)/*(i & 0xFF)*/0xFC);
@@ -46,7 +46,7 @@ void spi_test_main()
 		spi_sendbyte(0xFF);
 		spi_sendbyte(0xFF);
 		answer = spi_sendbyte(0xFF);
-		DEBUG("It told %d\n", answer);
+		GR_DEBUG("It told %d\n", answer);
 		while(1)spi_sendbyte(0xFF);
 	//
 }
@@ -63,64 +63,68 @@ typedef struct {
 } BMP085Calibration;
 
 
-void bmp085LoadCalibration(BMP085Calibration * cal) {
+int bmp085LoadCalibration(BMP085Calibration * cal) {
 
 	const uint8_t calRegAddr = 0xAA;
 	int status;
+	i2c_reset();
 
 	status = i2c_start();
 	if (status != 0) {
 		printf("i2cStart1 error %d\r\n", status);
-		return;
+		return status;
 	}
 	status = i2c_send_slaw(0x77, false);
 	if (status != 0) {
 		printf("i2cSendSLAW1 error %d\r\n", status);
-		return;
+		return status;
 	}
 	status = i2c_write(&calRegAddr, 1);
 	if (status != 0) {
 		printf("i2cWrite error %d\r\n", status);
-		return;
+		return status;
 	}
 
 
 	status = i2c_start();
 	if (status != 0) {
 		printf("i2cWrite start2 %d\r\n", status);
-		return;
+		return status;
 	}
 	status = i2c_send_slaw(0x77, true);
 	if (status != 0) {
 		printf("i2cSendSLAW2 error %d\r\n", status);
-		return;
+		return status;
 	}
 	status = i2c_read(cal, sizeof(*cal), true);
 	if (status != 0) {
 		printf("i2cRead error %d\r\n", status);
-		return;
+		return status;
 	}
 	status = i2c_stop();
 	if (status != 0) {
 		printf("i2cStop error %d\r\n", status);
-		return;
+		return status;
 	}
+
+	return 0;
 }
 
 
 void i2c_test_main()
 {
 	initUartDebug();
-	DDRG = 0xFF;
+	i2c_init();
 	while(1)
 	{
 		BMP085Calibration cal;
-		bmp085LoadCalibration(&cal);
+		if (bmp085LoadCalibration(&cal) == 0) {
 
-		printf("success!\r\n");
-		printf("%d %d %d %d %d %d\r\n", cal.ac1, cal.ac2, cal.ac3, cal.ac4, cal.ac5, cal.ac6);
-		printf("%d %d\r\n", cal.b1, cal.b2);
-		printf("%d %d %d\r\n", cal.mb, cal.mc, cal.md);
+			printf("success!\r\n");
+			printf("%d %d %d %d %d %d\r\n", cal.ac1, cal.ac2, cal.ac3, cal.ac4, cal.ac5, cal.ac6);
+			printf("%d %d\r\n", cal.b1, cal.b2);
+			printf("%d %d %d\r\n", cal.mb, cal.mc, cal.md);
+		}
 	}
 }
 
