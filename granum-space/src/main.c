@@ -11,6 +11,7 @@
 #include "sd.h"
 #include "spi.h"
 #include "i2c.h"
+#include "adc.h"
 
 void spi_test_main()
 {
@@ -128,9 +129,24 @@ void i2c_test_main()
 	}
 }
 
+
+void adc_test()
+{
+	adc_init();
+	initUartDebug();
+
+
+	while(1)
+	{
+		uint16_t value = adc_read(ADC_CHANNEL_PRESSURE);
+		GR_DEBUG("adc_value = %d(0x%X)\n", value, value);
+	}
+}
+
 int main()
 {
 	//spi_test_main();
-	i2c_test_main();
+	//i2c_test_main();
+	adc_test();
 	return 0;
 }
