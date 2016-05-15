@@ -748,7 +748,7 @@ Source: http://www.molex.com/pdm_docs/sd/877580616_sd.pdf</description>
 <instance part="X1" gate="-6" x="139.7" y="60.96"/>
 <instance part="X1" gate="-7" x="45.72" y="5.08" rot="R270"/>
 <instance part="X1" gate="-8" x="139.7" y="58.42"/>
-<instance part="X1" gate="-9" x="119.38" y="55.88"/>
+<instance part="X1" gate="-9" x="139.7" y="55.88"/>
 <instance part="X1" gate="-10" x="-7.62" y="10.16" rot="R270"/>
 <instance part="X2" gate="-1" x="22.86" y="88.9" rot="R90"/>
 <instance part="X2" gate="-2" x="2.54" y="63.5" rot="R270"/>

@@ -374,10 +374,10 @@ UsedLibrary="side-libs/transistors.lbr"
 
 [Win_1]
 Type="Control Panel"
-Loc="319 231 1279 836"
+Loc="218 61 1178 666"
 State=2
 Number=0
 
 [Desktop]
-Screen="1280 1024"
+Screen="1920 1080"
 Window="Win_1"
