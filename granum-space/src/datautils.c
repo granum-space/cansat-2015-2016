@@ -2,7 +2,7 @@
 
 #include "spi.h"
 #include "sd.h"
-#include "uart_stdio.h"
+#include "uart-debug.h"
 #include <util/delay.h>
 
 uint32_t block = 0;
@@ -31,11 +31,11 @@ void du_write(const void* data, int length) {
 			};
 			uint8_t Answ[6];
 			spi_exchange(CMD24, sizeof(CMD24),Answ);
-			for(int i = 0; i<6;i++) DEBUG("CMD24 transfer %d: %d\n", i, Answ[i]);
-			DEBUG("Start of new packet\n");
+			for(int i = 0; i<6;i++) GR_DEBUG("CMD24 transfer %d: %d\n", i, Answ[i]);
+			GR_DEBUG("Start of new packet\n");
 			while(1) {
 				uint8_t answer = spi_sendbyte(0xFF);
-				DEBUG("CMD24 answer %d\n", answer);
+				GR_DEBUG("CMD24 answer %d\n", answer);
 				if(answer==0x00) break;
 			}
 			spi_sendbyte(0xFF);
@@ -53,10 +53,10 @@ void du_write(const void* data, int length) {
 			spi_sendbyte((uint8_t)(*(ptr+i) & 0xFF));
 			spi_sendbyte(0xFF);
 			spi_sendbyte(0xFF);
-			DEBUG("It data answer was %d\n",spi_sendbyte(0xFF));
+			GR_DEBUG("It data answer was %d\n",spi_sendbyte(0xFF));
 			while(1) {
 				uint8_t answer = spi_sendbyte(0xFF);
-				DEBUG("%d\n", answer);
+				GR_DEBUG("%d\n", answer);
 				if(answer) break;
 			}
 			bib = 0;

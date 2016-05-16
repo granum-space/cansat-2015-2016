@@ -14,7 +14,11 @@
 
 #define SPIDDR DDRB
 #define SPIPORT PORTB
-#define SS 2
+#if defined (__AVR_ATmega328P__)
+#	define SS 2
+#elif defined (__AVR_ATmega128__)
+#	define SS 0
+#endif
 
 uint8_t sd_send_r1cmd(uint8_t cmd, uint32_t arg, uint8_t crc);
 void sd_enable();
@@ -40,13 +44,10 @@ uint8_t sd_init() {
 	uint8_t answer;
 	for(int i = 0; i<16;i++) {
 		answer = spi_sendbyte(0xFF);
-<<<<<<< HEAD
-=======
 		GR_DEBUG("It answered %d\n", answer);
->>>>>>> branch 'master' of https://github.com/granum-space/main.git
 		if(answer != 0xFF) break;
 	}
-	DEBUG("CMD0 answer %d\n", answer);
+	GR_DEBUG("CMD0 answer %d\n", answer);
 	if(answer != 0x01) return answer;
 	uint8_t CMD1[] = {
 			0x41,
@@ -58,19 +59,16 @@ uint8_t sd_init() {
 	};
 	while(1) {
 		spi_exchange(CMD1, sizeof(CMD1),0);
-<<<<<<< HEAD
 		while(1) {
 			answer = spi_sendbyte(0xFF);
 			if(answer != 0xFF) break;
 		}
-		DEBUG("CMD1 answer %d\n", answer);
-=======
+		GR_DEBUG("CMD1 answer %d\n", answer);
 			while(1) {
 				answer = spi_sendbyte(0xFF);
 				GR_DEBUG("It secondary answered %d\n", answer);
 				if(answer != 0xFF) break;
 			}
->>>>>>> branch 'master' of https://github.com/granum-space/main.git
 		if(answer == 0x00) break;
 	}
 	return answer;

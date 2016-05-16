@@ -7,7 +7,8 @@
 
 #include <avr/io.h>
 #include <util/delay.h>
-#include "uart_stdio.h"
+
+#include "uart-debug.h"
 #include "datautils.h"
 #include "uart-debug.h"
 #include "sd.h"
@@ -17,21 +18,21 @@
 
 void spi_test_main()
 {
-	initUartStdio();
+	initUartDebug();
 	spi_init();
 	_delay_ms(5000);
 	du_init();
 	uint8_t Bytes[1024];
-	DEBUG("Sending bytes\n");
+	GR_DEBUG("Sending bytes\n");
 	for(int i = 0;i<1024;i++) {
 		Bytes[i]=(uint8_t)(i & 0xFF);
-		DEBUG("%d\  ", Bytes[i]);
+		GR_DEBUG("%d\n", Bytes[i]);
 	}
 	du_write(Bytes, 1024);
 	//while(1) {
 		_delay_ms(100);
 		while(1) {
-			//DEBUG("It finally answered %d\n", sd_init());
+			//GR_DEBUG("It finally answered %d\n", sd_init());
 			if(sd_init()==0x00) {
 				break;
 			}
