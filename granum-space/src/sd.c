@@ -7,13 +7,14 @@
  */
 #include <avr/io.h>
 #include <stdint.h>
+#include <util/delay.h>
 
 #include "uart-debug.h"
 #include "spi.h"
 
 #define SPIDDR DDRB
 #define SPIPORT PORTB
-#define SS 0
+#define SS 2
 
 uint8_t sd_send_r1cmd(uint8_t cmd, uint32_t arg, uint8_t crc);
 void sd_enable();
@@ -23,8 +24,7 @@ uint8_t sd_init() {
 	SPIDDR |= (1<<SS);
 	SPIPORT |= (1<<SS);
 	sd_disable();
-	spi_init();
-	for(int i=0;i<10;i++) {
+	for(int i=0;i<20;i++) {
 		spi_sendbyte(0xFF);
 	}
 	sd_enable();
@@ -38,11 +38,15 @@ uint8_t sd_init() {
 	};
 	spi_exchange(CMD0, sizeof(CMD0),0);
 	uint8_t answer;
-	for(int i = 0; i<8;i++) {
+	for(int i = 0; i<16;i++) {
 		answer = spi_sendbyte(0xFF);
+<<<<<<< HEAD
+=======
 		GR_DEBUG("It answered %d\n", answer);
+>>>>>>> branch 'master' of https://github.com/granum-space/main.git
 		if(answer != 0xFF) break;
 	}
+	DEBUG("CMD0 answer %d\n", answer);
 	if(answer != 0x01) return answer;
 	uint8_t CMD1[] = {
 			0x41,
@@ -54,11 +58,19 @@ uint8_t sd_init() {
 	};
 	while(1) {
 		spi_exchange(CMD1, sizeof(CMD1),0);
+<<<<<<< HEAD
+		while(1) {
+			answer = spi_sendbyte(0xFF);
+			if(answer != 0xFF) break;
+		}
+		DEBUG("CMD1 answer %d\n", answer);
+=======
 			while(1) {
 				answer = spi_sendbyte(0xFF);
 				GR_DEBUG("It secondary answered %d\n", answer);
 				if(answer != 0xFF) break;
 			}
+>>>>>>> branch 'master' of https://github.com/granum-space/main.git
 		if(answer == 0x00) break;
 	}
 	return answer;
@@ -69,10 +81,12 @@ uint8_t sd_init() {
 
 void sd_enable() {
 	SPIPORT &= ~(1<<SS);
+	_delay_ms(1);
 }
 
 void sd_disable() {
 	SPIPORT |= (1<<SS);
+	_delay_ms(1);
 }
 
 uint8_t sd_send_r1cmd(uint8_t cmd, uint32_t arg, uint8_t crc) {

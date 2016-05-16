@@ -3,10 +3,10 @@
 #define SPI_PORTX PORTB
 #define SPI_DDRX DDRB
 
-#define SPI_MISO 3
-#define SPI_MOSI 2
-#define SPI_SCK 1
-#define SPI_SS 0
+#define SPI_MISO 4
+#define SPI_MOSI 3
+#define SPI_SCK 5
+#define SPI_SS 2
 
 void spi_init()
 {
