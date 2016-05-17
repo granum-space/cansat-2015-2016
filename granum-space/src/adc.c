@@ -87,8 +87,6 @@ uint16_t adc_read(adc_channel_t channel)
 	case ADC_CHANNEL_CO2_SENS :
 		ADMUX |= (0 << MUX0) | (1 << MUX1) | ( 1 << MUX2) | (0 << MUX3) | (0 << MUX4);
 	break;
-
-	default:
 	};
 
 #endif
