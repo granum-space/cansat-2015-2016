@@ -1,14 +1,32 @@
 
 
+#include <util/delay.h>
+#include <avr/io.h>
+
 #include "spi.h"
 #include "sd.h"
 #include "uart-debug.h"
-#include <util/delay.h>
+#include "uart.h"
+
+#define RCFGPORT PORTC
+#define RCFGDDR DDRC
+#define RCFGNUM 0
 
 uint32_t block = 0;
 uint16_t bib = 0;
 
 void du_init() {
+	uart_init();
+	RCFGDDR |= (1<<RCFGNUM);
+	RCFGPORT |= (1<<RCFGNUM);
+	_delay_us(1);
+	RCFGPORT &= ~(1<<RCFGNUM);
+	uint8_t config[] = {
+			0x7E,0x7E,0x7E,0x7E, //destination address
+			0x7E,0x7E,0x7E,0x7E //self address
+	};
+	uart_send_many(config, sizeof(config));
+	RCFGPORT |= (1<<RCFGNUM);
 	while(1) {
 		if(sd_init()==0x00) {
 			break;
@@ -20,6 +38,7 @@ void du_init() {
 void du_write(const void* data, int length) {
 	const uint8_t* ptr = (const uint8_t*) data;
 	for(int i = 0; i < length; i++) {
+		uart_send(*(ptr+i));
 		if(bib == 0) {
 			uint8_t CMD24[] = {
 				0x58,

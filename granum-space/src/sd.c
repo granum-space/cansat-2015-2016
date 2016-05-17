@@ -14,6 +14,7 @@
 
 #define SPIDDR DDRB
 #define SPIPORT PORTB
+
 #if defined (__AVR_ATmega328P__)
 #	define SS 2
 #elif defined (__AVR_ATmega128__)
