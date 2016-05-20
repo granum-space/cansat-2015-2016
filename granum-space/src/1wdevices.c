@@ -9,14 +9,15 @@
 #include "1wdevices.h"
 #include "onewire.h"
 #include <util/delay.h>
+#include "uart-debug.h"
 
 
 uint16_t get_temperature()
 {
-	OneWireReset();
+	GR_DEBUG("onewire_reset %d\n", OneWireReset());
 	OneWireWriteByte(0xCC);
 	OneWireWriteByte(0x44);
-	_delay_ms(1000);
+	//_delay_ms(1000);
 	OneWireReset();
 	OneWireWriteByte(0xCC);
 	OneWireWriteByte(0xBE);

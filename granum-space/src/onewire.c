@@ -36,7 +36,7 @@ int OneWireReadBus()
 int OneWireReset()
 {
 	OneWireSetBusZero();
-	_delay_us(500);
+	_delay_us(600);
 	OneWireSetBusOne();
 	_delay_us(10);
 

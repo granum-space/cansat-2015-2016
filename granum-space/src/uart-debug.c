@@ -31,11 +31,11 @@ FILE mystdout = FDEV_SETUP_STREAM(myPutChar, NULL, _FDEV_SETUP_WRITE);
 
 void initUartDebug() {
 #if defined __AVR_ATmega128__ // для атмеги128 используем UART1 (не UART0)
-	UCSR0B = (1 << TXEN0); // включаем только TX
+	UCSR1B = (1 << TXEN1); // включаем только TX
 
-	UCSR0C = (1 << UCSZ00) | (1 << UCSZ01) // Размер символа - 8 бит
-		| (0 << UPM00) | (0 << UPM01)      // Бит чертности отключен
-		| (0 << USBS0) // 1 стоп бит
+	UCSR1C = (1 << UCSZ10) | (1 << UCSZ11) // Размер символа - 8 бит
+		| (0 << UPM10) | (0 << UPM11)      // Бит чертности отключен
+		| (0 << USBS1) // 1 стоп бит
 	;
 
 	UBRR1L = (int)(F_CPU/(16.0*TARGET_BAUD_RATE)-1) % 0xFF;
@@ -49,7 +49,8 @@ void initUartDebug() {
 		| (0 << USBS0) // 1 стоп бит
 	;
 
-	UBRR0 = (int)(F_CPU/(16.0*TARGET_BAUD_RATE)-1);
+	UBRR0L = (int)(F_CPU/(16.0*TARGET_BAUD_RATE)-1) % 0xFF;
+	UBRR0H = (int)(F_CPU/(16.0*TARGET_BAUD_RATE)-1) / 0xFF;
 #endif
 	stdout = &mystdout;
 }

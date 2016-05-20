@@ -15,6 +15,9 @@
 #include "spi.h"
 #include "i2c.h"
 #include "adc.h"
+#include "onewire.h"
+#include "1wdevices.h"
+#include "pkt_types.h"
 
 void spi_test_main()
 {
@@ -161,6 +164,38 @@ int main()
 {
 	//spi_test_main();
 	//i2c_test_main();
-	adc_test();
+	//adc_test();
+
+
+	_delay_ms(500);
+	adc_init();
+	initUartDebug();
+	OneWireInit();
+	du_init();
+	dtpkt_t pkt;
+	pkt.beacon = 0xFFFF;
+	pkt.number = 0;
+	pkt.time = 0;
+	pkt.time_part = 0;
+	pkt.temperature2 = 0;
+	pkt.humidity = 0;
+	pkt.O2 = 0;
+	pkt.CO2 = 0;
+	pkt.rezistance12 = 0;
+	pkt.rezistance13 = 0;
+	pkt.rezistance23 = 0;
+	pkt.legs = 0;
+	pkt.parachute = 0;
+	while(1) {
+		pkt.number++;
+		pkt.temperature1 = get_temperature();
+		pkt.pressure = adc_read(ADC_CHANNEL_PRESSURE);
+		uint8_t* pkt_ptr = (uint8_t*)&pkt;
+		pkt.cntrl = 0;
+		for(int i = 0; i < (sizeof(pkt)-sizeof(pkt.cntrl)); i++) {
+			pkt.cntrl += *(pkt_ptr+i);
+		}
+		du_write(pkt_ptr, sizeof(pkt));
+	}
 	return 0;
 }

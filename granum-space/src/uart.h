@@ -12,5 +12,6 @@ void uart_send(uint8_t value);
 int uart_receive();
 void uart_init();
 void uart_send_many(const void* ptr, int length);
+void uart_read_many(const void* ptr, int length);
 
 #endif /* UART_H_ */

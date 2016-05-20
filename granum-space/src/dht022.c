@@ -9,7 +9,7 @@
 #define DHT_PORT PORTC	// Регистр PORT порта, на котором подсоединен датчик DHT022
 #define DHT_PPIN PINC	// Регистр PIN порта на котором подсоединен датчик DHT022
 #define DHT_DDR DDRC	// Регистр ВВК порта на котором подсоединен датчик DHT022
-#define DHT_PIN 1		// Номер пина в порту
+#define DHT_PIN 4		// Номер пина в порту
 
 
 void DHT_Init()
