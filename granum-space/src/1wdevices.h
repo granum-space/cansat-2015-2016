@@ -9,8 +9,17 @@
 #define HUMIDITY_H_
 
 #include <stdint.h>
+#include <stddef.h>
 
-uint16_t get_temperature();
+int32_t get_temperature();
+
+// Подсчет контрольной суммы алгоритмом CRC-8
+uint8_t crc8(const void * data_ptr, size_t data_size);
+
+enum{
+	crc_error = -1,  // Возвращает в случае несовпадения crc
+	reset_error = -2, // возвращает если устройсво не ответило нам
+};
 
 #endif /* HUMIDITY_H_ */
 
