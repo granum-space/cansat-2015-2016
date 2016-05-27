@@ -8,9 +8,7 @@
 #include <avr/io.h>
 
 #include "uart-debug.h"
-
-// скорость работы отладочного UART
-#define TARGET_BAUD_RATE 9600
+#include "config.h"
 
 
 static int myPutChar(char value, FILE * stream) {
@@ -38,8 +36,8 @@ void initUartDebug() {
 		| (0 << USBS1) // 1 стоп бит
 	;
 
-	UBRR1L = (int)(F_CPU/(16.0*TARGET_BAUD_RATE)-1) % 0xFF;
-	UBRR1H = (int)(F_CPU/(16.0*TARGET_BAUD_RATE)-1) / 0xFF;
+	UBRR1L = (int)(F_CPU/(16.0*UART_DEBUG_BAUD_RATE)-1) % 0xFF;
+	UBRR1H = (int)(F_CPU/(16.0*UART_DEBUG_BAUD_RATE)-1) / 0xFF;
 
 #elif defined __AVR_ATmega328P__
 	UCSR0B = (1 << TXEN0); // включаем только TX
@@ -49,8 +47,8 @@ void initUartDebug() {
 		| (0 << USBS0) // 1 стоп бит
 	;
 
-	UBRR0L = (int)(F_CPU/(16.0*TARGET_BAUD_RATE)-1) % 0xFF;
-	UBRR0H = (int)(F_CPU/(16.0*TARGET_BAUD_RATE)-1) / 0xFF;
+	UBRR0L = (int)(F_CPU/(16.0*UART_DEBUG_BAUD_RATE)-1) % 0xFF;
+	UBRR0H = (int)(F_CPU/(16.0*UART_DEBUG_BAUD_RATE)-1) / 0xFF;
 #endif
 	stdout = &mystdout;
 }

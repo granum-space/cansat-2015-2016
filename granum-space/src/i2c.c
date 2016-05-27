@@ -3,7 +3,9 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
+#include "config.h"
 #include "uart-debug.h"
+
 
 #define I2C_START_TRANSFERED 0x10
 #define I2C_RESTART_TRANSFERED 0x08
@@ -16,11 +18,6 @@
 #define I2C_WRITE_ACK 0x28
 #define I2C_WRITE_NO_ACK 0x30
 #define I2C_ARB_LOST 0x38
-
-#define I2C_TIMEOUT_COUNT 30
-#define I2C_TIMEOUT_US 10
-
-#define F_SCL 600000
 
 
 i2c_error_t i2c_status_to_error(uint8_t status)

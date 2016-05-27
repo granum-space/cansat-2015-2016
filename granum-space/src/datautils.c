@@ -3,29 +3,16 @@
 #include <util/delay.h>
 #include <avr/io.h>
 
+#include "config.h"
 #include "spi.h"
 #include "sd.h"
 #include "uart-debug.h"
-#include "uart.h"
-
-#define RPORT PORTC
-#define RDDR DDRC
-#define RCFGNUM 1
-#define RRTSNUM 2
-#define RCTSNUM 3
 
 uint32_t block = 0;
 uint16_t bib = 0;
 
-#define CONFIG RPORT &= ~(1<<RCFGNUM);
-#define OPER RPORT |= (1<<RCFGNUM);
-#define RTS_EN RPORT &= ~(1<<RRTSNUM);
-#define RTS_DIS RPORT |= (1<<RRTSNUM);
-#define CTS (RPIN & (1<<RCTSNUM));
 
 void du_init() {
-	uart_init();
-
 	/*RDDR |= (1<<RCFGNUM)|(1<<RRTSNUM);
 	RDDR &= ~(1<<RCTSNUM);
 
@@ -73,7 +60,6 @@ void du_init() {
 void du_write(const void* data, int length) {
 	const uint8_t* ptr = (const uint8_t*) data;
 	for(int i = 0; i < length; i++) {
-		uart_send(*(ptr+i));
 		/*if(bib == 0) {
 			uint8_t CMD24[] = {
 				0x58,

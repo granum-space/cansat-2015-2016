@@ -11,15 +11,8 @@
 
 #include "uart-debug.h"
 #include "spi.h"
+#include "config.h"
 
-#define SPIDDR DDRB
-#define SPIPORT PORTB
-
-#if defined (__AVR_ATmega328P__)
-#	define SS 2
-#elif defined (__AVR_ATmega128__)
-#	define SS 0
-#endif
 
 uint8_t sd_send_r1cmd(uint8_t cmd, uint32_t arg, uint8_t crc);
 void sd_enable();

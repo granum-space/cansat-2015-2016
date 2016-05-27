@@ -1,12 +1,9 @@
 #include <avr/io.h>
 #include <stdint.h>
 #include <util/delay.h>
-#include "onewire.h"
 
-#define ONE_WIRE_PORT PORTC
-#define ONE_WIRE_PPIN PINC
-#define ONE_WIRE_DDR DDRC
-#define ONE_WIRE_PIN 0
+#include "config.h"
+#include "onewire.h"
 
 
 void OneWireInit()

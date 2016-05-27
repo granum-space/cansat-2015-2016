@@ -18,6 +18,7 @@
 #include "onewire.h"
 #include "1wdevices.h"
 #include "pkt_types.h"
+#include "radio-module.h"
 
 void spi_test_main()
 {
@@ -160,13 +161,8 @@ void adc_test()
 	}
 }
 
-int main()
+void du_test()
 {
-	//spi_test_main();
-	//i2c_test_main();
-	//adc_test();
-
-
 	_delay_ms(500);
 	adc_init();
 	initUartDebug();
@@ -197,5 +193,29 @@ int main()
 		}
 		du_write(pkt_ptr, sizeof(pkt));
 	}
+}
+
+
+void rf_test()
+{
+	DDRG = 0xFF;
+	radio_init();
+
+	while(1)
+	{
+		PORTG ^= 0xFF;
+		const char hello[] = "hello world!\n";
+		radio_write((uint8_t*)hello, sizeof(hello));
+		_delay_ms(500);
+	}
+}
+
+int main()
+{
+	//spi_test_main();
+	//i2c_test_main();
+	//adc_test();
+	rf_test();
+
 	return 0;
 }
