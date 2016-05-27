@@ -53,7 +53,7 @@
 #define RF_RX_PACKET 30 // размер принимаемых  пакетов (30 максимум)
 #define RF_TX_PACKET 30 // размер отсылаемых пакетов (30 максимум)
 #define RF_SELF_ADDR  0x01, 0x02, 0x03, 0x04 // адрес модуля
-#define RF_TARGET_ADDR 0x5a, 0x5b, 0x5c, 0x5d // адрес получателя
+#define RF_TARGET_ADDR 0x5a, 0x5b, 0x5c, 0x5f // адрес получателя
 
 #define CTSDDR DDRC
 #define CTSPIN PINC

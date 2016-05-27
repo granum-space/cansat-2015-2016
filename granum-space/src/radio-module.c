@@ -40,7 +40,7 @@ void radio_init(){
 	uint8_t test = 100;
 	radio_write(&test , 1);
 	_delay_ms(100);
-	CFGPORT &= ~(1 << CFGPORT);
+	CFGPORT &= ~(1 << CFGLEG);
 
 	uint8_t config[12] = {
 		RF_TARGET_ADDR,
