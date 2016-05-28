@@ -12,6 +12,7 @@
 #include <util/delay.h>
 
 #include "config.h"
+#include "i2c.h"
 #include "uart-debug.h"
 
 #define I2C_START_TRANSFERED 0x10
@@ -28,37 +29,28 @@
 
 
 
-void i2c_init_digipot(){
+void digipot_init(){
 
 }
 
-int i2c_start();
 
-int i2c_send_slaw(uint8_t slave_addr, bool read_access);
+int digipot_write(uint8_t position)
+{
 
-int i2c_write(const void * data_ptr, size_t data_size);
+	i2c_start();
+	i2c_send_slaw(0x01, 1);
 
-
-
-
-int sending_digipot(uint8_t position){
-
-	uint8_t conf[8];
-
+	uint8_t conf[8] = {0};
+	uint8_t cfg_byte = 0;
 	for(uint8_t i = 0; i < 8; i++){
-		conf[i] = (conf[i] << i);
+		cfg_byte |= (conf[i] << i);
 	}
-	uint8_t position_digipot[8];
 
-	for(uint8_t i = 0;i < 8; i++){
-		position_digipot[i]= position;
-	}
-	i2c_write(conf , 8);
-	i2c_write(position_digipot, 8);
+	i2c_write(cfg_byte, 1);
+	i2c_write(&position, 1);
+
+	i2c_stop();
 	return 0;
-
 }
-
-int i2c_stop();
 
 

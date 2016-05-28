@@ -11,8 +11,8 @@
 #include "i2c.h"
 
 
-void i2c_init_digipot();
+void digipot_init();
 
-int write_digipot(uint8_t position);
+int digipot_write(uint8_t position);
 
 #endif /* DIGIPOT_H_ */
