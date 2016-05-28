@@ -205,7 +205,7 @@ void rf_test()
 	{
 		PORTG ^= 0xFF;
 		const char hello[] = "hello world!\n";
-		radio_write((uint8_t*)hello, sizeof(hello));
+		radio_write((uint8_t*)hello, (sizeof(hello)-1));
 		_delay_ms(500);
 	}
 }
