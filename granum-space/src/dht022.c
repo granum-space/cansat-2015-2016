@@ -4,11 +4,7 @@
 #include <util/delay.h>
 
 #include "config.h"
-
-#include "onewire.h"
 #include "dht022.h"
-
-
 
 void DHT_Init()
 {
@@ -17,19 +13,19 @@ void DHT_Init()
 }
 
 
-void DHT_SetBusZero()
+inline static void DHT_SetBusZero()
 {
 	DHT_DDR |= (1 << DHT_PIN);
 }
 
 
-void DHT_SetBusOne()
+inline static void DHT_SetBusOne()
 {
 	DHT_DDR &= ~(1 << DHT_PIN);
 }
 
 
-int DHT_ReadBus()
+inline static int DHT_ReadBus()
 {
 	if ((DHT_PPIN & (1 << DHT_PIN)) != 0)
 		return 1;
@@ -42,15 +38,15 @@ int DHT_ReadBus()
 // если все хорошо возвращает ноль
 // если устроиство не отвечает то возвращает -1 * DHT_ERROR_NO_REPLY
 // если линия не поднялась после ответа за заданное время возвращает -1 * DHT_ERROR_REPLY_TOO_LONG
-int DHT_Reset()
+inline static int DHT_Reset()
 {
 	DHT_SetBusZero();
-	_delay_us(20);
+	_delay_us(1500);
 	DHT_SetBusOne();
-	_delay_us(40);
+	_delay_us(10);
 
  	bool isSomeoneHere = false;
-	for (int i = 0; i < 40; i++)
+	for (int i = 0; i < 30+80; i++)
 	{
 		if (DHT_ReadBus() == 0)
 		{
@@ -74,7 +70,7 @@ int DHT_Reset()
 }
 
 
-int DHT_wait_bit_start(){
+inline static int DHT_wait_bit_start(){
 
 	int value = 0;
 
@@ -95,7 +91,7 @@ int DHT_wait_bit_start(){
 // 		DHT_ERROR_WAIT_TO_LONG -> передача бита не началась
 // 		DHT_ERROR_BIT_TO_LONG -> передача бита не кончилась
 // из положительных значений возвращает 0 или 1
-int DHT_read_bit()
+inline static int DHT_read_bit()
 {
 	bool bitStartedOrEnded = false;
 	for (int i = 0; i < 50; i++)
@@ -124,12 +120,12 @@ int DHT_read_bit()
 	if (!bitStartedOrEnded)
 		return DHT_ERROR_BIT_TO_LONG;
 
-	if(i > 50) return 1;
+	if(i > 12) return 1;
 	else return 0;
 }
 
 
-int DHT_read_byte(){
+inline static int DHT_read_byte(){
 	int num[8];
 	for(int i = 0; i < 8; i++){
 		int value = DHT_read_bit();
@@ -153,6 +149,10 @@ int DHT_read_byte(){
 
 int DHT_Read(uint16_t * humidity, int16_t * temp)
 {
+	int reset_status = DHT_Reset();
+	if (reset_status < 0)
+		return reset_status;
+
 	int wait_start_status = DHT_wait_bit_start();
 	if (wait_start_status < 0)
 		return wait_start_status;
@@ -165,7 +165,7 @@ int DHT_Read(uint16_t * humidity, int16_t * temp)
 	}
 
 	if (sum[0] + sum[1] + sum[2] + sum[3] != sum[4])
-		return -10;
+		return DHT_ERROR_CHECKSUM_WRONG;
 
 	uint8_t* tempptr = (uint8_t*)temp;
 	*(tempptr + 0) = sum[2];
