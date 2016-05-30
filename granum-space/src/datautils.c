@@ -7,60 +7,30 @@
 #include "spi.h"
 #include "sd.h"
 #include "uart-debug.h"
+#include "radio-module.h"
 
 uint32_t block = 0;
 uint16_t bib = 0;
 
 
 void du_init() {
-	/*RDDR |= (1<<RCFGNUM)|(1<<RRTSNUM);
-	RDDR &= ~(1<<RCTSNUM);
+	radio_init();
 
-	OPER
-	_delay_us(10);
-
-	CONFIG
-	RTS_EN
-	uint8_t config[] = {
-			0x7E,0x7E,0x7E,0x7E, //destination address
-			0x7E,0x7E,0x7E,0x7E //self address
-	};
-	uart_send_many(config, sizeof(config));
-	RTS_DIS
-	OPER
-
-	CONFIG
-	RTS_EN
-	uart_send_many(config, 1);
-
-	uint8_t data_to_verify[11];
-	uart_read_many(data_to_verify, sizeof(data_to_verify));
-	GR_DEBUG("ggg\n");
-	RTS_DIS
-
-	GR_DEBUG("%d %d %d %d %d %d %d %d %d %d %d\n", data_to_verify[0],
-													data_to_verify[1],
-													data_to_verify[2],
-													data_to_verify[3],
-													data_to_verify[4],
-													data_to_verify[5],
-													data_to_verify[6],
-													data_to_verify[7],
-													data_to_verify[8],
-													data_to_verify[9],
-													data_to_verify[10]);*/
 	/*while(1) {
+		GR_DEBUG("I'm there99\n");
 		if(sd_init()==0x00) {
+			GR_DEBUG("I'm there66\n");
 			break;
 		}
 		_delay_ms(100);
-	}*/
+	}*/ //Для SD карты
 }
 
 void du_write(const void* data, int length) {
-	const uint8_t* ptr = (const uint8_t*) data;
+	radio_write(data, length);
+	/*const uint8_t* ptr = (const uint8_t*) data;
 	for(int i = 0; i < length; i++) {
-		/*if(bib == 0) {
+		if(bib == 0) {
 			uint8_t CMD24[] = {
 				0x58,
 				(uint8_t)((block >> 24) & 0xFF),
@@ -90,9 +60,9 @@ void du_write(const void* data, int length) {
 			}
 		}
 		if(bib == 511) {
-			spi_sendbyte((uint8_t)(*(ptr+i) & 0xFF));
-			spi_sendbyte(0xFF);
-			spi_sendbyte(0xFF);
+			spi_sendbyte(*(ptr+i));
+			spi_sendbyte(0x99);
+			spi_sendbyte(0x99);
 			GR_DEBUG("It data answer was %d\n",spi_sendbyte(0xFF));
 			while(1) {
 				uint8_t answer = spi_sendbyte(0xFF);
@@ -101,6 +71,6 @@ void du_write(const void* data, int length) {
 			}
 			bib = 0;
 			block += 512;
-		}*/
-	}
+		}
+	}*/ //Для SD карты
 }

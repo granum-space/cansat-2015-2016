@@ -19,6 +19,7 @@
 #include "1wdevices.h"
 #include "pkt_types.h"
 #include "radio-module.h"
+#include "dht022.h"
 
 void spi_test_main()
 {
@@ -198,24 +199,53 @@ void du_test()
 
 void rf_test()
 {
-	DDRG = 0xFF;
-	radio_init();
-
 	while(1)
 	{
 		PORTG ^= 0xFF;
 		const char hello[] = "hello world!\n";
-		radio_write((uint8_t*)hello, (sizeof(hello)-1));
-		_delay_ms(500);
+		du_write((uint8_t*)hello, (sizeof(hello)-1));
 	}
 }
 
 int main()
 {
-	//spi_test_main();
-	//i2c_test_main();
-	//adc_test();
-	rf_test();
+	_delay_ms(5000);
+	DDRG = 0xFF;
+	PORTG = 0xFF;
+	initUartDebug();
+	du_init();
+	adc_init();
+	OneWireInit();
+	GR_DEBUG("All inits completed!");
+	dtpkt_t pkt;
+	pkt.beacon = 0xFFFF;
+	pkt.number = 0;
+	pkt.time = 0;
+	pkt.time_part = 0;
+	pkt.temperature2 = 0;
+	pkt.humidity = 0;
+	pkt.O2 = 0;
+	pkt.CO2 = 0;
+	pkt.rezistance12 = 0;
+	pkt.rezistance13 = 0;
+	pkt.rezistance23 = 0;
+	pkt.legs = 0;
+	pkt.parachute = 0;
+	while(1) {
+		pkt.number++;
+		pkt.temperature1 = get_temperature();
+		pkt.pressure = adc_read(ADC_CHANNEL_PRESSURE);
+		pkt.rezistance12 = adc_read(ADC_CHANNEL_EARTH_TEMP_1);
+		pkt.rezistance13 = adc_read(ADC_CHANNEL_EARTH_TEMP_2);
+		pkt.rezistance23 = adc_read(ADC_CHANNEL_EARTH_TEMP_3);
+		uint8_t* pkt_ptr = (uint8_t*)&pkt;
+		pkt.cntrl = 0;
+		for(int i = 0; i < (sizeof(pkt)-sizeof(pkt.cntrl)); i++) {
+			pkt.cntrl += *(pkt_ptr+i);
+		}
+		du_write(pkt_ptr, sizeof(pkt));
+		GR_DEBUG("SMPFOMPOFKW");
+	}
 
 	return 0;
 }
