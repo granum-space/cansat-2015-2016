@@ -138,146 +138,6 @@
 </layers>
 <schematic xreflabel="%F%N/%S.%C%R" xrefpart="/%S.%C%R">
 <libraries>
-<library name="RHT03_DHT-22_AM2302">
-<description>&lt;h1&gt;RHT03 / DHT-22 / AM2302 library&lt;/h1&gt;
-&lt;p&gt;
-Library with devices (schematic symbol and packages) for the RHT03 / DHT-22 / AM2302 digital relative humidity and tempearture sensor.&lt;br /&gt;
-Warning: Package does not include tKeepout areas so that the part may optionally be placed on a riser with components underneath.  Please keep the package outline and bent-pin space in mind.
-&lt;/p&gt;</description>
-<packages>
-<package name="RHT03_DHT-22">
-<description>&lt;h1&gt;RHT03 / DHT-22&lt;/h1&gt;
-&lt;p&gt;
-Package for the RHT03 / DHT-22 relative humidity and temperature sensor.
-&lt;/p&gt;</description>
-<pad name="VDD" x="-3.81" y="0" drill="0.8" shape="octagon"/>
-<pad name="DATA" x="-1.27" y="0" drill="0.8"/>
-<pad name="NULL" x="1.27" y="0" drill="0.8"/>
-<pad name="GND" x="3.81" y="0" drill="0.8"/>
-<wire x1="-7.55" y1="2.5" x2="7.55" y2="2.5" width="0.127" layer="21"/>
-<wire x1="-7.55" y1="-5.2" x2="7.55" y2="-5.2" width="0.127" layer="21"/>
-<wire x1="-7.55" y1="2.5" x2="-7.55" y2="0.8" width="0.127" layer="21"/>
-<wire x1="-7.55" y1="0.8" x2="-7.55" y2="-5.2" width="0.127" layer="21"/>
-<wire x1="7.55" y1="2.5" x2="7.55" y2="0.8" width="0.127" layer="21"/>
-<wire x1="7.55" y1="0.8" x2="7.55" y2="-5.2" width="0.127" layer="21"/>
-<wire x1="-7.55" y1="0.8" x2="7.55" y2="0.8" width="0.127" layer="21"/>
-<text x="-6" y="-4.5" size="1.27" layer="21" font="vector">&gt;NAME</text>
-<text x="-6" y="-2.5" size="1.27" layer="21" font="vector">&gt;VALUE</text>
-</package>
-<package name="AM2302">
-<description>&lt;h1&gt;AM2302&lt;/h1&gt;
-&lt;p&gt;
-Package for the AM2302 wired variant of the RHT03/DHT-22 relative humidity and temperature sensor.
-&lt;/p&gt;</description>
-<pad name="VDD" x="-3.81" y="0" drill="0.8" shape="octagon"/>
-<pad name="DATA" x="-1.27" y="0" drill="0.8"/>
-<pad name="NULL" x="1.27" y="0" drill="0.8"/>
-<pad name="GND" x="3.81" y="0" drill="0.8"/>
-<text x="-5.08" y="-2.667" size="1.27" layer="21" font="vector">&gt;NAME</text>
-<wire x1="-5.08" y1="-0.635" x2="-4.445" y2="-1.27" width="0.127" layer="21"/>
-<wire x1="-4.445" y1="-1.27" x2="5.08" y2="-1.27" width="0.127" layer="21"/>
-<wire x1="5.08" y1="-1.27" x2="5.08" y2="1.27" width="0.127" layer="21"/>
-<wire x1="5.08" y1="1.27" x2="-5.08" y2="1.27" width="0.127" layer="21"/>
-<wire x1="-5.08" y1="1.27" x2="-5.08" y2="-0.635" width="0.127" layer="21"/>
-<text x="-5.08" y="1.397" size="1.27" layer="21">&gt;VALUE</text>
-</package>
-<package name="RHT03_DHT-22/RA">
-<description>&lt;h1&gt;RHT03 / DHT-22 - RIGHT ANGLE&lt;/h1&gt;
-&lt;p&gt;
-Right angle package for the RHT03 / DHT-22 relative humidity and temperature sensor.
-&lt;/p&gt;</description>
-<pad name="VDD" x="-3.81" y="0" drill="0.8" shape="octagon"/>
-<pad name="DATA" x="-1.27" y="0" drill="0.8"/>
-<pad name="NULL" x="1.27" y="0" drill="0.8"/>
-<pad name="GND" x="3.81" y="0" drill="0.8"/>
-<wire x1="-7.55" y1="2.5" x2="7.55" y2="2.5" width="0.127" layer="21"/>
-<text x="-5.08" y="5.08" size="1.27" layer="21" font="vector" rot="R90">&gt;NAME</text>
-<wire x1="-7.55" y1="2.5" x2="-7.55" y2="22.5" width="0.127" layer="21"/>
-<wire x1="7.55" y1="2.5" x2="7.55" y2="22.5" width="0.127" layer="21"/>
-<wire x1="-7.55" y1="22.5" x2="7.55" y2="22.5" width="0.127" layer="21"/>
-<wire x1="-5.25" y1="27.1" x2="5.25" y2="27.1" width="0.127" layer="21"/>
-<wire x1="7.55" y1="22.5" x2="5.25" y2="27.1" width="0.127" layer="21"/>
-<wire x1="-7.55" y1="22.5" x2="-5.25" y2="27.1" width="0.127" layer="21"/>
-<hole x="0" y="24.5" drill="3.25"/>
-<wire x1="-3.81" y1="1.27" x2="-3.81" y2="2.54" width="0.127" layer="21"/>
-<wire x1="-1.27" y1="1.27" x2="-1.27" y2="2.54" width="0.127" layer="21"/>
-<wire x1="1.27" y1="1.27" x2="1.27" y2="2.54" width="0.127" layer="21"/>
-<wire x1="3.81" y1="1.27" x2="3.81" y2="2.54" width="0.127" layer="21"/>
-<text x="0" y="12.5" size="1.27" layer="21" font="vector" rot="R90" align="center">&gt;VALUE</text>
-</package>
-</packages>
-<symbols>
-<symbol name="RHT03">
-<description>&lt;h1&gt;RHT03 / DHT-22 / AM2302&lt;/h1&gt;
-&lt;p&gt;
-Symbol for the RHT03 / DHT-22 / AM2302 relative humidity and temperature sensor.
-&lt;/p&gt;</description>
-<wire x1="-5.08" y1="10.16" x2="-5.08" y2="-10.16" width="0.254" layer="94"/>
-<wire x1="-5.08" y1="-10.16" x2="5.08" y2="-10.16" width="0.254" layer="94"/>
-<wire x1="5.08" y1="-10.16" x2="5.08" y2="10.16" width="0.254" layer="94"/>
-<wire x1="5.08" y1="10.16" x2="-5.08" y2="10.16" width="0.254" layer="94"/>
-<pin name="VDD" x="-10.16" y="7.62" length="middle" direction="pwr"/>
-<pin name="DATA" x="-10.16" y="2.54" length="middle"/>
-<pin name="NULL" x="-10.16" y="-2.54" visible="pad" length="middle" direction="nc"/>
-<pin name="GND" x="-10.16" y="-7.62" length="middle" direction="pwr"/>
-<text x="-5.08" y="11.43" size="1.27" layer="94">&gt;NAME</text>
-<text x="-5.08" y="-12.7" size="1.27" layer="94">&gt;VALUE</text>
-</symbol>
-</symbols>
-<devicesets>
-<deviceset name="RHT03_DHT-22_AM2302" prefix="U" uservalue="yes">
-<description>&lt;h1&gt;RHT03 / DHT-22 / AM2302&lt;/h1&gt;
-&lt;p&gt;
-Packages and symbol for the RHT03 / DHT-22 relative humidity and temperature sensor.&lt;br /&gt;
-Note: The AM2302 is a wired version of the DHT-22 which typically requires less clearance and is thus provided as a separate package.
-&lt;/p&gt;</description>
-<gates>
-<gate name="G$1" symbol="RHT03" x="0" y="0"/>
-</gates>
-<devices>
-<device name="" package="RHT03_DHT-22">
-<connects>
-<connect gate="G$1" pin="DATA" pad="DATA"/>
-<connect gate="G$1" pin="GND" pad="GND"/>
-<connect gate="G$1" pin="NULL" pad="NULL"/>
-<connect gate="G$1" pin="VDD" pad="VDD"/>
-</connects>
-<technologies>
-<technology name="">
-<attribute name="PROD_ID" value="SEN-10167"/>
-</technology>
-</technologies>
-</device>
-<device name="WIRED" package="AM2302">
-<connects>
-<connect gate="G$1" pin="DATA" pad="DATA"/>
-<connect gate="G$1" pin="GND" pad="GND"/>
-<connect gate="G$1" pin="NULL" pad="NULL"/>
-<connect gate="G$1" pin="VDD" pad="VDD"/>
-</connects>
-<technologies>
-<technology name="">
-<attribute name="PROD_ID" value="SEN-10167"/>
-</technology>
-</technologies>
-</device>
-<device name="RA" package="RHT03_DHT-22/RA">
-<connects>
-<connect gate="G$1" pin="DATA" pad="DATA"/>
-<connect gate="G$1" pin="GND" pad="GND"/>
-<connect gate="G$1" pin="NULL" pad="NULL"/>
-<connect gate="G$1" pin="VDD" pad="VDD"/>
-</connects>
-<technologies>
-<technology name="">
-<attribute name="PROD_ID" value="SEN-10167"/>
-</technology>
-</technologies>
-</device>
-</devices>
-</deviceset>
-</devicesets>
-</library>
 <library name="SparkFun-Capacitors">
 <description>&lt;h3&gt;SparkFun Electronics' preferred foot prints&lt;/h3&gt;
 In this library you'll find resistors, capacitors, inductors, test points, jumper pads, etc.&lt;br&gt;&lt;br&gt;
@@ -1349,6 +1209,146 @@ in the sensor’s electrode design.&lt;/p&gt;
 </deviceset>
 </devicesets>
 </library>
+<library name="RHT03_DHT-22_AM2302">
+<description>&lt;h1&gt;RHT03 / DHT-22 / AM2302 library&lt;/h1&gt;
+&lt;p&gt;
+Library with devices (schematic symbol and packages) for the RHT03 / DHT-22 / AM2302 digital relative humidity and tempearture sensor.&lt;br /&gt;
+Warning: Package does not include tKeepout areas so that the part may optionally be placed on a riser with components underneath.  Please keep the package outline and bent-pin space in mind.
+&lt;/p&gt;</description>
+<packages>
+<package name="RHT03_DHT-22">
+<description>&lt;h1&gt;RHT03 / DHT-22&lt;/h1&gt;
+&lt;p&gt;
+Package for the RHT03 / DHT-22 relative humidity and temperature sensor.
+&lt;/p&gt;</description>
+<pad name="VDD" x="-3.81" y="0" drill="0.8" shape="octagon"/>
+<pad name="DATA" x="-1.27" y="0" drill="0.8"/>
+<pad name="NULL" x="1.27" y="0" drill="0.8"/>
+<pad name="GND" x="3.81" y="0" drill="0.8"/>
+<wire x1="-7.55" y1="2.5" x2="7.55" y2="2.5" width="0.127" layer="21"/>
+<wire x1="-7.55" y1="-5.2" x2="7.55" y2="-5.2" width="0.127" layer="21"/>
+<wire x1="-7.55" y1="2.5" x2="-7.55" y2="0.8" width="0.127" layer="21"/>
+<wire x1="-7.55" y1="0.8" x2="-7.55" y2="-5.2" width="0.127" layer="21"/>
+<wire x1="7.55" y1="2.5" x2="7.55" y2="0.8" width="0.127" layer="21"/>
+<wire x1="7.55" y1="0.8" x2="7.55" y2="-5.2" width="0.127" layer="21"/>
+<wire x1="-7.55" y1="0.8" x2="7.55" y2="0.8" width="0.127" layer="21"/>
+<text x="-6" y="-4.5" size="1.27" layer="21" font="vector">&gt;NAME</text>
+<text x="-6" y="-2.5" size="1.27" layer="21" font="vector">&gt;VALUE</text>
+</package>
+<package name="AM2302">
+<description>&lt;h1&gt;AM2302&lt;/h1&gt;
+&lt;p&gt;
+Package for the AM2302 wired variant of the RHT03/DHT-22 relative humidity and temperature sensor.
+&lt;/p&gt;</description>
+<pad name="VDD" x="-3.81" y="0" drill="0.8" shape="octagon"/>
+<pad name="DATA" x="-1.27" y="0" drill="0.8"/>
+<pad name="NULL" x="1.27" y="0" drill="0.8"/>
+<pad name="GND" x="3.81" y="0" drill="0.8"/>
+<text x="-5.08" y="-2.667" size="1.27" layer="21" font="vector">&gt;NAME</text>
+<wire x1="-5.08" y1="-0.635" x2="-4.445" y2="-1.27" width="0.127" layer="21"/>
+<wire x1="-4.445" y1="-1.27" x2="5.08" y2="-1.27" width="0.127" layer="21"/>
+<wire x1="5.08" y1="-1.27" x2="5.08" y2="1.27" width="0.127" layer="21"/>
+<wire x1="5.08" y1="1.27" x2="-5.08" y2="1.27" width="0.127" layer="21"/>
+<wire x1="-5.08" y1="1.27" x2="-5.08" y2="-0.635" width="0.127" layer="21"/>
+<text x="-5.08" y="1.397" size="1.27" layer="21">&gt;VALUE</text>
+</package>
+<package name="RHT03_DHT-22/RA">
+<description>&lt;h1&gt;RHT03 / DHT-22 - RIGHT ANGLE&lt;/h1&gt;
+&lt;p&gt;
+Right angle package for the RHT03 / DHT-22 relative humidity and temperature sensor.
+&lt;/p&gt;</description>
+<pad name="VDD" x="-3.81" y="0" drill="0.8" shape="octagon"/>
+<pad name="DATA" x="-1.27" y="0" drill="0.8"/>
+<pad name="NULL" x="1.27" y="0" drill="0.8"/>
+<pad name="GND" x="3.81" y="0" drill="0.8"/>
+<wire x1="-7.55" y1="2.5" x2="7.55" y2="2.5" width="0.127" layer="21"/>
+<text x="-5.08" y="5.08" size="1.27" layer="21" font="vector" rot="R90">&gt;NAME</text>
+<wire x1="-7.55" y1="2.5" x2="-7.55" y2="22.5" width="0.127" layer="21"/>
+<wire x1="7.55" y1="2.5" x2="7.55" y2="22.5" width="0.127" layer="21"/>
+<wire x1="-7.55" y1="22.5" x2="7.55" y2="22.5" width="0.127" layer="21"/>
+<wire x1="-5.25" y1="27.1" x2="5.25" y2="27.1" width="0.127" layer="21"/>
+<wire x1="7.55" y1="22.5" x2="5.25" y2="27.1" width="0.127" layer="21"/>
+<wire x1="-7.55" y1="22.5" x2="-5.25" y2="27.1" width="0.127" layer="21"/>
+<hole x="0" y="24.5" drill="3.25"/>
+<wire x1="-3.81" y1="1.27" x2="-3.81" y2="2.54" width="0.127" layer="21"/>
+<wire x1="-1.27" y1="1.27" x2="-1.27" y2="2.54" width="0.127" layer="21"/>
+<wire x1="1.27" y1="1.27" x2="1.27" y2="2.54" width="0.127" layer="21"/>
+<wire x1="3.81" y1="1.27" x2="3.81" y2="2.54" width="0.127" layer="21"/>
+<text x="0" y="12.5" size="1.27" layer="21" font="vector" rot="R90" align="center">&gt;VALUE</text>
+</package>
+</packages>
+<symbols>
+<symbol name="RHT03">
+<description>&lt;h1&gt;RHT03 / DHT-22 / AM2302&lt;/h1&gt;
+&lt;p&gt;
+Symbol for the RHT03 / DHT-22 / AM2302 relative humidity and temperature sensor.
+&lt;/p&gt;</description>
+<wire x1="-5.08" y1="10.16" x2="-5.08" y2="-10.16" width="0.254" layer="94"/>
+<wire x1="-5.08" y1="-10.16" x2="5.08" y2="-10.16" width="0.254" layer="94"/>
+<wire x1="5.08" y1="-10.16" x2="5.08" y2="10.16" width="0.254" layer="94"/>
+<wire x1="5.08" y1="10.16" x2="-5.08" y2="10.16" width="0.254" layer="94"/>
+<pin name="VDD" x="-10.16" y="7.62" length="middle" direction="pwr"/>
+<pin name="DATA" x="-10.16" y="2.54" length="middle"/>
+<pin name="NULL" x="-10.16" y="-2.54" visible="pad" length="middle" direction="nc"/>
+<pin name="GND" x="-10.16" y="-7.62" length="middle" direction="pwr"/>
+<text x="-5.08" y="11.43" size="1.27" layer="94">&gt;NAME</text>
+<text x="-5.08" y="-12.7" size="1.27" layer="94">&gt;VALUE</text>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="RHT03_DHT-22_AM2302" prefix="U" uservalue="yes">
+<description>&lt;h1&gt;RHT03 / DHT-22 / AM2302&lt;/h1&gt;
+&lt;p&gt;
+Packages and symbol for the RHT03 / DHT-22 relative humidity and temperature sensor.&lt;br /&gt;
+Note: The AM2302 is a wired version of the DHT-22 which typically requires less clearance and is thus provided as a separate package.
+&lt;/p&gt;</description>
+<gates>
+<gate name="G$1" symbol="RHT03" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="RHT03_DHT-22">
+<connects>
+<connect gate="G$1" pin="DATA" pad="DATA"/>
+<connect gate="G$1" pin="GND" pad="GND"/>
+<connect gate="G$1" pin="NULL" pad="NULL"/>
+<connect gate="G$1" pin="VDD" pad="VDD"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="PROD_ID" value="SEN-10167"/>
+</technology>
+</technologies>
+</device>
+<device name="WIRED" package="AM2302">
+<connects>
+<connect gate="G$1" pin="DATA" pad="DATA"/>
+<connect gate="G$1" pin="GND" pad="GND"/>
+<connect gate="G$1" pin="NULL" pad="NULL"/>
+<connect gate="G$1" pin="VDD" pad="VDD"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="PROD_ID" value="SEN-10167"/>
+</technology>
+</technologies>
+</device>
+<device name="RA" package="RHT03_DHT-22/RA">
+<connects>
+<connect gate="G$1" pin="DATA" pad="DATA"/>
+<connect gate="G$1" pin="GND" pad="GND"/>
+<connect gate="G$1" pin="NULL" pad="NULL"/>
+<connect gate="G$1" pin="VDD" pad="VDD"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="PROD_ID" value="SEN-10167"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -1359,7 +1359,6 @@ in the sensor’s electrode design.&lt;/p&gt;
 </class>
 </classes>
 <parts>
-<part name="HMDT" library="RHT03_DHT-22_AM2302" deviceset="RHT03_DHT-22_AM2302" device="RA"/>
 <part name="C1" library="SparkFun-Capacitors" deviceset="4.7PF-50V(-/+.25PF)(0603)" device="" value="4.7pF"/>
 <part name="C3" library="SparkFun-Capacitors" deviceset="4.7PF-50V(-/+.25PF)(0603)" device="" value="4.7pF"/>
 <part name="C4" library="SparkFun-Capacitors" deviceset="4.7PF-50V(-/+.25PF)(0603)" device="" value="4.7pF"/>
@@ -1367,12 +1366,9 @@ in the sensor’s electrode design.&lt;/p&gt;
 <part name="GND2" library="SparkFun-Aesthetics" deviceset="GND" device=""/>
 <part name="VBAT" library="solpad" deviceset="LSP10" device=""/>
 <part name="GND" library="solpad" deviceset="LSP10" device=""/>
-<part name="GND3" library="SparkFun-Aesthetics" deviceset="GND" device=""/>
-<part name="SUPPLY6" library="SparkFun-Aesthetics" deviceset="VCC" device=""/>
 <part name="U$5" library="datchiki" deviceset="TGS4161" device=""/>
 <part name="IC1" library="linear" deviceset="TLC271" device="D"/>
 <part name="SUPPLY8" library="SparkFun-Aesthetics" deviceset="VCC" device=""/>
-<part name="SUPPLY9" library="SparkFun-Aesthetics" deviceset="VCC" device=""/>
 <part name="GND15" library="SparkFun-Aesthetics" deviceset="GND" device=""/>
 <part name="GND17" library="SparkFun-Aesthetics" deviceset="GND" device=""/>
 <part name="U$9" library="elements" deviceset="SS-8" device=""/>
@@ -1398,7 +1394,6 @@ in the sensor’s electrode design.&lt;/p&gt;
 <part name="PROBE_14" library="wirepad" deviceset="2,54/0,8" device=""/>
 <part name="X2" library="con-molex" deviceset="87758-0216" device=""/>
 <part name="X3" library="con-molex" deviceset="87758-0216" device=""/>
-<part name="X8" library="con-molex" deviceset="87758-0216" device=""/>
 <part name="GND23" library="SparkFun-Aesthetics" deviceset="GND" device=""/>
 <part name="U2" library="elements" deviceset="TLV1117-33" device=""/>
 <part name="U3" library="elements" deviceset="LD1117S50" device=""/>
@@ -1407,26 +1402,19 @@ in the sensor’s electrode design.&lt;/p&gt;
 <part name="U$2" library="elements" deviceset="MC74HC4051A" device=""/>
 <part name="U$3" library="elements" deviceset="MC74HC4051A" device=""/>
 <part name="U$4" library="datchiki" deviceset="O2-A2" device=""/>
-<part name="GND6" library="SparkFun-Aesthetics" deviceset="GND" device=""/>
 <part name="SUPPLY1" library="SparkFun-Aesthetics" deviceset="VCC" device=""/>
 <part name="GROUND_PROBE2" library="wirepad" deviceset="2,54/0,8" device=""/>
 <part name="GROUND_PROBE3" library="wirepad" deviceset="2,54/0,8" device=""/>
 <part name="U1" library="elements" deviceset="AD5241BRU1M-REEL7" device="AD5241BRZ1M"/>
 <part name="SUPPLY2" library="SparkFun-Aesthetics" deviceset="VCC" device=""/>
-<part name="IC2" library="linear" deviceset="TLC271" device="D"/>
-<part name="SUPPLY4" library="SparkFun-Aesthetics" deviceset="VCC" device=""/>
 <part name="X1" library="con-molex" deviceset="87758-0216" device=""/>
-<part name="GND9" library="SparkFun-Aesthetics" deviceset="GND" device=""/>
 <part name="X6" library="con-molex" deviceset="87758-0216" device=""/>
 <part name="X7" library="con-molex" deviceset="87758-0216" device=""/>
-<part name="X10" library="con-molex" deviceset="87758-0216" device=""/>
 <part name="GND5" library="SparkFun-Aesthetics" deviceset="GND" device=""/>
 <part name="GND7" library="SparkFun-Aesthetics" deviceset="GND" device=""/>
 <part name="SUPPLY7" library="SparkFun-Aesthetics" deviceset="VCC" device=""/>
 <part name="X4" library="con-molex" deviceset="87758-0216" device=""/>
 <part name="R12" library="SparkFun-Resistors" deviceset="0.75OHM-1/4W-1%(0805)" device="" value="0.75"/>
-<part name="R13" library="SparkFun-Resistors" deviceset="0.75OHM-1/4W-1%(0805)" device="" value="0.75"/>
-<part name="R14" library="SparkFun-Resistors" deviceset="0.75OHM-1/4W-1%(0805)" device="" value="0.75"/>
 <part name="R20" library="SparkFun-Resistors" deviceset="0.75OHM-1/4W-1%(0805)" device="" value="0.75"/>
 <part name="R21" library="SparkFun-Resistors" deviceset="0.75OHM-1/4W-1%(0805)" device="" value="0.75"/>
 <part name="R22" library="SparkFun-Resistors" deviceset="0.75OHM-1/4W-1%(0805)" device="" value="0.75"/>
@@ -1435,14 +1423,26 @@ in the sensor’s electrode design.&lt;/p&gt;
 <part name="R25" library="SparkFun-Resistors" deviceset="0.75OHM-1/4W-1%(0805)" device="" value="0.75"/>
 <part name="R26" library="SparkFun-Resistors" deviceset="0.75OHM-1/4W-1%(0805)" device="" value="0.75"/>
 <part name="GND8" library="SparkFun-Aesthetics" deviceset="GND" device=""/>
+<part name="SUPPLY3" library="SparkFun-Aesthetics" deviceset="VCC" device=""/>
+<part name="U4" library="RHT03_DHT-22_AM2302" deviceset="RHT03_DHT-22_AM2302" device="RA"/>
+<part name="X5" library="con-molex" deviceset="87758-0216" device=""/>
+<part name="SUPPLY4" library="SparkFun-Aesthetics" deviceset="VCC" device=""/>
 <part name="R1" library="SparkFun-Resistors" deviceset="0.75OHM-1/4W-1%(0805)" device="" value="0.75"/>
+<part name="GND3" library="SparkFun-Aesthetics" deviceset="GND" device=""/>
+<part name="IC2" library="linear" deviceset="TLC271" device="D"/>
+<part name="SUPPLY5" library="SparkFun-Aesthetics" deviceset="VCC" device=""/>
+<part name="GND4" library="SparkFun-Aesthetics" deviceset="GND" device=""/>
+<part name="R2" library="SparkFun-Resistors" deviceset="0.75OHM-1/4W-1%(0805)" device="" value="0.75"/>
+<part name="R3" library="SparkFun-Resistors" deviceset="0.75OHM-1/4W-1%(0805)" device="" value="0.75"/>
+<part name="GND6" library="SparkFun-Aesthetics" deviceset="GND" device=""/>
+<part name="SUPPLY6" library="SparkFun-Aesthetics" deviceset="VCC" device=""/>
+<part name="SUPPLY9" library="SparkFun-Aesthetics" deviceset="VCC" device=""/>
 </parts>
 <sheets>
 <sheet>
 <plain>
 </plain>
 <instances>
-<instance part="HMDT" gate="G$1" x="233.28" y="103.46"/>
 <instance part="C1" gate="G$1" x="132.08" y="25.4"/>
 <instance part="C3" gate="G$1" x="132.08" y="2.54"/>
 <instance part="C4" gate="G$1" x="86.36" y="10.16"/>
@@ -1450,12 +1450,9 @@ in the sensor’s electrode design.&lt;/p&gt;
 <instance part="GND2" gate="1" x="116.84" y="17.78"/>
 <instance part="VBAT" gate="1" x="78.74" y="45.72"/>
 <instance part="GND" gate="1" x="81.28" y="2.54"/>
-<instance part="GND3" gate="1" x="218.04" y="90.76"/>
-<instance part="SUPPLY6" gate="G$1" x="215.5" y="121.975"/>
 <instance part="U$5" gate="TGS4161" x="200.66" y="-20.32"/>
 <instance part="IC1" gate="A" x="231.14" y="-17.78"/>
 <instance part="SUPPLY8" gate="G$1" x="182.88" y="-10.16"/>
-<instance part="SUPPLY9" gate="G$1" x="231.14" y="0"/>
 <instance part="GND15" gate="1" x="215.9" y="-30.48"/>
 <instance part="GND17" gate="1" x="241.3" y="-53.34"/>
 <instance part="U$9" gate="G$1" x="76.2" y="25.4"/>
@@ -1479,10 +1476,9 @@ in the sensor’s electrode design.&lt;/p&gt;
 <instance part="Q7" gate="G$1" x="76.2" y="-43.18"/>
 <instance part="GND22" gate="1" x="76.2" y="-55.88"/>
 <instance part="PROBE_14" gate="P" x="53.34" y="-20.32" rot="R90"/>
-<instance part="X2" gate="-1" x="93.98" y="88.9" rot="MR180"/>
-<instance part="X2" gate="-2" x="93.98" y="134.62"/>
+<instance part="X2" gate="-1" x="515.62" y="-45.72" rot="MR180"/>
+<instance part="X2" gate="-2" x="515.62" y="0"/>
 <instance part="X3" gate="-2" x="248.92" y="-17.78"/>
-<instance part="X8" gate="-1" x="197.72" y="106" rot="R180"/>
 <instance part="GND23" gate="1" x="182.88" y="-30.48"/>
 <instance part="U2" gate="G$1" x="116.84" y="33.02"/>
 <instance part="U3" gate="G$1" x="116.84" y="10.16"/>
@@ -1490,40 +1486,47 @@ in the sensor’s electrode design.&lt;/p&gt;
 <instance part="U$1" gate="MC74HC4051A" x="294.64" y="40.64"/>
 <instance part="U$2" gate="MC74HC4051A" x="294.64" y="-20.32"/>
 <instance part="U$3" gate="MC74HC4051A" x="294.64" y="10.16"/>
-<instance part="U$4" gate="O2-A2" x="142.24" y="71.12" rot="R180"/>
-<instance part="GND6" gate="1" x="185.42" y="73.66"/>
+<instance part="U$4" gate="O2-A2" x="160.02" y="71.12" rot="R180"/>
 <instance part="SUPPLY1" gate="G$1" x="337.82" y="55.88"/>
 <instance part="GROUND_PROBE2" gate="P" x="327.66" y="15.24" rot="MR0"/>
 <instance part="GROUND_PROBE3" gate="P" x="327.66" y="45.72" rot="MR0"/>
 <instance part="U1" gate="A" x="406.4" y="40.64"/>
 <instance part="SUPPLY2" gate="G$1" x="370.84" y="55.88"/>
-<instance part="IC2" gate="A" x="195.58" y="60.96"/>
-<instance part="SUPPLY4" gate="G$1" x="195.58" y="78.74"/>
 <instance part="X1" gate="-1" x="327.66" y="38.1"/>
 <instance part="X1" gate="-2" x="281.94" y="30.48" rot="R270"/>
-<instance part="GND9" gate="1" x="218.44" y="25.4"/>
 <instance part="X6" gate="-1" x="281.94" y="-30.48" rot="R270"/>
 <instance part="X6" gate="-2" x="327.66" y="-22.86"/>
 <instance part="X7" gate="-1" x="281.94" y="0" rot="R270"/>
 <instance part="X7" gate="-2" x="327.66" y="7.62"/>
-<instance part="X10" gate="-1" x="231.14" y="55.88" rot="R270"/>
 <instance part="GND5" gate="1" x="368.3" y="-45.72"/>
 <instance part="GND7" gate="1" x="431.8" y="7.62"/>
 <instance part="SUPPLY7" gate="G$1" x="431.8" y="63.5"/>
 <instance part="X4" gate="-1" x="350.52" y="-45.72" rot="R270"/>
 <instance part="X4" gate="-2" x="386.08" y="-45.72" rot="R270"/>
-<instance part="R12" gate="G$1" x="170.18" y="71.12" rot="R270"/>
-<instance part="R13" gate="G$1" x="218.44" y="53.34" rot="R90"/>
-<instance part="R14" gate="G$1" x="218.44" y="38.1" rot="R90"/>
-<instance part="R20" gate="G$1" x="81.28" y="144.78" rot="R90"/>
-<instance part="R21" gate="G$1" x="78.74" y="99.06" rot="R90"/>
+<instance part="R12" gate="G$1" x="185.42" y="71.12" rot="R270"/>
+<instance part="R20" gate="G$1" x="502.92" y="10.16" rot="R90"/>
+<instance part="R21" gate="G$1" x="500.38" y="-35.56" rot="R90"/>
 <instance part="R22" gate="G$1" x="355.6" y="-30.48" rot="R90"/>
 <instance part="R23" gate="G$1" x="381" y="-30.48" rot="R90"/>
 <instance part="R24" gate="G$1" x="431.8" y="25.4" rot="R90"/>
 <instance part="R25" gate="G$1" x="241.3" y="-27.94" rot="R90"/>
 <instance part="R26" gate="G$1" x="241.3" y="-43.18" rot="R90"/>
 <instance part="GND8" gate="1" x="279.4" y="-45.72"/>
-<instance part="R1" gate="G$1" x="209.375" y="111.13" rot="R90"/>
+<instance part="SUPPLY3" gate="G$1" x="228.6" y="0"/>
+<instance part="U4" gate="G$1" x="284.48" y="78.74"/>
+<instance part="X5" gate="-1" x="226.06" y="60.96"/>
+<instance part="X5" gate="-2" x="251.46" y="81.28" rot="R180"/>
+<instance part="SUPPLY4" gate="G$1" x="266.7" y="101.6"/>
+<instance part="R1" gate="G$1" x="259.08" y="88.9" rot="R270"/>
+<instance part="GND3" gate="1" x="269.24" y="66.04"/>
+<instance part="IC2" gate="A" x="205.74" y="60.96"/>
+<instance part="SUPPLY5" gate="G$1" x="203.2" y="78.74"/>
+<instance part="GND4" gate="1" x="195.58" y="73.66"/>
+<instance part="R2" gate="G$1" x="215.9" y="50.8" rot="R270"/>
+<instance part="R3" gate="G$1" x="215.9" y="35.56" rot="R270"/>
+<instance part="GND6" gate="1" x="215.9" y="22.86"/>
+<instance part="SUPPLY6" gate="G$1" x="233.68" y="-30.48"/>
+<instance part="SUPPLY9" gate="G$1" x="208.28" y="48.26"/>
 </instances>
 <busses>
 </busses>
@@ -1539,21 +1542,15 @@ in the sensor’s electrode design.&lt;/p&gt;
 <pinref part="U2" gate="G$1" pin="OUT"/>
 </segment>
 <segment>
-<label x="220.58" y="118.7" size="1.778" layer="95"/>
-<pinref part="HMDT" gate="G$1" pin="VDD"/>
-<wire x1="215.5" y1="121.975" x2="215.5" y2="118.675" width="0.1524" layer="91"/>
-<wire x1="215.5" y1="118.675" x2="215.5" y2="111.08" width="0.1524" layer="91"/>
-<wire x1="215.5" y1="111.08" x2="223.12" y2="111.08" width="0.1524" layer="91"/>
-<pinref part="SUPPLY6" gate="G$1" pin="VCC"/>
-<wire x1="209.375" y1="117.8" x2="209.375" y2="116.21" width="0.1524" layer="91"/>
-<wire x1="209.375" y1="116.21" x2="209.375" y2="118.675" width="0.1524" layer="91"/>
-<wire x1="209.375" y1="118.675" x2="215.5" y2="118.675" width="0.1524" layer="91"/>
-<junction x="215.5" y="118.675"/>
-<pinref part="R1" gate="G$1" pin="2"/>
-<junction x="209.375" y="116.21"/>
-<wire x1="209.4" y1="118.3" x2="209.375" y2="118.3" width="0.1524" layer="91"/>
-<wire x1="209.375" y1="118.3" x2="209.375" y2="116.21" width="0.1524" layer="91"/>
-<wire x1="209.375" y1="117.05" x2="209.375" y2="116.21" width="0.1524" layer="91"/>
+<pinref part="U4" gate="G$1" pin="VDD"/>
+<wire x1="274.32" y1="86.36" x2="266.7" y2="86.36" width="0.1524" layer="91"/>
+<wire x1="266.7" y1="86.36" x2="266.7" y2="96.52" width="0.1524" layer="91"/>
+<pinref part="SUPPLY4" gate="G$1" pin="VCC"/>
+<pinref part="R1" gate="G$1" pin="1"/>
+<wire x1="266.7" y1="96.52" x2="266.7" y2="101.6" width="0.1524" layer="91"/>
+<wire x1="259.08" y1="93.98" x2="259.08" y2="96.52" width="0.1524" layer="91"/>
+<wire x1="259.08" y1="96.52" x2="266.7" y2="96.52" width="0.1524" layer="91"/>
+<junction x="266.7" y="96.52"/>
 </segment>
 </net>
 <net name="GND" class="0">
@@ -1580,12 +1577,6 @@ in the sensor’s electrode design.&lt;/p&gt;
 <wire x1="86.36" y1="7.62" x2="86.36" y2="0" width="0.1524" layer="91"/>
 <junction x="86.36" y="0"/>
 <pinref part="U3" gate="G$1" pin="ADJ"/>
-</segment>
-<segment>
-<pinref part="GND3" gate="1" pin="GND"/>
-<pinref part="HMDT" gate="G$1" pin="GND"/>
-<wire x1="218.04" y1="93.3" x2="218.04" y2="95.84" width="0.1524" layer="91"/>
-<wire x1="218.04" y1="95.84" x2="223.12" y2="95.84" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="U$5" gate="TGS4161" pin="SENS-"/>
@@ -1632,26 +1623,6 @@ in the sensor’s electrode design.&lt;/p&gt;
 <pinref part="U$5" gate="TGS4161" pin="HEAT-"/>
 <wire x1="182.88" y1="-27.94" x2="182.88" y2="-25.4" width="0.1524" layer="91"/>
 <wire x1="182.88" y1="-25.4" x2="187.96" y2="-25.4" width="0.1524" layer="91"/>
-</segment>
-<segment>
-<pinref part="U$4" gate="O2-A2" pin="GND"/>
-<wire x1="157.48" y1="78.74" x2="170.18" y2="78.74" width="0.1524" layer="91"/>
-<wire x1="170.18" y1="78.74" x2="185.42" y2="78.74" width="0.1524" layer="91"/>
-<wire x1="185.42" y1="78.74" x2="185.42" y2="76.2" width="0.1524" layer="91"/>
-<pinref part="GND6" gate="1" pin="GND"/>
-<wire x1="170.18" y1="78.74" x2="170.18" y2="76.2" width="0.1524" layer="91"/>
-<junction x="170.18" y="78.74"/>
-<pinref part="R12" gate="G$1" pin="1"/>
-</segment>
-<segment>
-<wire x1="218.44" y1="33.02" x2="218.44" y2="30.48" width="0.1524" layer="91"/>
-<pinref part="GND9" gate="1" pin="GND"/>
-<pinref part="IC2" gate="A" pin="V-"/>
-<wire x1="218.44" y1="30.48" x2="218.44" y2="27.94" width="0.1524" layer="91"/>
-<wire x1="218.44" y1="30.48" x2="193.04" y2="30.48" width="0.1524" layer="91"/>
-<wire x1="193.04" y1="30.48" x2="193.04" y2="53.34" width="0.1524" layer="91"/>
-<junction x="218.44" y="30.48"/>
-<pinref part="R14" gate="G$1" pin="1"/>
 </segment>
 <segment>
 <wire x1="381" y1="-40.64" x2="381" y2="-35.56" width="0.1524" layer="91"/>
@@ -1701,6 +1672,32 @@ in the sensor’s electrode design.&lt;/p&gt;
 <junction x="289.56" y="-22.86"/>
 <pinref part="GND8" gate="1" pin="GND"/>
 </segment>
+<segment>
+<pinref part="U4" gate="G$1" pin="GND"/>
+<wire x1="274.32" y1="71.12" x2="269.24" y2="71.12" width="0.1524" layer="91"/>
+<wire x1="269.24" y1="71.12" x2="269.24" y2="68.58" width="0.1524" layer="91"/>
+<pinref part="GND3" gate="1" pin="GND"/>
+</segment>
+<segment>
+<pinref part="U$4" gate="O2-A2" pin="GND"/>
+<wire x1="175.26" y1="78.74" x2="185.42" y2="78.74" width="0.1524" layer="91"/>
+<wire x1="185.42" y1="78.74" x2="185.42" y2="76.2" width="0.1524" layer="91"/>
+<pinref part="R12" gate="G$1" pin="1"/>
+<wire x1="185.42" y1="78.74" x2="195.58" y2="78.74" width="0.1524" layer="91"/>
+<wire x1="195.58" y1="78.74" x2="195.58" y2="76.2" width="0.1524" layer="91"/>
+<junction x="185.42" y="78.74"/>
+<pinref part="GND4" gate="1" pin="GND"/>
+</segment>
+<segment>
+<pinref part="IC2" gate="A" pin="V-"/>
+<wire x1="203.2" y1="53.34" x2="203.2" y2="27.94" width="0.1524" layer="91"/>
+<pinref part="R3" gate="G$1" pin="2"/>
+<wire x1="203.2" y1="27.94" x2="215.9" y2="27.94" width="0.1524" layer="91"/>
+<wire x1="215.9" y1="27.94" x2="215.9" y2="30.48" width="0.1524" layer="91"/>
+<wire x1="215.9" y1="27.94" x2="215.9" y2="25.4" width="0.1524" layer="91"/>
+<junction x="215.9" y="27.94"/>
+<pinref part="GND6" gate="1" pin="GND"/>
+</segment>
 </net>
 <net name="5V" class="0">
 <segment>
@@ -1713,13 +1710,13 @@ in the sensor’s electrode design.&lt;/p&gt;
 <pinref part="U3" gate="G$1" pin="OUT"/>
 </segment>
 <segment>
-<wire x1="81.28" y1="149.86" x2="81.28" y2="160.02" width="0.1524" layer="91"/>
-<label x="83.82" y="157.48" size="1.778" layer="95"/>
+<wire x1="502.92" y1="15.24" x2="502.92" y2="25.4" width="0.1524" layer="91"/>
+<label x="505.46" y="22.86" size="1.778" layer="95"/>
 <pinref part="R20" gate="G$1" pin="2"/>
 </segment>
 <segment>
-<wire x1="78.74" y1="104.14" x2="78.74" y2="114.3" width="0.1524" layer="91"/>
-<label x="81.28" y="111.76" size="1.778" layer="95"/>
+<wire x1="500.38" y1="-30.48" x2="500.38" y2="-20.32" width="0.1524" layer="91"/>
+<label x="502.92" y="-22.86" size="1.778" layer="95"/>
 <pinref part="R21" gate="G$1" pin="2"/>
 </segment>
 <segment>
@@ -1727,22 +1724,6 @@ in the sensor’s electrode design.&lt;/p&gt;
 <pinref part="SUPPLY8" gate="G$1" pin="VCC"/>
 <wire x1="182.88" y1="-15.24" x2="187.96" y2="-15.24" width="0.1524" layer="91"/>
 <pinref part="U$5" gate="TGS4161" pin="HEAT+"/>
-</segment>
-<segment>
-<pinref part="IC1" gate="A" pin="-IN"/>
-<wire x1="220.98" y1="-20.32" x2="223.52" y2="-20.32" width="0.1524" layer="91"/>
-<wire x1="241.3" y1="-33.02" x2="241.3" y2="-35.56" width="0.1524" layer="91"/>
-<wire x1="241.3" y1="-35.56" x2="220.98" y2="-35.56" width="0.1524" layer="91"/>
-<wire x1="220.98" y1="-35.56" x2="220.98" y2="-20.32" width="0.1524" layer="91"/>
-<wire x1="241.3" y1="-35.56" x2="241.3" y2="-38.1" width="0.1524" layer="91"/>
-<junction x="241.3" y="-35.56"/>
-<pinref part="R25" gate="G$1" pin="1"/>
-<pinref part="R26" gate="G$1" pin="2"/>
-</segment>
-<segment>
-<pinref part="SUPPLY9" gate="G$1" pin="VCC"/>
-<pinref part="IC1" gate="A" pin="ON1"/>
-<wire x1="231.14" y1="-10.16" x2="231.14" y2="0" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <wire x1="337.82" y1="55.88" x2="337.82" y2="50.8" width="0.1524" layer="91"/>
@@ -1778,16 +1759,6 @@ in the sensor’s electrode design.&lt;/p&gt;
 <junction x="350.52" y="12.7"/>
 </segment>
 <segment>
-<pinref part="U$4" gate="O2-A2" pin="VOUT"/>
-<wire x1="157.48" y1="63.5" x2="170.18" y2="63.5" width="0.1524" layer="91"/>
-<wire x1="170.18" y1="63.5" x2="170.18" y2="66.04" width="0.1524" layer="91"/>
-<pinref part="IC2" gate="A" pin="+IN"/>
-<wire x1="170.18" y1="63.5" x2="187.96" y2="63.5" width="0.1524" layer="91"/>
-<junction x="170.18" y="63.5"/>
-<wire x1="170.18" y1="63.5" x2="170.18" y2="53.34" width="0.1524" layer="91"/>
-<pinref part="R12" gate="G$1" pin="2"/>
-</segment>
-<segment>
 <pinref part="U1" gate="A" pin="VSS"/>
 <wire x1="424.18" y1="58.42" x2="431.8" y2="58.42" width="0.1524" layer="91"/>
 <wire x1="431.8" y1="58.42" x2="431.8" y2="55.88" width="0.1524" layer="91"/>
@@ -1804,6 +1775,30 @@ in the sensor’s electrode design.&lt;/p&gt;
 <wire x1="431.8" y1="58.42" x2="431.8" y2="63.5" width="0.1524" layer="91"/>
 <junction x="431.8" y="58.42"/>
 <pinref part="SUPPLY7" gate="G$1" pin="VCC"/>
+</segment>
+<segment>
+<pinref part="IC2" gate="A" pin="V+"/>
+<wire x1="203.2" y1="68.58" x2="203.2" y2="78.74" width="0.1524" layer="91"/>
+<pinref part="SUPPLY5" gate="G$1" pin="VCC"/>
+</segment>
+<segment>
+<pinref part="IC1" gate="A" pin="V+"/>
+<wire x1="228.6" y1="-10.16" x2="228.6" y2="0" width="0.1524" layer="91"/>
+<pinref part="SUPPLY3" gate="G$1" pin="VCC"/>
+</segment>
+<segment>
+<pinref part="IC1" gate="A" pin="OPT"/>
+<wire x1="231.14" y1="-25.4" x2="231.14" y2="-33.02" width="0.1524" layer="91"/>
+<wire x1="231.14" y1="-33.02" x2="233.68" y2="-33.02" width="0.1524" layer="91"/>
+<wire x1="233.68" y1="-33.02" x2="233.68" y2="-30.48" width="0.1524" layer="91"/>
+<pinref part="SUPPLY6" gate="G$1" pin="VCC"/>
+</segment>
+<segment>
+<pinref part="IC2" gate="A" pin="OPT"/>
+<wire x1="205.74" y1="53.34" x2="205.74" y2="45.72" width="0.1524" layer="91"/>
+<wire x1="205.74" y1="45.72" x2="208.28" y2="45.72" width="0.1524" layer="91"/>
+<wire x1="208.28" y1="45.72" x2="208.28" y2="48.26" width="0.1524" layer="91"/>
+<pinref part="SUPPLY9" gate="G$1" pin="VCC"/>
 </segment>
 </net>
 <net name="VBAT" class="0">
@@ -1844,12 +1839,12 @@ in the sensor’s electrode design.&lt;/p&gt;
 </net>
 <net name="SDA_5V" class="0">
 <segment>
-<wire x1="81.28" y1="134.62" x2="81.28" y2="139.7" width="0.1524" layer="91"/>
-<wire x1="73.66" y1="134.62" x2="81.28" y2="134.62" width="0.1524" layer="91"/>
-<label x="86.36" y="129.54" size="1.778" layer="95"/>
+<wire x1="502.92" y1="0" x2="502.92" y2="5.08" width="0.1524" layer="91"/>
+<wire x1="495.3" y1="0" x2="502.92" y2="0" width="0.1524" layer="91"/>
+<label x="508" y="-5.08" size="1.778" layer="95"/>
 <pinref part="X2" gate="-2" pin="S"/>
-<wire x1="81.28" y1="134.62" x2="91.44" y2="134.62" width="0.1524" layer="91"/>
-<junction x="81.28" y="134.62"/>
+<wire x1="502.92" y1="0" x2="513.08" y2="0" width="0.1524" layer="91"/>
+<junction x="502.92" y="0"/>
 <pinref part="R20" gate="G$1" pin="1"/>
 </segment>
 <segment>
@@ -1860,32 +1855,18 @@ in the sensor’s electrode design.&lt;/p&gt;
 </net>
 <net name="SCL_5V" class="0">
 <segment>
-<wire x1="78.74" y1="88.9" x2="78.74" y2="93.98" width="0.1524" layer="91"/>
-<wire x1="73.66" y1="88.9" x2="78.74" y2="88.9" width="0.1524" layer="91"/>
-<label x="83.82" y="83.82" size="1.778" layer="95"/>
+<wire x1="500.38" y1="-45.72" x2="500.38" y2="-40.64" width="0.1524" layer="91"/>
+<wire x1="495.3" y1="-45.72" x2="500.38" y2="-45.72" width="0.1524" layer="91"/>
+<label x="505.46" y="-50.8" size="1.778" layer="95"/>
 <pinref part="X2" gate="-1" pin="S"/>
-<wire x1="78.74" y1="88.9" x2="91.44" y2="88.9" width="0.1524" layer="91"/>
-<junction x="78.74" y="88.9"/>
+<wire x1="500.38" y1="-45.72" x2="513.08" y2="-45.72" width="0.1524" layer="91"/>
+<junction x="500.38" y="-45.72"/>
 <pinref part="R21" gate="G$1" pin="1"/>
 </segment>
 <segment>
 <pinref part="U1" gate="A" pin="SCL"/>
 <wire x1="388.62" y1="25.4" x2="383.54" y2="25.4" width="0.1524" layer="91"/>
 <wire x1="383.54" y1="25.4" x2="383.54" y2="20.32" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="N$55" class="0">
-<segment>
-<pinref part="HMDT" gate="G$1" pin="DATA"/>
-<pinref part="X8" gate="-1" pin="S"/>
-<wire x1="200.26" y1="106" x2="209.4" y2="106" width="0.1524" layer="91"/>
-<junction x="209.4" y="106"/>
-<wire x1="209.4" y1="106" x2="223.12" y2="106" width="0.1524" layer="91"/>
-</segment>
-<segment>
-<wire x1="209.45" y1="105.975" x2="209.375" y2="105.975" width="0.1524" layer="91"/>
-<wire x1="209.375" y1="105.975" x2="209.375" y2="106.05" width="0.1524" layer="91"/>
-<pinref part="R1" gate="G$1" pin="1"/>
 </segment>
 </net>
 <net name="N$22" class="0">
@@ -2003,38 +1984,6 @@ in the sensor’s electrode design.&lt;/p&gt;
 <pinref part="R22" gate="G$1" pin="2"/>
 </segment>
 </net>
-<net name="VCC" class="0">
-<segment>
-<wire x1="195.58" y1="68.58" x2="195.58" y2="78.74" width="0.1524" layer="91"/>
-<pinref part="SUPPLY4" gate="G$1" pin="VCC"/>
-<pinref part="IC2" gate="A" pin="ON1"/>
-</segment>
-</net>
-<net name="N$4" class="0">
-<segment>
-<pinref part="IC2" gate="A" pin="OUT"/>
-<wire x1="203.2" y1="60.96" x2="218.44" y2="60.96" width="0.1524" layer="91"/>
-<wire x1="218.44" y1="60.96" x2="218.44" y2="58.42" width="0.1524" layer="91"/>
-<wire x1="218.44" y1="60.96" x2="231.14" y2="60.96" width="0.1524" layer="91"/>
-<wire x1="231.14" y1="60.96" x2="231.14" y2="58.42" width="0.1524" layer="91"/>
-<junction x="218.44" y="60.96"/>
-<pinref part="X10" gate="-1" pin="S"/>
-<pinref part="R13" gate="G$1" pin="2"/>
-</segment>
-</net>
-<net name="N$10" class="0">
-<segment>
-<wire x1="218.44" y1="48.26" x2="218.44" y2="45.72" width="0.1524" layer="91"/>
-<pinref part="IC2" gate="A" pin="-IN"/>
-<wire x1="218.44" y1="45.72" x2="218.44" y2="43.18" width="0.1524" layer="91"/>
-<wire x1="187.96" y1="58.42" x2="182.88" y2="58.42" width="0.1524" layer="91"/>
-<wire x1="182.88" y1="58.42" x2="182.88" y2="45.72" width="0.1524" layer="91"/>
-<wire x1="182.88" y1="45.72" x2="218.44" y2="45.72" width="0.1524" layer="91"/>
-<junction x="218.44" y="45.72"/>
-<pinref part="R13" gate="G$1" pin="1"/>
-<pinref part="R14" gate="G$1" pin="2"/>
-</segment>
-</net>
 <net name="N$11" class="0">
 <segment>
 <pinref part="U$3" gate="MC74HC4051A" pin="ENABLE"/>
@@ -2089,6 +2038,65 @@ in the sensor’s electrode design.&lt;/p&gt;
 <wire x1="431.8" y1="38.1" x2="431.8" y2="30.48" width="0.1524" layer="91"/>
 <pinref part="R24" gate="G$1" pin="2"/>
 <junction x="431.8" y="30.48"/>
+</segment>
+</net>
+<net name="N$3" class="0">
+<segment>
+<pinref part="U4" gate="G$1" pin="DATA"/>
+<wire x1="274.32" y1="81.28" x2="259.08" y2="81.28" width="0.1524" layer="91"/>
+<pinref part="X5" gate="-2" pin="S"/>
+<wire x1="259.08" y1="81.28" x2="254" y2="81.28" width="0.1524" layer="91"/>
+<wire x1="259.08" y1="81.28" x2="259.08" y2="83.82" width="0.1524" layer="91"/>
+<junction x="259.08" y="81.28"/>
+<pinref part="R1" gate="G$1" pin="2"/>
+</segment>
+</net>
+<net name="N$110" class="0">
+<segment>
+<pinref part="U$4" gate="O2-A2" pin="VOUT"/>
+<wire x1="175.26" y1="63.5" x2="185.42" y2="63.5" width="0.1524" layer="91"/>
+<wire x1="185.42" y1="63.5" x2="185.42" y2="66.04" width="0.1524" layer="91"/>
+<pinref part="R12" gate="G$1" pin="2"/>
+<pinref part="IC2" gate="A" pin="+IN"/>
+<wire x1="185.42" y1="63.5" x2="198.12" y2="63.5" width="0.1524" layer="91"/>
+<junction x="185.42" y="63.5"/>
+</segment>
+</net>
+<net name="N$1" class="0">
+<segment>
+<pinref part="IC2" gate="A" pin="OUT"/>
+<wire x1="213.36" y1="60.96" x2="215.9" y2="60.96" width="0.1524" layer="91"/>
+<wire x1="215.9" y1="60.96" x2="215.9" y2="55.88" width="0.1524" layer="91"/>
+<pinref part="R2" gate="G$1" pin="1"/>
+<wire x1="215.9" y1="60.96" x2="223.52" y2="60.96" width="0.1524" layer="91"/>
+<junction x="215.9" y="60.96"/>
+<pinref part="X5" gate="-1" pin="S"/>
+</segment>
+</net>
+<net name="N$4" class="0">
+<segment>
+<wire x1="195.58" y1="43.18" x2="195.58" y2="58.42" width="0.1524" layer="91"/>
+<pinref part="IC2" gate="A" pin="-IN"/>
+<wire x1="195.58" y1="58.42" x2="198.12" y2="58.42" width="0.1524" layer="91"/>
+<pinref part="R3" gate="G$1" pin="1"/>
+<pinref part="R2" gate="G$1" pin="2"/>
+<wire x1="215.9" y1="45.72" x2="215.9" y2="43.18" width="0.1524" layer="91"/>
+<wire x1="215.9" y1="43.18" x2="215.9" y2="40.64" width="0.1524" layer="91"/>
+<wire x1="195.58" y1="43.18" x2="215.9" y2="43.18" width="0.1524" layer="91"/>
+<junction x="215.9" y="43.18"/>
+</segment>
+</net>
+<net name="N$111" class="0">
+<segment>
+<pinref part="IC1" gate="A" pin="-IN"/>
+<wire x1="220.98" y1="-20.32" x2="223.52" y2="-20.32" width="0.1524" layer="91"/>
+<wire x1="241.3" y1="-33.02" x2="241.3" y2="-35.56" width="0.1524" layer="91"/>
+<wire x1="241.3" y1="-35.56" x2="220.98" y2="-35.56" width="0.1524" layer="91"/>
+<wire x1="220.98" y1="-35.56" x2="220.98" y2="-20.32" width="0.1524" layer="91"/>
+<wire x1="241.3" y1="-35.56" x2="241.3" y2="-38.1" width="0.1524" layer="91"/>
+<junction x="241.3" y="-35.56"/>
+<pinref part="R25" gate="G$1" pin="1"/>
+<pinref part="R26" gate="G$1" pin="2"/>
 </segment>
 </net>
 </nets>

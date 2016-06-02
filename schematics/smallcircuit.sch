@@ -237,32 +237,36 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <description>&lt;b&gt;Molex Connectors&lt;/b&gt;&lt;p&gt;
 &lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;</description>
 <packages>
-<package name="87758-0616">
-<description>&lt;b&gt;6 Pin - 2mm Dual Row Single Wafer, Vertical T/H HDR&lt;/b&gt;&lt;p&gt;
+<package name="87758-0816">
+<description>&lt;b&gt;8 Pin - 2mm Dual Row Single Wafer, Vertical T/H HDR&lt;/b&gt;&lt;p&gt;
 Source: http://www.molex.com/pdm_docs/sd/877580616_sd.pdf</description>
-<wire x1="-2.85" y1="-1.9" x2="2.85" y2="-1.9" width="0.2032" layer="21"/>
-<wire x1="2.85" y1="-1.9" x2="2.85" y2="-0.4" width="0.2032" layer="21"/>
-<wire x1="2.85" y1="0.4" x2="2.85" y2="1.9" width="0.2032" layer="21"/>
-<wire x1="2.85" y1="1.9" x2="-2.85" y2="1.9" width="0.2032" layer="21"/>
-<wire x1="-2.85" y1="1.9" x2="-2.85" y2="0.4" width="0.2032" layer="21"/>
-<wire x1="-2.85" y1="-0.4" x2="-2.85" y2="-1.9" width="0.2032" layer="21"/>
-<wire x1="-2.85" y1="0.4" x2="-2.85" y2="-0.4" width="0.2032" layer="21" curve="-129.184564"/>
-<wire x1="2.85" y1="-0.4" x2="2.85" y2="0.4" width="0.2032" layer="21" curve="-129.184564"/>
-<pad name="1" x="-2" y="-1" drill="0.9" diameter="1.27"/>
-<pad name="2" x="-2" y="1" drill="0.9" diameter="1.27"/>
-<pad name="3" x="0" y="-1" drill="0.9" diameter="1.27"/>
-<pad name="4" x="0" y="1" drill="0.9" diameter="1.27"/>
-<pad name="5" x="2" y="-1" drill="0.9" diameter="1.27"/>
-<pad name="6" x="2" y="1" drill="0.9" diameter="1.27"/>
-<text x="-2.65" y="-1.75" size="0.3048" layer="21" font="vector">1</text>
-<text x="-2.62" y="-3.81" size="1.27" layer="25">&gt;NAME</text>
-<text x="-2.62" y="2.54" size="1.27" layer="27">&gt;VALUE</text>
-<rectangle x1="-2.25" y1="-1.25" x2="-1.75" y2="-0.75" layer="51"/>
-<rectangle x1="-2.25" y1="0.75" x2="-1.75" y2="1.25" layer="51"/>
-<rectangle x1="-0.25" y1="-1.25" x2="0.25" y2="-0.75" layer="51"/>
-<rectangle x1="-0.25" y1="0.75" x2="0.25" y2="1.25" layer="51"/>
-<rectangle x1="1.75" y1="-1.25" x2="2.25" y2="-0.75" layer="51"/>
-<rectangle x1="1.75" y1="0.75" x2="2.25" y2="1.25" layer="51"/>
+<wire x1="-3.85" y1="-1.9" x2="3.85" y2="-1.9" width="0.2032" layer="21"/>
+<wire x1="3.85" y1="-1.9" x2="3.85" y2="-0.4" width="0.2032" layer="21"/>
+<wire x1="3.85" y1="0.4" x2="3.85" y2="1.9" width="0.2032" layer="21"/>
+<wire x1="3.85" y1="1.9" x2="-3.85" y2="1.9" width="0.2032" layer="21"/>
+<wire x1="-3.85" y1="1.9" x2="-3.85" y2="0.4" width="0.2032" layer="21"/>
+<wire x1="-3.85" y1="-0.4" x2="-3.85" y2="-1.9" width="0.2032" layer="21"/>
+<wire x1="-3.85" y1="0.4" x2="-3.85" y2="-0.4" width="0.2032" layer="21" curve="-129.184564"/>
+<wire x1="3.85" y1="-0.4" x2="3.85" y2="0.4" width="0.2032" layer="21" curve="-129.184564"/>
+<pad name="1" x="-3" y="-1" drill="0.9" diameter="1.27"/>
+<pad name="2" x="-3" y="1" drill="0.9" diameter="1.27"/>
+<pad name="3" x="-1" y="-1" drill="0.9" diameter="1.27"/>
+<pad name="4" x="-1" y="1" drill="0.9" diameter="1.27"/>
+<pad name="5" x="1" y="-1" drill="0.9" diameter="1.27"/>
+<pad name="6" x="1" y="1" drill="0.9" diameter="1.27"/>
+<pad name="7" x="3" y="-1" drill="0.9" diameter="1.27"/>
+<pad name="8" x="3" y="1" drill="0.9" diameter="1.27"/>
+<text x="-3.65" y="-1.75" size="0.3048" layer="21" font="vector">1</text>
+<text x="-3.62" y="-3.81" size="1.27" layer="25">&gt;NAME</text>
+<text x="-3.62" y="2.54" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="-3.25" y1="-1.25" x2="-2.75" y2="-0.75" layer="51"/>
+<rectangle x1="-3.25" y1="0.75" x2="-2.75" y2="1.25" layer="51"/>
+<rectangle x1="-1.25" y1="-1.25" x2="-0.75" y2="-0.75" layer="51"/>
+<rectangle x1="-1.25" y1="0.75" x2="-0.75" y2="1.25" layer="51"/>
+<rectangle x1="0.75" y1="-1.25" x2="1.25" y2="-0.75" layer="51"/>
+<rectangle x1="0.75" y1="0.75" x2="1.25" y2="1.25" layer="51"/>
+<rectangle x1="2.75" y1="-1.25" x2="3.25" y2="-0.75" layer="51"/>
+<rectangle x1="2.75" y1="0.75" x2="3.25" y2="1.25" layer="51"/>
 </package>
 </packages>
 <symbols>
@@ -279,19 +283,21 @@ Source: http://www.molex.com/pdm_docs/sd/877580616_sd.pdf</description>
 </symbol>
 </symbols>
 <devicesets>
-<deviceset name="87758-0616" prefix="X">
-<description>&lt;b&gt;6 Pin - 2mm Dual Row Single Wafer, Vertical T/H HDR&lt;/b&gt;&lt;p&gt;
+<deviceset name="87758-0816" prefix="X">
+<description>&lt;b&gt;8 Pin - 2mm Dual Row Single Wafer, Vertical T/H HDR&lt;/b&gt;&lt;p&gt;
 Source: http://www.molex.com/pdm_docs/sd/877580616_sd.pdf</description>
 <gates>
-<gate name="-1" symbol="MV" x="-10.16" y="2.54" addlevel="always"/>
-<gate name="-2" symbol="MV" x="10.16" y="2.54" addlevel="always"/>
-<gate name="-3" symbol="M" x="-10.16" y="0" addlevel="always"/>
-<gate name="-4" symbol="M" x="10.16" y="0" addlevel="always"/>
-<gate name="-5" symbol="M" x="-10.16" y="-2.54" addlevel="always"/>
-<gate name="-6" symbol="M" x="10.16" y="-2.54" addlevel="always"/>
+<gate name="-1" symbol="MV" x="-10.16" y="30.48" addlevel="always"/>
+<gate name="-2" symbol="MV" x="10.16" y="30.48" addlevel="always"/>
+<gate name="-3" symbol="M" x="-10.16" y="27.94" addlevel="always"/>
+<gate name="-4" symbol="M" x="10.16" y="27.94" addlevel="always"/>
+<gate name="-5" symbol="M" x="-10.16" y="25.4" addlevel="always"/>
+<gate name="-6" symbol="M" x="10.16" y="25.4" addlevel="always"/>
+<gate name="-7" symbol="M" x="-10.16" y="22.86" addlevel="always"/>
+<gate name="-8" symbol="M" x="10.16" y="22.86" addlevel="always"/>
 </gates>
 <devices>
-<device name="" package="87758-0616">
+<device name="" package="87758-0816">
 <connects>
 <connect gate="-1" pin="S" pad="1"/>
 <connect gate="-2" pin="S" pad="2"/>
@@ -299,13 +305,15 @@ Source: http://www.molex.com/pdm_docs/sd/877580616_sd.pdf</description>
 <connect gate="-4" pin="S" pad="4"/>
 <connect gate="-5" pin="S" pad="5"/>
 <connect gate="-6" pin="S" pad="6"/>
+<connect gate="-7" pin="S" pad="7"/>
+<connect gate="-8" pin="S" pad="8"/>
 </connects>
 <technologies>
 <technology name="">
-<attribute name="MF" value="" constant="no"/>
-<attribute name="MPN" value="87758-0616" constant="no"/>
-<attribute name="OC_FARNELL" value="7472323" constant="no"/>
-<attribute name="OC_NEWARK" value="25M5667" constant="no"/>
+<attribute name="MF" value="MOLEX" constant="no"/>
+<attribute name="MPN" value="87758-0816" constant="no"/>
+<attribute name="OC_FARNELL" value="7472331" constant="no"/>
+<attribute name="OC_NEWARK" value="59J1556" constant="no"/>
 </technology>
 </technologies>
 </device>
@@ -4428,7 +4436,8 @@ These are standard SMD and PTH capacitors. Normally 10uF, 47uF, and 100uF in ele
 <part name="C1" library="rcl" deviceset="C-EU" device="C0603"/>
 <part name="C2" library="SparkFun-Passives" deviceset="CAP_POL" device="3528"/>
 <part name="GND3" library="SparkFun-Aesthetics" deviceset="GND" device=""/>
-<part name="X3" library="con-molex" deviceset="87758-0616" device=""/>
+<part name="GND4" library="SparkFun-Aesthetics" deviceset="GND" device=""/>
+<part name="X1" library="con-molex" deviceset="87758-0816" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -4442,7 +4451,7 @@ These are standard SMD and PTH capacitors. Normally 10uF, 47uF, and 100uF in ele
 </plain>
 <instances>
 <instance part="GND1" gate="1" x="-22.92" y="-10.5"/>
-<instance part="R3" gate="G$1" x="22.86" y="-10.16"/>
+<instance part="R3" gate="G$1" x="22.86" y="-5.08"/>
 <instance part="U1" gate="A" x="104.14" y="7.62"/>
 <instance part="GND2" gate="1" x="142.24" y="5.08"/>
 <instance part="R1" gate="G$1" x="40.64" y="-10.16" rot="R90"/>
@@ -4451,12 +4460,15 @@ These are standard SMD and PTH capacitors. Normally 10uF, 47uF, and 100uF in ele
 <instance part="C1" gate="G$1" x="20.32" y="38.1"/>
 <instance part="C2" gate="G$1" x="35.56" y="38.1"/>
 <instance part="GND3" gate="1" x="35.56" y="22.86"/>
-<instance part="X3" gate="-1" x="-27.94" y="5.08" rot="R90"/>
-<instance part="X3" gate="-2" x="165.1" y="40.64"/>
-<instance part="X3" gate="-3" x="27.94" y="22.86" rot="R270"/>
-<instance part="X3" gate="-4" x="50.8" y="-17.78" rot="R270"/>
-<instance part="X3" gate="-5" x="45.72" y="53.34" rot="R90"/>
-<instance part="X3" gate="-6" x="40.64" y="-20.32" rot="R270"/>
+<instance part="GND4" gate="1" x="10.16" y="-20.32"/>
+<instance part="X1" gate="-1" x="-27.94" y="5.08" rot="R90"/>
+<instance part="X1" gate="-2" x="50.8" y="-20.32" rot="R270"/>
+<instance part="X1" gate="-3" x="27.94" y="22.86" rot="R270"/>
+<instance part="X1" gate="-4" x="40.64" y="-20.32" rot="R270"/>
+<instance part="X1" gate="-5" x="45.72" y="53.34" rot="R90"/>
+<instance part="X1" gate="-6" x="142.24" y="20.32"/>
+<instance part="X1" gate="-7" x="101.6" y="53.34"/>
+<instance part="X1" gate="-8" x="142.24" y="17.78"/>
 </instances>
 <busses>
 </busses>
@@ -4464,8 +4476,8 @@ These are standard SMD and PTH capacitors. Normally 10uF, 47uF, and 100uF in ele
 <net name="3.3V" class="0">
 <segment>
 <pinref part="R3" gate="G$1" pin="2"/>
-<wire x1="27.94" y1="-10.16" x2="30.48" y2="-10.16" width="0.1524" layer="91"/>
-<wire x1="30.48" y1="-10.16" x2="30.48" y2="15.24" width="0.1524" layer="91"/>
+<wire x1="27.94" y1="-5.08" x2="30.48" y2="-5.08" width="0.1524" layer="91"/>
+<wire x1="30.48" y1="-5.08" x2="30.48" y2="15.24" width="0.1524" layer="91"/>
 <pinref part="U1" gate="A" pin="*CS"/>
 <wire x1="76.2" y1="-5.08" x2="71.12" y2="-5.08" width="0.1524" layer="91"/>
 <wire x1="71.12" y1="-5.08" x2="71.12" y2="0" width="0.1524" layer="91"/>
@@ -4509,7 +4521,7 @@ These are standard SMD and PTH capacitors. Normally 10uF, 47uF, and 100uF in ele
 <pinref part="C2" gate="G$1" pin="+"/>
 <wire x1="35.56" y1="40.64" x2="35.56" y2="43.18" width="0.1524" layer="91"/>
 <junction x="35.56" y="43.18"/>
-<pinref part="X3" gate="-5" pin="S"/>
+<pinref part="X1" gate="-5" pin="S"/>
 </segment>
 </net>
 <net name="GND" class="0">
@@ -4545,7 +4557,13 @@ These are standard SMD and PTH capacitors. Normally 10uF, 47uF, and 100uF in ele
 <wire x1="27.94" y1="27.94" x2="27.94" y2="25.4" width="0.1524" layer="91"/>
 <junction x="27.94" y="27.94"/>
 <pinref part="GND3" gate="1" pin="GND"/>
-<pinref part="X3" gate="-3" pin="S"/>
+<pinref part="X1" gate="-3" pin="S"/>
+</segment>
+<segment>
+<pinref part="U$1" gate="G$1" pin="PLANE"/>
+<wire x1="5.08" y1="-10.16" x2="10.16" y2="-10.16" width="0.1524" layer="91"/>
+<wire x1="10.16" y1="-10.16" x2="10.16" y2="-17.78" width="0.1524" layer="91"/>
+<pinref part="GND4" gate="1" pin="GND"/>
 </segment>
 </net>
 <net name="N$1" class="0">
@@ -4553,50 +4571,74 @@ These are standard SMD and PTH capacitors. Normally 10uF, 47uF, and 100uF in ele
 <wire x1="-15.24" y1="0" x2="-27.94" y2="0" width="0.1524" layer="91"/>
 <wire x1="-27.94" y1="0" x2="-27.94" y2="2.54" width="0.1524" layer="91"/>
 <pinref part="U$1" gate="G$1" pin="ADDR"/>
-<pinref part="X3" gate="-1" pin="S"/>
+<pinref part="X1" gate="-1" pin="S"/>
 </segment>
 </net>
 <net name="N$6" class="0">
 <segment>
-<wire x1="15.24" y1="-5.08" x2="15.24" y2="-10.16" width="0.1524" layer="91"/>
 <pinref part="R3" gate="G$1" pin="1"/>
-<wire x1="15.24" y1="-10.16" x2="17.78" y2="-10.16" width="0.1524" layer="91"/>
+<wire x1="15.24" y1="-5.08" x2="17.78" y2="-5.08" width="0.1524" layer="91"/>
 <pinref part="U$1" gate="G$1" pin="INT"/>
 </segment>
 </net>
-<net name="SCL_3.3V" class="0">
+<net name="N$5" class="0">
 <segment>
-<wire x1="15.24" y1="5.08" x2="50.8" y2="5.08" width="0.1524" layer="91"/>
-<pinref part="R2" gate="G$1" pin="2"/>
-<wire x1="50.8" y1="-2.54" x2="50.8" y2="5.08" width="0.1524" layer="91"/>
-<pinref part="U$1" gate="G$1" pin="SDA"/>
-<pinref part="U1" gate="A" pin="SDA/SDI/SDIO"/>
-<wire x1="50.8" y1="5.08" x2="76.2" y2="5.08" width="0.1524" layer="91"/>
-<junction x="50.8" y="5.08"/>
-</segment>
-<segment>
-<wire x1="15.24" y1="0" x2="40.64" y2="0" width="0.1524" layer="91"/>
 <pinref part="R1" gate="G$1" pin="2"/>
 <wire x1="40.64" y1="-5.08" x2="40.64" y2="0" width="0.1524" layer="91"/>
-<pinref part="U$1" gate="G$1" pin="SCL"/>
-<wire x1="40.64" y1="0" x2="40.64" y2="10.16" width="0.1524" layer="91"/>
-<junction x="40.64" y="0"/>
 <pinref part="U1" gate="A" pin="SCL/SCLK"/>
-<wire x1="40.64" y1="10.16" x2="76.2" y2="10.16" width="0.1524" layer="91"/>
+<wire x1="40.64" y1="0" x2="40.64" y2="10.16" width="0.1524" layer="91"/>
+<wire x1="40.64" y1="10.16" x2="40.64" y2="17.78" width="0.1524" layer="91"/>
+<wire x1="76.2" y1="10.16" x2="40.64" y2="10.16" width="0.1524" layer="91"/>
+<junction x="40.64" y="10.16"/>
+<pinref part="U$1" gate="G$1" pin="SCL"/>
+<wire x1="15.24" y1="0" x2="40.64" y2="0" width="0.1524" layer="91"/>
+<junction x="40.64" y="0"/>
+</segment>
+</net>
+<net name="N$2" class="0">
+<segment>
+<pinref part="R2" gate="G$1" pin="2"/>
+<wire x1="50.8" y1="-2.54" x2="50.8" y2="2.54" width="0.1524" layer="91"/>
+<wire x1="50.8" y1="2.54" x2="50.8" y2="7.62" width="0.1524" layer="91"/>
+<wire x1="50.8" y1="7.62" x2="50.8" y2="20.32" width="0.1524" layer="91"/>
+<pinref part="U1" gate="A" pin="SDA/SDI/SDIO"/>
+<wire x1="76.2" y1="5.08" x2="55.88" y2="5.08" width="0.1524" layer="91"/>
+<wire x1="55.88" y1="5.08" x2="55.88" y2="7.62" width="0.1524" layer="91"/>
+<wire x1="55.88" y1="7.62" x2="50.8" y2="7.62" width="0.1524" layer="91"/>
+<junction x="50.8" y="7.62"/>
+<pinref part="U$1" gate="G$1" pin="SDA"/>
+<wire x1="15.24" y1="5.08" x2="45.72" y2="5.08" width="0.1524" layer="91"/>
+<wire x1="45.72" y1="5.08" x2="45.72" y2="2.54" width="0.1524" layer="91"/>
+<wire x1="45.72" y1="2.54" x2="50.8" y2="2.54" width="0.1524" layer="91"/>
+<junction x="50.8" y="2.54"/>
+</segment>
+</net>
+<net name="N$8" class="0">
+<segment>
+<pinref part="U1" gate="A" pin="INT2"/>
+<pinref part="X1" gate="-8" pin="S"/>
+<wire x1="132.08" y1="17.78" x2="139.7" y2="17.78" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$7" class="0">
+<segment>
+<pinref part="X1" gate="-2" pin="S"/>
+<pinref part="R2" gate="G$1" pin="1"/>
+<wire x1="50.8" y1="-17.78" x2="50.8" y2="-12.7" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$3" class="0">
 <segment>
-<pinref part="R1" gate="G$1" pin="1"/>
-<wire x1="40.64" y1="-17.78" x2="40.64" y2="-15.24" width="0.1524" layer="91"/>
-<pinref part="X3" gate="-6" pin="S"/>
+<pinref part="U1" gate="A" pin="INT1"/>
+<pinref part="X1" gate="-6" pin="S"/>
+<wire x1="132.08" y1="20.32" x2="139.7" y2="20.32" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$4" class="0">
 <segment>
-<pinref part="R2" gate="G$1" pin="1"/>
-<wire x1="50.8" y1="-15.24" x2="50.8" y2="-12.7" width="0.1524" layer="91"/>
-<pinref part="X3" gate="-4" pin="S"/>
+<pinref part="X1" gate="-4" pin="S"/>
+<pinref part="R1" gate="G$1" pin="1"/>
+<wire x1="40.64" y1="-17.78" x2="40.64" y2="-15.24" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
