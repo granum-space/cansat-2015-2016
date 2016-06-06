@@ -7,9 +7,8 @@
 
 #include <avr/io.h>
 #include "opt3001.h"
-#include "i2c.c"
 #include "i2c.h"
-
+/*
 
 #define OPT3001
 	uint16_t config_opt[16];
@@ -36,3 +35,4 @@
 		}
 			// break;
 	}
+*/
