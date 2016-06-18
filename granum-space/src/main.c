@@ -213,9 +213,13 @@ int main()
 	DDRG = 0xFF;
 	PORTG = 0xFF;
 	initUartDebug();
+	GR_DEBUG("Debug init completed!");
 	du_init();
+	GR_DEBUG("DU init completed!");
 	adc_init();
+	GR_DEBUG("ADC init completed!");
 	OneWireInit();
+	GR_DEBUG("1wire init completed!");
 	GR_DEBUG("All inits completed!");
 	dtpkt_t pkt;
 	pkt.beacon = 0xFFFF;

@@ -10,20 +10,6 @@
 
 #include <avr/io.h>
 
-
-// datautils
-//#define RPORT PORTC
-//#define RDDR DDRC
-//#define RCFGNUM 1
-//#define RRTSNUM 2
-//#define RCTSNUM 3
-
-//#define CONFIG RPORT &= ~(1<<RCFGNUM);
-//#define OPER RPORT |= (1<<RCFGNUM);
-//#define RTS_EN RPORT &= ~(1<<RRTSNUM);
-//#define RTS_DIS RPORT |= (1<<RRTSNUM);
-//#define CTS (RPIN & (1<<RCTSNUM));
-
 // DHT22
 #define DHT_PORT PORTC	// Регистр PORT порта, на котором подсоединен датчик DHT022
 #define DHT_PPIN PINC	// Регистр PIN порта на котором подсоединен датчик DHT022
@@ -59,6 +45,14 @@
 #define CTSPIN PINC
 #define CTSLEG 2
 
+#define PDDDR DDRC
+#define PDPORT PORTC
+#define PDLEG 3
+
+#define RTSDDR DDRC
+#define RTSPORT PORTC
+#define RTSLEG 5
+
 // sdcard
 #define SPIDDR DDRB
 #define SPIPORT PORTB
@@ -88,5 +82,8 @@
 // debug
 // скорость работы отладочного UART
 #define UART_DEBUG_BAUD_RATE 9600
+
+//acc
+#define ACC_ADRESS 0x1D
 
 #endif /* CONFIG_H_ */

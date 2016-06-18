@@ -22,6 +22,12 @@ void radio_write(const uint8_t *value, size_t size){
 
 void radio_init(){
 
+	PDDDR |=(1<<PDLEG);
+	PDPORT |= (1<<PDLEG);
+
+	RTSDDR |= (1<<RTSLEG);
+	RTSPORT &= ~(1<<RTSLEG);
+
 	CFGDDR = CFGDDR | (1 << CFGLEG);
 	CTSDDR = CTSDDR & ~(1 << CTSLEG);
 
