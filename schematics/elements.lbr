@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="7.5.0">
+<eagle version="7.6.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="yes" altdistance="0.01" altunitdist="inch" altunit="inch"/>
+<grid distance="0.05" unitdist="inch" unit="inch" style="lines" multiple="1" display="yes" altdistance="0.025" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="16" name="Bottom" color="1" fill="1" visible="yes" active="yes"/>
@@ -498,27 +498,54 @@
 <rectangle x1="-2.7432" y1="-3.6576" x2="-1.8796" y2="-1.8034" layer="51"/>
 <rectangle x1="1.8796" y1="-3.6576" x2="2.7432" y2="-1.8034" layer="51"/>
 </package>
-<package name="SOIC16">
-<wire x1="0" y1="0" x2="0" y2="10.2" width="0.127" layer="21"/>
-<wire x1="0" y1="10.2" x2="5.2" y2="10.2" width="0.127" layer="21"/>
-<wire x1="5.2" y1="10.2" x2="5.2" y2="0" width="0.127" layer="21"/>
-<wire x1="5.2" y1="0" x2="0" y2="0" width="0.127" layer="21"/>
-<smd name="Y1" x="-0.17" y="9.52" dx="2.03" dy="0.61" layer="1"/>
-<smd name="Y0" x="-0.17" y="8.25" dx="2.03" dy="0.61" layer="1"/>
-<smd name="Z1" x="-0.17" y="6.98" dx="2.03" dy="0.61" layer="1"/>
-<smd name="Z" x="-0.17" y="5.71" dx="2.03" dy="0.61" layer="1"/>
-<smd name="Z0" x="-0.17" y="4.44" dx="2.03" dy="0.61" layer="1"/>
-<smd name="ENABLE" x="-0.17" y="3.17" dx="2.03" dy="0.61" layer="1"/>
-<smd name="VEE" x="-0.17" y="1.9" dx="2.03" dy="0.61" layer="1"/>
-<smd name="VCC" x="5.33" y="9.52" dx="2.03" dy="0.61" layer="1"/>
-<smd name="Y" x="5.33" y="8.25" dx="2.03" dy="0.61" layer="1"/>
-<smd name="X" x="5.33" y="6.98" dx="2.03" dy="0.61" layer="1"/>
-<smd name="X1" x="5.33" y="5.71" dx="2.03" dy="0.61" layer="1"/>
-<smd name="X0" x="5.33" y="4.44" dx="2.03" dy="0.61" layer="1"/>
-<smd name="A" x="5.33" y="3.17" dx="2.03" dy="0.61" layer="1"/>
-<smd name="B" x="5.33" y="1.9" dx="2.03" dy="0.61" layer="1"/>
-<smd name="C" x="5.33" y="0.63" dx="2.03" dy="0.61" layer="1"/>
-<smd name="GND" x="-0.17" y="0.63" dx="2.03" dy="0.61" layer="1"/>
+<package name="SOIC-16">
+<description>&lt;b&gt;Small Outline package&lt;/b&gt; 150 mil</description>
+<wire x1="4.699" y1="1.9558" x2="-4.699" y2="1.9558" width="0.1524" layer="21"/>
+<wire x1="4.699" y1="-1.9558" x2="5.08" y2="-1.5748" width="0.1524" layer="21" curve="90"/>
+<wire x1="-4.699" y1="1.9558" x2="-5.08" y2="1.5748" width="0.1524" layer="21" curve="90"/>
+<wire x1="5.08" y1="1.5748" x2="4.699" y2="1.9558" width="0.1524" layer="21" curve="90"/>
+<wire x1="-5.08" y1="-1.5748" x2="-4.699" y2="-1.9558" width="0.1524" layer="21" curve="90"/>
+<wire x1="-4.699" y1="-1.9558" x2="4.699" y2="-1.9558" width="0.1524" layer="21"/>
+<wire x1="5.08" y1="-1.5748" x2="5.08" y2="1.5748" width="0.1524" layer="21"/>
+<wire x1="-5.08" y1="1.5748" x2="-5.08" y2="0.508" width="0.1524" layer="21"/>
+<wire x1="-5.08" y1="0.508" x2="-5.08" y2="-0.508" width="0.1524" layer="21"/>
+<wire x1="-5.08" y1="-0.508" x2="-5.08" y2="-1.5748" width="0.1524" layer="21"/>
+<wire x1="-5.08" y1="-0.508" x2="-5.08" y2="0.508" width="0.1524" layer="21" curve="180"/>
+<wire x1="-5.08" y1="-1.6002" x2="5.08" y2="-1.6002" width="0.0508" layer="21"/>
+<smd name="1" x="-4.445" y="-2.8" dx="0.6" dy="1.2" layer="1"/>
+<smd name="2" x="-3.175" y="-2.8" dx="0.6" dy="1.2" layer="1"/>
+<smd name="3" x="-1.905" y="-2.8" dx="0.6" dy="1.2" layer="1"/>
+<smd name="4" x="-0.635" y="-2.8" dx="0.6" dy="1.2" layer="1"/>
+<smd name="5" x="0.635" y="-2.8" dx="0.6" dy="1.2" layer="1"/>
+<smd name="6" x="1.905" y="-2.8" dx="0.6" dy="1.2" layer="1"/>
+<smd name="7" x="3.175" y="-2.8" dx="0.6" dy="1.2" layer="1"/>
+<smd name="8" x="4.445" y="-2.8" dx="0.6" dy="1.2" layer="1"/>
+<smd name="9" x="4.445" y="2.8" dx="0.6" dy="1.2" layer="1"/>
+<smd name="10" x="3.175" y="2.8" dx="0.6" dy="1.2" layer="1"/>
+<smd name="11" x="1.905" y="2.8" dx="0.6" dy="1.2" layer="1"/>
+<smd name="12" x="0.635" y="2.8" dx="0.6" dy="1.2" layer="1"/>
+<smd name="13" x="-0.635" y="2.8" dx="0.6" dy="1.2" layer="1"/>
+<smd name="14" x="-1.905" y="2.8" dx="0.6" dy="1.2" layer="1"/>
+<smd name="15" x="-3.175" y="2.8" dx="0.6" dy="1.2" layer="1"/>
+<smd name="16" x="-4.445" y="2.8" dx="0.6" dy="1.2" layer="1"/>
+<text x="-4.064" y="-0.635" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<text x="-5.461" y="-1.778" size="1.27" layer="25" ratio="10" rot="R90">&gt;NAME</text>
+<rectangle x1="-0.889" y1="1.9558" x2="-0.381" y2="3.0988" layer="51"/>
+<rectangle x1="-4.699" y1="-3.0988" x2="-4.191" y2="-1.9558" layer="51"/>
+<rectangle x1="-3.429" y1="-3.0988" x2="-2.921" y2="-1.9558" layer="51"/>
+<rectangle x1="-2.159" y1="-3.0734" x2="-1.651" y2="-1.9304" layer="51"/>
+<rectangle x1="-0.889" y1="-3.0988" x2="-0.381" y2="-1.9558" layer="51"/>
+<rectangle x1="-2.159" y1="1.9558" x2="-1.651" y2="3.0988" layer="51"/>
+<rectangle x1="-3.429" y1="1.9558" x2="-2.921" y2="3.0988" layer="51"/>
+<rectangle x1="-4.699" y1="1.9558" x2="-4.191" y2="3.0988" layer="51"/>
+<rectangle x1="0.381" y1="-3.0988" x2="0.889" y2="-1.9558" layer="51"/>
+<rectangle x1="1.651" y1="-3.0988" x2="2.159" y2="-1.9558" layer="51"/>
+<rectangle x1="2.921" y1="-3.0988" x2="3.429" y2="-1.9558" layer="51"/>
+<rectangle x1="4.191" y1="-3.0988" x2="4.699" y2="-1.9558" layer="51"/>
+<rectangle x1="0.381" y1="1.9558" x2="0.889" y2="3.0988" layer="51"/>
+<rectangle x1="1.651" y1="1.9558" x2="2.159" y2="3.0988" layer="51"/>
+<rectangle x1="2.921" y1="1.9558" x2="3.429" y2="3.0988" layer="51"/>
+<rectangle x1="4.191" y1="1.9558" x2="4.699" y2="3.0988" layer="51"/>
 </package>
 </packages>
 <symbols>
@@ -1148,24 +1175,24 @@ Standard adjustable voltage regulator but in SMD form. Spark Fun Electronics SKU
 <gate name="MC74HC4051A" symbol="MC74HC4051A" x="-2.54" y="-5.08"/>
 </gates>
 <devices>
-<device name="" package="SOIC16">
+<device name="MC74HC4051AG" package="SOIC-16">
 <connects>
-<connect gate="MC74HC4051A" pin="A" pad="A"/>
-<connect gate="MC74HC4051A" pin="B" pad="B"/>
-<connect gate="MC74HC4051A" pin="C" pad="C"/>
-<connect gate="MC74HC4051A" pin="ENABLE" pad="ENABLE"/>
-<connect gate="MC74HC4051A" pin="GND" pad="GND"/>
-<connect gate="MC74HC4051A" pin="VCC" pad="VCC"/>
-<connect gate="MC74HC4051A" pin="VEE" pad="VEE"/>
-<connect gate="MC74HC4051A" pin="X" pad="X"/>
-<connect gate="MC74HC4051A" pin="X0" pad="X0"/>
-<connect gate="MC74HC4051A" pin="X1" pad="X1"/>
-<connect gate="MC74HC4051A" pin="Y" pad="Y"/>
-<connect gate="MC74HC4051A" pin="Y0" pad="Y0"/>
-<connect gate="MC74HC4051A" pin="Y1" pad="Y1"/>
-<connect gate="MC74HC4051A" pin="Z" pad="Z"/>
-<connect gate="MC74HC4051A" pin="Z0" pad="Z0"/>
-<connect gate="MC74HC4051A" pin="Z1" pad="Z1"/>
+<connect gate="MC74HC4051A" pin="A" pad="11"/>
+<connect gate="MC74HC4051A" pin="B" pad="10"/>
+<connect gate="MC74HC4051A" pin="C" pad="9"/>
+<connect gate="MC74HC4051A" pin="ENABLE" pad="6"/>
+<connect gate="MC74HC4051A" pin="GND" pad="8"/>
+<connect gate="MC74HC4051A" pin="VCC" pad="16"/>
+<connect gate="MC74HC4051A" pin="VEE" pad="7"/>
+<connect gate="MC74HC4051A" pin="X" pad="14"/>
+<connect gate="MC74HC4051A" pin="X0" pad="12"/>
+<connect gate="MC74HC4051A" pin="X1" pad="13"/>
+<connect gate="MC74HC4051A" pin="Y" pad="15"/>
+<connect gate="MC74HC4051A" pin="Y0" pad="2"/>
+<connect gate="MC74HC4051A" pin="Y1" pad="1"/>
+<connect gate="MC74HC4051A" pin="Z" pad="4"/>
+<connect gate="MC74HC4051A" pin="Z0" pad="5"/>
+<connect gate="MC74HC4051A" pin="Z1" pad="3"/>
 </connects>
 <technologies>
 <technology name=""/>

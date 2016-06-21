@@ -52,18 +52,13 @@ uint8_t sd_init() {
 			0x00,
 			0x00 //CRC8
 	};
-	while(1) {
+	for(int i=0;i<20;i++) {
 		spi_exchange(CMD1, sizeof(CMD1),0);
-		while(1) {
+		for(int ii=0;ii<10;ii++) {
 			answer = spi_sendbyte(0xFF);
 			if(answer != 0xFF) break;
 		}
 		GR_DEBUG("CMD1 answer %d\n", answer);
-			/*while(1) {
-				answer = spi_sendbyte(0xFF);
-				GR_DEBUG("It secondary answered %d\n", answer);
-				if(answer != 0xFF) break;
-			}*/
 		if(answer == 0x00) break;
 	}
 	return answer;
