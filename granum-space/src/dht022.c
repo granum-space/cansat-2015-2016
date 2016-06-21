@@ -93,8 +93,8 @@ inline static int DHT_wait_bit_start(){
 // из положительных значений возвращает 0 или 1
 inline static int DHT_read_bit()
 {
-	bool bitStartedOrEnded = false;
-	for (int i = 0; i < 50; i++)
+	register uint8_t bitStartedOrEnded = false;
+	for (uint8_t i = 0; i < 50; i++)
 	{
 		_delay_us(1);
 		if (DHT_ReadBus() != 0)
@@ -107,7 +107,7 @@ inline static int DHT_read_bit()
 	if (!bitStartedOrEnded) return DHT_ERROR_WAIT_TO_LONG;
 
 	bitStartedOrEnded = false;
-	int i;
+	uint8_t i;
 	for (i = 0; i < 100; i++){
 		_delay_us(1);
 		if (DHT_ReadBus() == 0)
@@ -120,7 +120,7 @@ inline static int DHT_read_bit()
 	if (!bitStartedOrEnded)
 		return DHT_ERROR_BIT_TO_LONG;
 
-	if(i > 12) return 1;
+	if(i > 13) return 1;
 	else return 0;
 }
 
@@ -157,15 +157,12 @@ int DHT_Read(uint16_t * humidity, int16_t * temp)
 	if (wait_start_status < 0)
 		return wait_start_status;
 
-	int sum[5];
+	uint8_t sum[5];
 	for( int i = 0; i<5; i++){
 		sum[i] = DHT_read_byte();
 		if (sum[i] < 0)
 			return sum[i];
 	}
-
-	if (sum[0] + sum[1] + sum[2] + sum[3] != sum[4])
-		return DHT_ERROR_CHECKSUM_WRONG;
 
 	uint8_t* tempptr = (uint8_t*)temp;
 	*(tempptr + 0) = sum[2];
@@ -173,8 +170,9 @@ int DHT_Read(uint16_t * humidity, int16_t * temp)
 
 	*humidity = (sum[0] << 8) | sum[1];
 	*temp = (sum[2] << 8) | sum[3];
-	// FIXME: Температура может быть отрицательной.
-	// Нужно проверить правильно ли побитовый сдвиг отработает в этой ситуации
+
+	if (((sum[0] + sum[1] + sum[2] + sum[3]) & 0xFF) != sum[4])
+		return DHT_ERROR_CHECKSUM_WRONG;
 
 	return 0;
 }
