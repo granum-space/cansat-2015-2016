@@ -9,46 +9,109 @@
 #include <util/delay.h>
 #include <avr/io.h>
 #include "opt3001.h"
-#include "i2c.c"
 #include "i2c.h"
 
-// #define ONE 0000000100000000
+#define OPT3001_ADDR 0x10  // АДРЕСС ДАТЧИКА
+#define ADDR_REG 01 // адрес регистра в котором лежит конфигурация в hex
+#define ADDR_RES 00 //адрес регистра из которого мы хотим прочитать результат в hex
 
 
-	uint16_t config_opt[16];
+uint8_t config_opt[16] = {
 
 
+};
+uint16_t result;
 
-	OPT_init(){
-	for(uint8_t i = 0; i < 16; i++){  //заполняем конфигурацию
-			config_opt[i] << i;
-		}
-		i2c_write(config_opt, 16);  		// отправлеям конф на запись
+int OPT_read(uint8_t ADDR_read){
+
+	int flag = 0;
+	flag = i2c_start();
+	if(flag != 0)
+		return flag;
+	flag = i2c_send_slaw(OPT3001_ADDR, false);
+	if(flag != 0){
+		i2c_stop();
+		return flag;
 	}
+	uint8_t target_register_addr = ADDR_read;
+	flag = i2c_write(&target_register_addr, 1);
+	if(flag != 0 ){
+		i2c_stop();
+		return flag;
+	}
+	i2c_start();
+	flag = i2c_send_slaw(OPT3001_ADDR, true);
+	    if (flag != 0){
+	        i2c_stop();
+	        return flag;
+	    }
+	 if(ADDR_read == ADDR_REG){
+		 flag = i2c_read(config_opt, 2, true);
+		 if (flag != 0) {
+	        i2c_stop();
+	        return flag;
+		 	 }
+		 i2c_stop();
+		 return flag;
+	 }
+	 else{
+		 flag = i2c_read(&result, 2, true);
+	 	 if (flag != 0) {
+	 		 i2c_stop();
+	 	     return flag;
+	 	 }
+	 	 i2c_stop();
+	 	 return flag;
+	 }
+}
 
-	OPT_start(){
-			while(1){
-			if(config_opt[10] == 0) // config_opt[10] флаг выхода за нижнийй лимит если он == 0 то мы вышли из ракеты
-				break;
-			}
-			return 1;
-		}
+uint16_t OPT_RESULT(){
+	uint8_t res = ADDR_RES;
+	OPT_read(res);
+	return result;
+}
 
+int OPT_write(uint8_t ADDR_write){
+	int flag = 0;
+	flag = i2c_start();
+	if(flag != 0)
+		return flag;
+	flag = i2c_send_slaw(OPT3001_ADDR, false);
+	if(flag != 0){
+		i2c_stop();
+		return flag;
+	}
+	uint8_t target_register_addr = ADDR_write;
+	flag = i2c_write(&target_register_addr, 1);
+	if (flag != 0)
+	{
+		i2c_stop();
+	    return flag;
+	}
+	if(ADDR_write == ADDR_REG) {
+		flag = i2c_write(config_opt, 2);
+	}
+	i2c_stop();
+	return flag;
+}
 
+void OPT_init(){
 
-	OPT_read(){									// читаем результат
-		uint16_t result[16];
-		uint8_t finish = 0; // индикатор ошибки
-		while(1){
-			uint8_t OVF  = config_opt[7]; // &  (ONE << 1) ;
-			uint8_t CRF = config_opt[8]; // & ONE;
-			if(CRF == 1 && OVF == 0){	// если преоб-ние завершилось (CRF == 1 ) и если не произошло переполнения (OVF ==0)
-					i2c_read(result, 16);
-					finish = 1;
-			}
-			     }
+	OPT_read(ADDR_REG);
 
-		return finish;
-		}
+	// меняем конфигурацию
+	uint8_t uno = ADDR_REG;
+	OPT_write(uno);  // отправлеям новую конфу на запись
+}
+
+uint8_t OPT_start(){
+	while(1){
+		OPT_read(ADDR_REG);
+		if(config_opt[6] == 1)
+			break;
+	}
+	return 1;
+}
+
 
 
