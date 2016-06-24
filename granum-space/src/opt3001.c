@@ -14,12 +14,9 @@
 #define OPT3001_ADDR 0x10  // АДРЕСС ДАТЧИКА
 #define ADDR_REG 01 // адрес регистра в котором лежит конфигурация в hex
 #define ADDR_RES 00 //адрес регистра из которого мы хотим прочитать результат в hex
+#define BYN_OPT 0000010000000000
 
-
-uint8_t config_opt[16] = {
-
-
-};
+uint16_t config_opt;
 uint16_t result;
 
 int OPT_read(uint8_t ADDR_read){
@@ -46,7 +43,7 @@ int OPT_read(uint8_t ADDR_read){
 	        return flag;
 	    }
 	 if(ADDR_read == ADDR_REG){
-		 flag = i2c_read(config_opt, 2, true);
+		 flag = i2c_read(&config_opt, 2, true);
 		 if (flag != 0) {
 	        i2c_stop();
 	        return flag;
@@ -66,8 +63,7 @@ int OPT_read(uint8_t ADDR_read){
 }
 
 uint16_t OPT_RESULT(){
-	uint8_t res = ADDR_RES;
-	OPT_read(res);
+	OPT_read(ADDR_RES);
 	return result;
 }
 
@@ -89,7 +85,7 @@ int OPT_write(uint8_t ADDR_write){
 	    return flag;
 	}
 	if(ADDR_write == ADDR_REG) {
-		flag = i2c_write(config_opt, 2);
+		flag = i2c_write(&config_opt, 2);
 	}
 	i2c_stop();
 	return flag;
@@ -98,19 +94,16 @@ int OPT_write(uint8_t ADDR_write){
 void OPT_init(){
 
 	OPT_read(ADDR_REG);
-
 	// меняем конфигурацию
-	uint8_t uno = ADDR_REG;
-	OPT_write(uno);  // отправлеям новую конфу на запись
+	// config_opt = 000110111010011; например
+	OPT_write(ADDR_REG);  // отправлеям новую конфу на запись
 }
 
 uint8_t OPT_start(){
-	while(1){
 		OPT_read(ADDR_REG);
-		if(config_opt[6] == 1)
-			break;
-	}
-	return 1;
+		if(config_opt & BYN_OPT)
+			return 1;
+		else return 0;
 }
 
 
