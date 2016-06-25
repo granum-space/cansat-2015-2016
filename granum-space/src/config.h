@@ -17,9 +17,9 @@
 #define DHT_PIN 4		// Номер пина в порту
 
 // i2c
-#define I2C_TIMEOUT_COUNT 30
+#define I2C_TIMEOUT_COUNT 10000
 #define I2C_TIMEOUT_US 10
-#define F_SCL 600000
+#define F_SCL 400000
 
 // onewire
 #define ONE_WIRE_PORT PORTC
@@ -39,7 +39,7 @@
 #define RF_RX_PACKET 30 // размер принимаемых  пакетов (30 максимум)
 #define RF_TX_PACKET 30 // размер отсылаемых пакетов (30 максимум)
 #define RF_SELF_ADDR  0x01, 0x02, 0x03, 0x04 // адрес модуля
-#define RF_TARGET_ADDR 0x5a, 0x5b, 0x5c, 0x5f // адрес получателя
+#define RF_TARGET_ADDR 0x7e, 0x7e, 0x7e, 0x7e // адрес получателя
 
 #define CTSDDR DDRC
 #define CTSPIN PINC
@@ -84,6 +84,39 @@
 #define UART_DEBUG_BAUD_RATE 9600
 
 //acc
-#define ACC_ADRESS 0x1D
+#define DATARATE (1<<3)|(1<<2)|1
+#define FIFOSET (1<<7)|32
+#define POWERCTL (1<<3)
+
+#define ACC_ADRESS 0x53
+
+#define DEVID 0x00
+#define THRESH_SHOCK 0x1D
+#define OFSX 0x1E
+#define OFSY 0x1F
+#define OFSZ 0x20
+#define DUR 0x21
+#define LATENT 0x22
+#define WINDOW 0x23
+#define TRESH_ACT 0x24
+#define TRESH_INACT 0x25
+#define TIME_INACT 0x26
+#define ACT_INACT_CTL 0x27
+#define SHOCK_AXES 0x2A
+#define ACT_SHOCK_STATUS 0x2B
+#define BW_RATE 0x2C
+#define POWER_CTL 0x2D
+#define INT_ENABLE 0x2E
+#define INT_MAP 0x2F
+#define INT_SOURCE 0x30
+#define DATA_FORMAT 0x31
+#define DATAX0 0x32
+#define DATAX1 0x33
+#define DATAY0 0x34
+#define DATAY1 0x35
+#define DATAZ0 0x36
+#define DATAZ1 0x37
+#define FIFO_CTL 0x38
+#define FIFO_STATUS 0x39
 
 #endif /* CONFIG_H_ */

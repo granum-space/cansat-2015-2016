@@ -4,6 +4,7 @@
 #include "radio-module.h"
 #include <avr/io.h>
 #include <util/delay.h>
+#include "uart-debug.h"
 
 #include "config.h"
 
@@ -11,14 +12,19 @@
 void radio_write(const uint8_t *value, size_t size){
 
 	for(size_t i = 0; i < size; i++){
-		while(((CTSPIN << CTSLEG) & CTSPIN )  != 0)
-		{}
-		while ( !(UCSR0A & (1 << UDRE0)) )
-		{}
+		while(CTSPIN & (1<<CTSLEG)) GR_DEBUG("CTS wait\n");
+		while ( !(UCSR0A & (1 << UDRE0)) ) GR_DEBUG("FREE WAIT\n");
+		GR_DEBUG("Wait complete\n");
 		UDR0 = *(value+i);
 	}
 }
 
+int uart_receive()
+	{
+	while ( !(UCSR0A & (1 << RXC0)) ) GR_DEBUG("Waiting for receive\n");
+
+	return UDR0;
+	}
 
 void radio_init(){
 
@@ -58,8 +64,17 @@ void radio_init(){
 	};
 
 	radio_write(config, 1);
+	for(int i = 0;i<12;i++){
+		GR_DEBUG("%d, ",uart_receive());
+	}
+	GR_DEBUG("\n");
 	_delay_ms(1000);
 	radio_write(config, 12);
 	_delay_ms(1000);
+	radio_write(config, 1);
+		for(int i = 0;i<12;i++){
+			GR_DEBUG("%d, ",uart_receive());
+		}
+		GR_DEBUG("\n");
 	CFGPORT = CFGPORT | (1 << CFGLEG);
 }

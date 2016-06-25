@@ -13,8 +13,7 @@
 
 void acc_init();
 
-uint16_t acc_availible();
-uint16_t acc_read(uint16_t * data, size_t dataSize);
+uint8_t acc_read(int16_t * datax,int16_t * datay,int16_t * dataz);
 
 
 #endif /* ACC_H_ */

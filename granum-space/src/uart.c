@@ -36,13 +36,13 @@ void uart_read_many(const void* ptr, int length) {
 	}
 }
 
-int uart_receive()
+/*int uart_receive()
 	{
 	while ( !(UCSR0A & (1 << RXC0)) )
 	{}
 
 	return UDR0;
-	}
+	}*/
 
 void uart_init() {
 	/*#if defined __AVR_ATmega128__ // для атмеги128 используем UART1 (не UART0)

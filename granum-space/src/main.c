@@ -15,6 +15,7 @@
 #include "spi.h"
 #include "i2c.h"
 #include "adc.h"
+#include "acc.h"
 #include "onewire.h"
 #include "1wdevices.h"
 #include "pkt_types.h"
@@ -197,7 +198,7 @@ void du_test()
 }
 
 
-void rf_test()
+/*void rf_test()
 {
 	while(1)
 	{
@@ -205,7 +206,7 @@ void rf_test()
 		const char hello[] = "hello world!\n";
 		du_write((uint8_t*)hello, (sizeof(hello)-1));
 	}
-}
+}*/
 
 int main()
 {
@@ -253,3 +254,22 @@ int main()
 
 	return 0;
 }
+
+/*int main() { //testing acc
+	_delay_ms(1000);
+	initUartDebug();
+	GR_DEBUG("I'm alive!\n");
+	acc_init();
+	int16_t datax[33];
+	int16_t datay[33];
+	int16_t dataz[33];
+	uint8_t dataaval=0;
+	while(true) {
+		dataaval = acc_read(datax,datay,dataz);
+		for(int i=0;i<dataaval;i++) {
+			GR_DEBUG("%f,%f,%f\n",((float)datax[i]*4.0f/1000.0f),((float)datay[i]*4.0f/1000.0f),((float)dataz[i]*4.0f/1000.0f));
+		}
+		GR_DEBUG("%d entries\n",dataaval);
+		//_delay_ms(50);
+	}
+}*/
