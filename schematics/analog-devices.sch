@@ -4130,9 +4130,9 @@ Note: The AM2302 is a wired version of the DHT-22 which typically requires less 
 <instance part="VCC_PAD" gate="1" x="17.78" y="73.66" rot="R180"/>
 <instance part="O2_PAD" gate="1" x="198.12" y="58.42" rot="R270"/>
 <instance part="CO2_PAD" gate="1" x="200.66" y="0" rot="R270"/>
-<instance part="GND_PAD0" gate="1" x="25.4" y="83.82"/>
+<instance part="GND_PAD0" gate="1" x="12.7" y="60.96"/>
 <instance part="SUPPLY1" gate="G$1" x="17.78" y="83.82"/>
-<instance part="GND1" gate="1" x="25.4" y="71.12"/>
+<instance part="GND1" gate="1" x="12.7" y="48.26"/>
 <instance part="GND2" gate="1" x="86.36" y="-17.78"/>
 <instance part="SUPPLY2" gate="G$1" x="86.36" y="7.62"/>
 <instance part="IC1" gate="A" x="144.78" y="0"/>
@@ -4148,7 +4148,7 @@ Note: The AM2302 is a wired version of the DHT-22 which typically requires less 
 <instance part="R4" gate="G$1" x="172.72" y="-17.78" rot="R180"/>
 <instance part="R5" gate="G$1" x="162.56" y="-27.94" rot="R180"/>
 <instance part="GND6" gate="1" x="137.16" y="-33.02"/>
-<instance part="GND_PAD1" gate="1" x="30.48" y="83.82"/>
+<instance part="GND_PAD1" gate="1" x="17.78" y="60.96"/>
 <instance part="GND11" gate="1" x="119.38" y="35.56"/>
 <instance part="VCC_PAD1" gate="1" x="12.7" y="73.66" rot="R180"/>
 <instance part="U1" gate="G$1" x="50.8" y="12.7"/>
@@ -4220,12 +4220,12 @@ Note: The AM2302 is a wired version of the DHT-22 which typically requires less 
 <segment>
 <pinref part="GND_PAD0" gate="1" pin="MP"/>
 <pinref part="GND1" gate="1" pin="GND"/>
-<wire x1="25.4" y1="81.28" x2="25.4" y2="76.2" width="0.1524" layer="91"/>
+<wire x1="12.7" y1="58.42" x2="12.7" y2="53.34" width="0.1524" layer="91"/>
 <pinref part="GND_PAD1" gate="1" pin="MP"/>
-<wire x1="25.4" y1="76.2" x2="25.4" y2="73.66" width="0.1524" layer="91"/>
-<wire x1="25.4" y1="76.2" x2="30.48" y2="76.2" width="0.1524" layer="91"/>
-<wire x1="30.48" y1="76.2" x2="30.48" y2="81.28" width="0.1524" layer="91"/>
-<junction x="25.4" y="76.2"/>
+<wire x1="12.7" y1="53.34" x2="12.7" y2="50.8" width="0.1524" layer="91"/>
+<wire x1="12.7" y1="53.34" x2="17.78" y2="53.34" width="0.1524" layer="91"/>
+<wire x1="17.78" y1="53.34" x2="17.78" y2="58.42" width="0.1524" layer="91"/>
+<junction x="12.7" y="53.34"/>
 </segment>
 <segment>
 <pinref part="U$1" gate="TGS4161" pin="HEAT-"/>
