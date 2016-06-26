@@ -10,6 +10,7 @@
 
 #include "i2c.h"
 
+extern uint8_t digipot_pos;
 
 void digipot_init();
 

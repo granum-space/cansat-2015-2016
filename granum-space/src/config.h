@@ -119,4 +119,14 @@
 #define FIFO_CTL 0x38
 #define FIFO_STATUS 0x39
 
+//soilres
+#define SRDDR DDRA
+#define SRPORT PORTA
+#define SR1MODE 0
+#define SR1ON 1
+#define SR2MODE 2
+#define SR2ON 3
+#define SR3MODE 4
+#define SR3ON 5
+
 #endif /* CONFIG_H_ */

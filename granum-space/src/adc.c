@@ -21,7 +21,7 @@ void adc_init()
 }
 
 
-uint16_t adc_read(adc_channel_t channel)
+int16_t adc_read(adc_channel_t channel)
 {
 	ADMUX &= ~((1 << MUX0) | (1 << MUX1) | (1 << MUX2) | (1 << MUX3));
 
@@ -60,34 +60,34 @@ uint16_t adc_read(adc_channel_t channel)
 #elif defined __AVR_ATmega128__
 	switch(channel)
 	{
-	case ADC_CHANNEL_PRESSURE:
-		//ADMUX |= (1 << MUX0) | (1 << MUX1) | (1 << MUX2) | (0 << MUX3) | (0 << MUX4);
-		ADMUX |= (0 << MUX0) | (0 << MUX1) | (0 << MUX2) | (0 << MUX3) | (0 << MUX4);
+	case ADC_CHANNEL_PRESSURE: //ADC7
+		ADMUX |= (1 << MUX0) | (1 << MUX1) | (1 << MUX2) | (0 << MUX3) | (0 << MUX4);
+		//ADMUX |= (0 << MUX0) | (0 << MUX1) | (0 << MUX2) | (0 << MUX3) | (0 << MUX4);
 
 		break;
 
 
-	case ADC_CHANNEL_EARTH_TEMP_1:
+	case ADC_CHANNEL_EARTH_TEMP_1: //ADC4
 		ADMUX |= (0 << MUX0) | (0 << MUX1) | (1 << MUX2) | (0 << MUX3) | (0 << MUX4);
 		break;
 
-	case ADC_CHANNEL_EARTH_TEMP_2 :
+	case ADC_CHANNEL_EARTH_TEMP_2 : //ADC2
 	    ADMUX |= (0 << MUX0) | (1 << MUX1) | (0 << MUX2) | (0 << MUX3) | (0 << MUX4);
 	  break;
 
-	case ADC_CHANNEL_EARTH_TEMP_3 :
+	case ADC_CHANNEL_EARTH_TEMP_3 : //ADC3
 		ADMUX |= (1 << MUX0) | (1 << MUX1) | (0 << MUX2) | (0 << MUX3) | (0 << MUX4);
 	break;
 
-	case ADC_CHANNEL_EARTH_RES:
-		ADMUX |= (1 << MUX0) | (0 << MUX1) | (0 << MUX2) | (1 << MUX3) | (0 << MUX4);
+	case ADC_CHANNEL_EARTH_RES: //(ADC1-ADC0)*10
+		ADMUX |= (1 << MUX0) | (0 << MUX1) | (0 << MUX2) | (0 << MUX3) | (1 << MUX4);
 	  break;
 
-	case ADC_CHANNEL_O2_SENS :
+	case ADC_CHANNEL_O2_SENS : //ADC5
 		ADMUX |= (1 << MUX0) | (0 << MUX1) | ( 1 << MUX2) | (0 << MUX3) | (0 << MUX4);
 	break;
 
-	case ADC_CHANNEL_CO2_SENS :
+	case ADC_CHANNEL_CO2_SENS : //ADC6
 		ADMUX |= (0 << MUX0) | (1 << MUX1) | ( 1 << MUX2) | (0 << MUX3) | (0 << MUX4);
 	break;
 	};
@@ -98,12 +98,8 @@ uint16_t adc_read(adc_channel_t channel)
 	while(1){
 		if ((ADCSRA & (1 << ADIF)) != 0)
 		{
-			uint16_t value = ADC;
+			int16_t value = ADC;
 			return value;
-		}
-		else
-		{
-			continue;
 		}
 	}
 

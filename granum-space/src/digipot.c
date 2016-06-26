@@ -15,8 +15,7 @@
 #include "i2c.h"
 #include "uart-debug.h"
 
-
-
+uint8_t digipot_pos;
 
 void digipot_init(){
 
@@ -25,7 +24,7 @@ void digipot_init(){
 
 int digipot_write(uint8_t position)
 {
-
+	digipot_pos = position;
 	i2c_start();
 	i2c_send_slaw(0x01, 1);
 
