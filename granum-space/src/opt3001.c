@@ -119,7 +119,8 @@ int OPT_read(uint8_t ADDR_read, uint16_t * value){
 }
 
 uint16_t OPT_RESULT(){
-	OPT_read(ADDR_RES);
+	uint16_t result;
+	OPT_read(ADDR_RES, result);
 	return result;
 }
 
