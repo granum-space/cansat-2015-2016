@@ -15,7 +15,8 @@
 #define ADDR_REG 0x01 // адрес регистра в котором лежит конфигурация в hex
 #define ADDR_RES 0x00 //адрес регистра из которого мы хотим прочитать результат в hex
 #define BYN_OPT (1 << 10)
-
+#define Low_Limit_ADDR 0x02 // адрес значения нижнего предела
+#define Hight_Limit_ADDR 0x03 // адресс згасения вернего предела (верхний предел в принципе не не=ужен нам)
 
 // биты конфигурационного регистра:
 // ========================================================
@@ -84,6 +85,13 @@
 // 10 -> Четыре измерения
 // 11 -> Восемь измерений
 
+// нижний предел
+#define OPT_FL_LE3 15
+#define OPT_FL_LE2 14
+#define OPT_FL_LE1 13
+#define OPT_FL_LE0 12
+
+
 int OPT_read(uint8_t ADDR_read, uint16_t * value){
 
 	int flag = 0;
@@ -120,7 +128,7 @@ int OPT_read(uint8_t ADDR_read, uint16_t * value){
 
 uint16_t OPT_RESULT(){
 	uint16_t result;
-	OPT_read(ADDR_RES, result);
+	OPT_read(ADDR_RES, &result);
 	return result;
 }
 
@@ -151,6 +159,9 @@ int OPT_write(uint8_t ADDR_write, uint16_t * value){
 
 void OPT_init(){
 
+	// нижний лимит равен 40,95 люкс ( табл на стр 20 )
+	uint16_t FL_limit =
+			(OPT_FL_LE3 << 0) | (OPT_FL_LE2 << 0)| (OPT_FL_LE1 << 0)|(OPT_FL_LE0 << 0);
 	uint16_t cfg_reg =
 	        // автоматическое определение пределов измерения
 	        (0 << OPT_CFG_RN0) | (0 << OPT_CFG_RN1) | (1 << OPT_CFG_RN2) | (1 << OPT_CFG_RN3) |
@@ -168,11 +179,11 @@ void OPT_init(){
 	        // не маскируем экспоненциальную часть результата
 	        (0 << OPT_CFG_ME) |
 	        // ставим по максимуму (8) измерений превыщающих предел для перехода в прерывание
-	        (1 << OPT_CFG_FC0) | (1 << OPT_CFG_FC1)
-	    ;
+	        (1 << OPT_CFG_FC0) | (1 << OPT_CFG_FC1) ;
 
 	// меняем конфигурацию
 	OPT_write(ADDR_REG, &cfg_reg);  // отправлеям новую конфу на запись
+	OPT_write(Low_Limit_ADDR, &FL_limit); // отправляем значение нижнего прдела на запись
 }
 
 uint8_t OPT_check(){
