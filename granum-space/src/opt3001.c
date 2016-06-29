@@ -14,7 +14,8 @@
 #define OPT3001_ADDR 0x10  // АДРЕСС ДАТЧИКА
 #define ADDR_REG 0x01 // адрес регистра в котором лежит конфигурация в hex
 #define ADDR_RES 0x00 //адрес регистра из которого мы хотим прочитать результат в hex
-#define BYN_OPT (1 << 10)
+#define BYN_OPT (1 << 5)
+#define BYN_OPT2 (1 << 7)
 #define Low_Limit_ADDR 0x02 // адрес значения нижнего предела
 #define Hight_Limit_ADDR 0x03 // адресс згасения вернего предела (верхний предел в принципе не не=ужен нам)
 
@@ -86,11 +87,26 @@
 // 11 -> Восемь измерений
 
 // нижний предел
+// экспонента
 #define OPT_FL_LE3 15
 #define OPT_FL_LE2 14
 #define OPT_FL_LE1 13
 #define OPT_FL_LE0 12
+// мантиса
+#define OPT_FL_TE11 11
+#define OPT_FL_TE10 10
+#define OPT_FL_TE9 9
+#define OPT_FL_TE8 8
+#define OPT_FL_TE7 7
+#define OPT_FL_TE6 6
+#define OPT_FL_TE5 5
+#define OPT_FL_TE4 4
+#define OPT_FL_TE3 3
+#define OPT_FL_TE2 2
+#define OPT_FL_TE1 1
+#define OPT_FL_TE0 0
 
+uint16_t cfg_reg;
 
 int OPT_read(uint8_t ADDR_read, uint16_t * value){
 
@@ -128,6 +144,10 @@ int OPT_read(uint8_t ADDR_read, uint16_t * value){
 
 uint16_t OPT_RESULT(){
 	uint16_t result;
+	while(1){
+		OPT_read(ADDR_REG, &cfg_reg);
+		if(cfg_reg & BYN_OPT2) break; // завершенно ли преобразование ацп
+	}
 	OPT_read(ADDR_RES, &result);
 	return result;
 }
@@ -159,16 +179,20 @@ int OPT_write(uint8_t ADDR_write, uint16_t * value){
 
 void OPT_init(){
 
-	// нижний лимит равен 40,95 люкс ( табл на стр 20 )
+	// нижний лимит равен 40 люкс ( табл на стр 20 )
+	//40 / 0,01 = 4000 в бинарном это  111110100000
 	uint16_t FL_limit =
-			(OPT_FL_LE3 << 0) | (OPT_FL_LE2 << 0)| (OPT_FL_LE1 << 0)|(OPT_FL_LE0 << 0);
-	uint16_t cfg_reg =
+			(OPT_FL_LE3 << 0) | (OPT_FL_LE2 << 0)| (OPT_FL_LE1 << 0)|(OPT_FL_LE0 << 0) |
+			(OPT_FL_TE11 << 1) | (OPT_FL_TE10 << 1) |(OPT_FL_TE9 << 1) | (OPT_FL_TE8 << 1 )|
+			(OPT_FL_TE7 << 1) | (OPT_FL_TE6 << 0) | (OPT_FL_TE5 << 1) |(OPT_FL_TE4 << 0 )|
+			(OPT_FL_TE3 << 0) | (OPT_FL_TE2 << 0) | (OPT_FL_TE1 << 0) | (OPT_FL_TE0 << 0);
+	 cfg_reg =
 	        // автоматическое определение пределов измерения
 	        (0 << OPT_CFG_RN0) | (0 << OPT_CFG_RN1) | (1 << OPT_CFG_RN2) | (1 << OPT_CFG_RN3) |
 	        // длительность измерений на 100мс
 	        (0 << OPT_CFG_CT) |
-	        // режим ожидания
-	        (0 << OPT_CFG_M0) | (0 << OPT_CFG_M1) |
+	        // режим непрерывного измерения
+	        (1 << OPT_CFG_M0) | (1 << OPT_CFG_M1) |
 	        // флаг переполнения (OVF) не трогаем
 	        // флаг заверешния преобразования (CRF) не трогаем
 	        // флаги прерываний (FH и FL) не трогаем
@@ -189,7 +213,7 @@ void OPT_init(){
 uint8_t OPT_check(){
 	uint16_t cfg_reg;
 	OPT_read(ADDR_REG, &cfg_reg);
-	if(cfg_reg & BYN_OPT)
+	if(cfg_reg & BYN_OPT) // стали ли мы измерять выше нижнего предела
 		return 1;
 	else
 		return 0;
