@@ -106,7 +106,7 @@
 #define OPT_FL_TE1 1
 #define OPT_FL_TE0 0
 
-uint16_t cfg_reg;
+
 
 int OPT_read(uint8_t ADDR_read, uint16_t * value){
 
@@ -142,14 +142,8 @@ int OPT_read(uint8_t ADDR_read, uint16_t * value){
 	 return flag;
 }
 
-uint16_t OPT_RESULT(){
-	uint16_t result;
-	while(1){
-		OPT_read(ADDR_REG, &cfg_reg);
-		if(cfg_reg & BYN_OPT2) break; // завершенно ли преобразование ацп
-	}
-	OPT_read(ADDR_RES, &result);
-	return result;
+int OPT_result(uint16_t * result){
+	return OPT_read(ADDR_RES, result);
 }
 
 int OPT_write(uint8_t ADDR_write, uint16_t * value){
@@ -181,12 +175,8 @@ void OPT_init(){
 
 	// нижний лимит равен 40 люкс ( табл на стр 20 )
 	//40 / 0,01 = 4000 в бинарном это  111110100000
-	uint16_t FL_limit =
-			(OPT_FL_LE3 << 0) | (OPT_FL_LE2 << 0)| (OPT_FL_LE1 << 0)|(OPT_FL_LE0 << 0) |
-			(OPT_FL_TE11 << 1) | (OPT_FL_TE10 << 1) |(OPT_FL_TE9 << 1) | (OPT_FL_TE8 << 1 )|
-			(OPT_FL_TE7 << 1) | (OPT_FL_TE6 << 0) | (OPT_FL_TE5 << 1) |(OPT_FL_TE4 << 0 )|
-			(OPT_FL_TE3 << 0) | (OPT_FL_TE2 << 0) | (OPT_FL_TE1 << 0) | (OPT_FL_TE0 << 0);
-	 cfg_reg =
+	uint16_t FL_limit = 4000 | (0 << 12);
+	uint16_t cfg_reg =
 	        // автоматическое определение пределов измерения
 	        (0 << OPT_CFG_RN0) | (0 << OPT_CFG_RN1) | (1 << OPT_CFG_RN2) | (1 << OPT_CFG_RN3) |
 	        // длительность измерений на 100мс
@@ -210,10 +200,12 @@ void OPT_init(){
 	OPT_write(Low_Limit_ADDR, &FL_limit); // отправляем значение нижнего прдела на запись
 }
 
-uint8_t OPT_check(){
+int OPT_check(){
 	uint16_t cfg_reg;
-	OPT_read(ADDR_REG, &cfg_reg);
-	if(cfg_reg & BYN_OPT) // стали ли мы измерять выше нижнего предела
+	int flag = OPT_read(ADDR_REG, &cfg_reg);
+	if(flag != 0)
+		return flag;
+	if(cfg_reg & BYN_OPT) // стали ли мы измерять выше нижнего предела в 40 лк
 		return 1;
 	else
 		return 0;

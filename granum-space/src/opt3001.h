@@ -12,14 +12,13 @@
 #include <avr/io.h>
 
 
-
 // инициализация
 void OPT_init();
 
 // возвращает 1 если мы вышли из ракеты и 0 если еще нет
-uint8_t OPT_check();
+int OPT_check();
 
 // возвращает результат измерения
-uint16_t OPT_RESULT();
+int OPT_result(uint16_t * result);
 
 #endif /* OPT3001_H_ */
