@@ -17,7 +17,7 @@
 void OPT_init();
 
 // возвращает 1 если мы вышли из ракеты и 0 если еще нет
-uint8_t OPT_start();
+uint8_t OPT_check();
 
 // возвращает результат измерения
 uint16_t OPT_RESULT();
