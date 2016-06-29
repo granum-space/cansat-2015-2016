@@ -5,19 +5,23 @@
  *      Author: developer
  */
 
+#include <avr/io.h>
+#include <stdbool.h>
 
 #include "adc.h"
 
-#include <avr/io.h>
+bool adc_needinit = true;
 
 void adc_init()
 {
-	ADMUX = (1 << REFS0) | (0 << REFS1) // опорное напряжение на AVCC
-		| (0 << ADLAR) // Левосторонний формат результата
-	;
-	ADCSRA = (1 << ADEN) | (0 << ADSC) | (0 << ADIE) |
-			(0 << ADPS0) | (1 << ADPS1) | (1 << ADPS2);
-
+	if(adc_needinit){
+		ADMUX = (1 << REFS0) | (0 << REFS1) // опорное напряжение на AVCC
+			| (0 << ADLAR) // Левосторонний формат результата
+		;
+		ADCSRA = (1 << ADEN) | (0 << ADSC) | (0 << ADIE) |
+				(0 << ADPS0) | (1 << ADPS1) | (1 << ADPS2);
+		adc_needinit = false;
+	}
 }
 
 

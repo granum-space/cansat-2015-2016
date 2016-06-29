@@ -5,6 +5,9 @@
  *      Author: developer
  */
 #include <avr/io.h>
+#include <stdbool.h>
+
+bool uart_needinit = true;
 
 #define TARGET_BAUD_RATE 9600
 
@@ -51,26 +54,29 @@ void uart_read_many(const void* ptr, int length) {
 	}*/
 
 void uart_init() {
-	/*#if defined __AVR_ATmega128__ // для атмеги128 используем UART1 (не UART0)
-		UCSR0B = (1 << TXEN0); // включаем только TX
+	if(uart_needinit){
+		/*#if defined __AVR_ATmega128__ // для атмеги128 используем UART1 (не UART0)
+			UCSR0B = (1 << TXEN0); // включаем только TX
 
-		UCSR0C = (1 << UCSZ00) | (1 << UCSZ01) // Размер символа - 8 бит
-			| (0 << UPM00) | (0 << UPM01)      // Бит чертности отключен
-			| (0 << USBS0) // 1 стоп бит
-		;
+			UCSR0C = (1 << UCSZ00) | (1 << UCSZ01) // Размер символа - 8 бит
+				| (0 << UPM00) | (0 << UPM01)      // Бит чертности отключен
+				| (0 << USBS0) // 1 стоп бит
+			;
 
-		UBRR1L = (int)(F_CPU/(16.0*TARGET_BAUD_RATE)-1) % 0xFF;
-		UBRR1H = (int)(F_CPU/(16.0*TARGET_BAUD_RATE)-1) / 0xFF;
+			UBRR1L = (int)(F_CPU/(16.0*TARGET_BAUD_RATE)-1) % 0xFF;
+			UBRR1H = (int)(F_CPU/(16.0*TARGET_BAUD_RATE)-1) / 0xFF;
 
-	#elif defined __AVR_ATmega328P__*/
-		UCSR0B = (1 << TXEN0); // включаем только TX
+		#elif defined __AVR_ATmega328P__*/
+			UCSR0B = (1 << TXEN0); // включаем только TX
 
-		UCSR0C = (1 << UCSZ00) | (1 << UCSZ01) // Размер символа - 8 бит
-			| (0 << UPM00) | (0 << UPM01)      // Бит чертности отключен
-			| (0 << USBS0) // 1 стоп бит
-		;
+			UCSR0C = (1 << UCSZ00) | (1 << UCSZ01) // Размер символа - 8 бит
+				| (0 << UPM00) | (0 << UPM01)      // Бит чертности отключен
+				| (0 << USBS0) // 1 стоп бит
+			;
 
-		UBRR0L = (int)(F_CPU/(16.0*TARGET_BAUD_RATE)-1) % 0xFF;
-		UBRR0H = (int)(F_CPU/(16.0*TARGET_BAUD_RATE)-1) / 0xFF;
-	//#endif
+			UBRR0L = (int)(F_CPU/(16.0*TARGET_BAUD_RATE)-1) % 0xFF;
+			UBRR0H = (int)(F_CPU/(16.0*TARGET_BAUD_RATE)-1) / 0xFF;
+		//#endif
+			uart_needinit = false;
+		}
 }

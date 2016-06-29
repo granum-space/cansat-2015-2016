@@ -8,6 +8,7 @@
 #ifndef BURN_H_
 #define BURN_H_
 
+void burn_init();
 void burn_burn(int n);
 
 

@@ -2,9 +2,12 @@
 
 #include <avr/io.h>
 #include <util/delay.h>
+#include <stdbool.h>
 
 #include "config.h"
 #include "uart-debug.h"
+
+bool i2c_needinit = true;
 
 
 #define I2C_START_TRANSFERED 0x10
@@ -43,7 +46,10 @@ i2c_error_t i2c_status_to_error(uint8_t status)
 
 void i2c_init()
 {
-	TWBR = (uint8_t)(F_CPU/F_SCL - 16)/2/1;
+	if(i2c_needinit){
+		TWBR = (uint8_t)(F_CPU/F_SCL - 16)/2/1;
+		i2c_needinit = false;
+	}
 }
 
 

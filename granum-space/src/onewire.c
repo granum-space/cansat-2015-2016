@@ -1,15 +1,20 @@
 #include <avr/io.h>
 #include <stdint.h>
 #include <util/delay.h>
+#include <stdbool.h>
 
 #include "config.h"
 #include "onewire.h"
 
+bool OneWireNeedinit = true;
 
 void OneWireInit()
 {
-	ONE_WIRE_PORT &= ~(1 << ONE_WIRE_PIN);
-	ONE_WIRE_DDR &= ~(1 << ONE_WIRE_PIN);
+	if(OneWireNeedinit){
+		ONE_WIRE_PORT &= ~(1 << ONE_WIRE_PIN);
+		ONE_WIRE_DDR &= ~(1 << ONE_WIRE_PIN);
+		OneWireNeedinit = false;
+	}
 }
 
 void OneWireSetBusZero()

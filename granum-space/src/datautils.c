@@ -2,6 +2,7 @@
 
 #include <util/delay.h>
 #include <avr/io.h>
+#include <stdbool.h>
 
 #include "config.h"
 #include "spi.h"
@@ -9,22 +10,27 @@
 #include "uart-debug.h"
 #include "radio-module.h"
 
+bool du_needinit = true;
+
 uint32_t block = 0;
 uint16_t bib = 0;
 
 
 void du_init() {
-	radio_init();
-	GR_DEBUG("Radio init completed!");
+	if(du_needinit){
+		radio_init();
+		GR_DEBUG("Radio init completed!");
 
-	for(int i=0;i<10;i++) {
-		GR_DEBUG("I'm there99\n");
-		if(sd_init()==0x00) {
-			GR_DEBUG("I'm there66\n");
-			break;
-		}
-		_delay_ms(100);
-	} //Для SD карты
+		for(int i=0;i<10;i++) {
+			GR_DEBUG("I'm there99\n");
+			if(sd_init()==0x00) {
+				GR_DEBUG("I'm there66\n");
+				break;
+			}
+			_delay_ms(100);
+		} //Для SD карты
+		du_needinit = false;
+	}
 }
 
 void du_write(const void* data, int length) {

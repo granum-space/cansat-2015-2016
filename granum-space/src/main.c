@@ -7,29 +7,48 @@
 
 #include <avr/io.h>
 #include <util/delay.h>
+#include <stdbool.h>
 
-#include "uart-debug.h"
-#include "datautils.h"
-#include "uart-debug.h"
-#include "sd.h"
-#include "spi.h"
-#include "i2c.h"
-#include "adc.h"
-#include "acc.h"
-#include "onewire.h"
 #include "1wdevices.h"
+#include "acc.h"
+#include "adc.h"
+#include "burn.h"
+#include "config.h"
+#include "datautils.h"
+#include "dht022.h"
+#include "digipot.h"
+#include "gps.h"
+#include "i2c.h"
+#include "onewire.h"
+#include "opt3001.h"
 #include "pkt_types.h"
 #include "radio-module.h"
-#include "dht022.h"
-#include "opt3001.c"
-#include "opt3001.h"
+#include "sd.h"
+#include "soilres.h"
+#include "spi.h"
+#include "time.h"
+#include "uart.h"
+#include "uart-debug.h"
 
 int main(){
+	//It's inits time!
+	acc_init();
+	adc_init();
+	//burn_init();
+	du_init();
+	DHT_Init();
+	digipot_init();
+	GPS_Init();
+	i2c_init();
+	OneWireInit();
 	OPT_init();
-	OPT_check();
-
-	while(1)
-		OPT_RESULT();
+	radio_init();
+	sd_init();
+	soilres_init();
+	spi_init();
+	TimeServiceInit();
+	uart_init();
+	initUartDebug();
 }
 
 

@@ -2,12 +2,15 @@
 
 
 #include "radio-module.h"
+
 #include <avr/io.h>
 #include <util/delay.h>
-#include "uart-debug.h"
+#include <stdbool.h>
 
+#include "uart-debug.h"
 #include "config.h"
 
+bool radio_needinit = true;
 
 void radio_write(const uint8_t *value, size_t size){
 
@@ -20,46 +23,48 @@ void radio_write(const uint8_t *value, size_t size){
 }
 
 void radio_init(){
+	if(radio_needinit){
+		PDDDR |=(1<<PDLEG);
+		PDPORT |= (1<<PDLEG);
 
-	PDDDR |=(1<<PDLEG);
-	PDPORT |= (1<<PDLEG);
+		RTSDDR |= (1<<RTSLEG);
+		RTSPORT &= ~(1<<RTSLEG);
 
-	RTSDDR |= (1<<RTSLEG);
-	RTSPORT &= ~(1<<RTSLEG);
+		CFGDDR = CFGDDR | (1 << CFGLEG);
+		CTSDDR = CTSDDR & ~(1 << CTSLEG);
 
-	CFGDDR = CFGDDR | (1 << CFGLEG);
-	CTSDDR = CTSDDR & ~(1 << CTSLEG);
+		// инициализация уарт
+		UCSR0B = (1 << TXEN0) | (1 << RXC0);// включаем только TX
 
-	// инициализация уарт
-	UCSR0B = (1 << TXEN0) | (1 << RXC0);// включаем только TX
+		UCSR0C = (1 << UCSZ00) | (1 << UCSZ01) // Размер символа - 8 бит
+			| (0 << UPM00) | (0 << UPM01)      // Бит четности отключен
+			| (0 << USBS0) // 1 стоп бит
+		;
 
-	UCSR0C = (1 << UCSZ00) | (1 << UCSZ01) // Размер символа - 8 бит
-		| (0 << UPM00) | (0 << UPM01)      // Бит четности отключен
-		| (0 << USBS0) // 1 стоп бит
-	;
+		UBRR0L = (int)(F_CPU/(16.0*RXQ2_BAUD_RATE)-1) % 0xFF;
+		UBRR0H = (int)(F_CPU/(16.0*RXQ2_BAUD_RATE)-1) / 0xFF;
 
-	UBRR0L = (int)(F_CPU/(16.0*RXQ2_BAUD_RATE)-1) % 0xFF;
-	UBRR0H = (int)(F_CPU/(16.0*RXQ2_BAUD_RATE)-1) / 0xFF;
+		CFGPORT = CFGPORT | (1 << CFGLEG);
+		uint8_t test = 100;
+		radio_write(&test , 1);
+		_delay_ms(100);
+		CFGPORT &= ~(1 << CFGLEG);
 
-	CFGPORT = CFGPORT | (1 << CFGLEG);
-	uint8_t test = 100;
-	radio_write(&test , 1);
-	_delay_ms(100);
-	CFGPORT &= ~(1 << CFGLEG);
+		uint8_t config[12] = {
+			RF_TARGET_ADDR,
+			RF_SELF_ADDR,
+			RF_CH,
+			RF_POWER,
+			RF_TX_PACKET,
+			RF_RX_PACKET,
+		};
 
-	uint8_t config[12] = {
-		RF_TARGET_ADDR,
-		RF_SELF_ADDR,
-		RF_CH,
-		RF_POWER,
-		RF_TX_PACKET,
-		RF_RX_PACKET,
-	};
-
-	radio_write(config, 1);
-	_delay_ms(1000);
-	radio_write(config, 12);
-	_delay_ms(1000);
-	radio_write(config, 1);
-	CFGPORT = CFGPORT | (1 << CFGLEG);
+		radio_write(config, 1);
+		_delay_ms(1000);
+		radio_write(config, 12);
+		_delay_ms(1000);
+		radio_write(config, 1);
+		CFGPORT = CFGPORT | (1 << CFGLEG);
+		radio_needinit = false;
+	}
 }

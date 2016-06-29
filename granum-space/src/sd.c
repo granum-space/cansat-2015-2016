@@ -8,61 +8,68 @@
 #include <avr/io.h>
 #include <stdint.h>
 #include <util/delay.h>
+#include <stdbool.h>
 
 #include "uart-debug.h"
 #include "spi.h"
 #include "config.h"
 
+bool sd_needinit = true;
 
 uint8_t sd_send_r1cmd(uint8_t cmd, uint32_t arg, uint8_t crc);
 void sd_enable();
 void sd_disable();
 
 uint8_t sd_init() {
-	spi_init();
-	SPIDDR |= (1<<SS);
-	SPIPORT |= (1<<SS);
-	sd_disable();
-	for(int i=0;i<20;i++) {
-		spi_sendbyte(0xFF);
-	}
-	sd_enable();
-	uint8_t CMD0[] = {
-		1<<6,
-		0x00,
-		0x00,
-		0x00,
-		0x00,
-		0x95 //CRC8
-	};
-	spi_exchange(CMD0, sizeof(CMD0),0);
 	uint8_t answer;
-	for(int i = 0; i<16;i++) {
-		answer = spi_sendbyte(0xFF);
-		GR_DEBUG("It answered %d\n", answer);
-		if(answer != 0xFF) break;
-	}
-	GR_DEBUG("CMD0 answer %d\n", answer);
-	if(answer != 0x01) return answer;
-	uint8_t CMD1[] = {
-			0x41,
+	if(sd_needinit){
+		spi_init();
+		SPIDDR |= (1<<SS);
+		SPIPORT |= (1<<SS);
+		sd_disable();
+		for(int i=0;i<20;i++) {
+			spi_sendbyte(0xFF);
+		}
+		sd_enable();
+		uint8_t CMD0[] = {
+			1<<6,
 			0x00,
 			0x00,
 			0x00,
 			0x00,
-			0x00 //CRC8
-	};
-	for(int i=0;i<20;i++) {
-		spi_exchange(CMD1, sizeof(CMD1),0);
-		for(int ii=0;ii<10;ii++) {
+			0x95 //CRC8
+		};
+		spi_exchange(CMD0, sizeof(CMD0),0);
+		for(int i = 0; i<16;i++) {
 			answer = spi_sendbyte(0xFF);
+			GR_DEBUG("It answered %d\n", answer);
 			if(answer != 0xFF) break;
 		}
-		GR_DEBUG("CMD1 answer %d\n", answer);
-		if(answer == 0x00) break;
+		GR_DEBUG("CMD0 answer %d\n", answer);
+		if(answer != 0x01) return answer;
+		uint8_t CMD1[] = {
+				0x41,
+				0x00,
+				0x00,
+				0x00,
+				0x00,
+				0x00 //CRC8
+		};
+		for(int i=0;i<20;i++) {
+			spi_exchange(CMD1, sizeof(CMD1),0);
+			for(int ii=0;ii<10;ii++) {
+				answer = spi_sendbyte(0xFF);
+				if(answer != 0xFF) break;
+			}
+			GR_DEBUG("CMD1 answer %d\n", answer);
+			if(answer == 0x00) break;
+		}
+		sd_needinit = false;
 	}
+	else answer = 0x00;
 	return answer;
 	//if(answer != 0) return answer;
+
 }
 
 

@@ -1,25 +1,33 @@
 /*
  * soilres.c
+
  *
  *  Created on: 26 июня 2016 г.
  *      Author: developer
  */
+#include <stdbool.h>
+
 #include "soilres.h"
 #include "adc.h"
 #include "digipot.h"
 #include "config.h"
 
+bool soilres_needinit = true;
+
 soilres_t resdata;
 
 void soilres_init() {
-	adc_init();
-	SRDDR |= (1<<SR1MODE)|(1<<SR1ON)|(1<<SR2MODE)|(1<<SR2ON)|(1<<SR3MODE)|(1<<SR3ON);
-	resdata.res12 = 128;
-	resdata.res23 = 128;
-	resdata.res31 = 128;
-	resdata.diff12 = 0;
-	resdata.diff23 = 0;
-	resdata.diff31 = 0;
+	if(soilres_needinit){
+		adc_init();
+		SRDDR |= (1<<SR1MODE)|(1<<SR1ON)|(1<<SR2MODE)|(1<<SR2ON)|(1<<SR3MODE)|(1<<SR3ON);
+		resdata.res12 = 128;
+		resdata.res23 = 128;
+		resdata.res31 = 128;
+		resdata.diff12 = 0;
+		resdata.diff23 = 0;
+		resdata.diff31 = 0;
+		soilres_needinit = false;
+	}
 }
 
 void legOff(int8_t leg) {

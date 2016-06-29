@@ -10,15 +10,20 @@
 
 #include <avr/io.h>
 #include <util/delay.h>
+#include <stdbool.h>
 
 #include "config.h"
 #include "i2c.h"
 #include "uart-debug.h"
 
+bool digipot_needinit = true;
+
 uint8_t digipot_pos;
 
 void digipot_init(){
-
+	if(digipot_needinit){
+		digipot_needinit = false;
+	}
 }
 
 

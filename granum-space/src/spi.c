@@ -1,9 +1,13 @@
 #include <avr/io.h>
+#include <stdbool.h>
 
 #include "config.h"
 
+bool spi_needinit = true;
+
 void spi_init()
 {
+	if(spi_needinit){
 	   /*настройка портов ввода-вывода
 	   все выводы, кроме MISO выходы*/
 	   SPI_DDRX |= (1<<SPI_MOSI)|(1<<SPI_SCK)|(1<<SPI_SS)|(0<<SPI_MISO);
@@ -12,6 +16,8 @@ void spi_init()
 	   /*разрешение spi,старший бит вперед,мастер, режим 0*/
 	   SPCR = (1<<SPE)|(0<<DORD)|(1<<MSTR)|(0<<CPOL)|(0<<CPHA)|(1<<SPR1)|(0<<SPR0);
 	   SPSR = (0<<SPI2X);
+		spi_needinit = false;
+	}
 }
 
 uint8_t spi_sendbyte(uint8_t arg) {

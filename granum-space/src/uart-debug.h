@@ -13,5 +13,6 @@
 void initUartDebug();
 
 #define GR_DEBUG printf
+#define GR_INITMSG printf
 
 #endif /* UART_DEBUG_H_ */

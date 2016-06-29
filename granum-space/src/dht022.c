@@ -2,14 +2,20 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <util/delay.h>
+#include <stdbool.h>
 
 #include "config.h"
 #include "dht022.h"
 
+bool DHT_needinit = true;
+
 void DHT_Init()
 {
-	DHT_PORT &= ~(1 << DHT_PIN);
-	DHT_DDR &= ~(1 << DHT_PIN);
+	if(DHT_needinit){
+		DHT_PORT &= ~(1 << DHT_PIN);
+		DHT_DDR &= ~(1 << DHT_PIN);
+		DHT_needinit = false;
+	}
 }
 
 
