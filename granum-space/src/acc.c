@@ -42,6 +42,11 @@ uint8_t acc_read(int16_t * datax,int16_t * datay,int16_t * dataz) {
 		*(datay+i) = databuf[2]|(databuf[3]<<8);
 		*(dataz+i) = databuf[4]|(databuf[5]<<8);
 	}
+	if(fifosize==1){
+		if(*datax==0){
+			fifosize=0;
+		}
+	}
 	return fifosize;
 }
 

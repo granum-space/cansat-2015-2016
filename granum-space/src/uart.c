@@ -26,7 +26,13 @@ void uart_send_many(const void* ptr, int length){
 	}
 }
 
-int uart_receive();
+int uart_receive()
+	{
+	while ( !(UCSR0A & (1 << RXC0)) ){}
+
+	return UDR0;
+	}
+
 
 void uart_read_many(const void* ptr, int length) {
 	uint8_t * ptr2 = (uint8_t*) ptr;

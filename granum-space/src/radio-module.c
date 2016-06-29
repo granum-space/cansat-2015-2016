@@ -19,13 +19,6 @@ void radio_write(const uint8_t *value, size_t size){
 	}
 }
 
-int uart_receive()
-	{
-	while ( !(UCSR0A & (1 << RXC0)) ) GR_DEBUG("Waiting for receive\n");
-
-	return UDR0;
-	}
-
 void radio_init(){
 
 	PDDDR |=(1<<PDLEG);
@@ -64,17 +57,9 @@ void radio_init(){
 	};
 
 	radio_write(config, 1);
-	for(int i = 0;i<12;i++){
-		GR_DEBUG("%d, ",uart_receive());
-	}
-	GR_DEBUG("\n");
 	_delay_ms(1000);
 	radio_write(config, 12);
 	_delay_ms(1000);
 	radio_write(config, 1);
-		for(int i = 0;i<12;i++){
-			GR_DEBUG("%d, ",uart_receive());
-		}
-		GR_DEBUG("\n");
 	CFGPORT = CFGPORT | (1 << CFGLEG);
 }
