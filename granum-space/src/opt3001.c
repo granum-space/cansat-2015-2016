@@ -110,7 +110,7 @@ bool OPT_needinit = true;
 #define OPT_FL_TE1 1
 #define OPT_FL_TE0 0
 
-bool marks = true;
+
 
 int OPT_read(uint8_t ADDR_read, uint16_t * value){
 
@@ -146,21 +146,8 @@ int OPT_read(uint8_t ADDR_read, uint16_t * value){
 	 return flag;
 }
 
-int OPT_result_and_chek(uint16_t * result){
-
-	if(marks){
-		uint16_t cfg_reg;
-		int flag = OPT_read(ADDR_REG, &cfg_reg);
-		if(flag != 0)
-			return flag;
-		if(cfg_reg & BYN_OPT){			// стали ли мы измерять выше нижнего предела в 40 лк
-			marks = false ;
-			return 1;
-		}
-		else return 0;
-	}
-		else
-			return OPT_read(ADDR_RES, result);
+int OPT_result(uint16_t * result){
+	return OPT_read(ADDR_RES, result);
 }
 
 int OPT_write(uint8_t ADDR_write, uint16_t * value){
@@ -217,6 +204,17 @@ void OPT_init(){
 		OPT_write(Low_Limit_ADDR, &FL_limit); // отправляем значение нижнего прдела на запись
 		OPT_needinit = false;
 	}
+}
+
+int OPT_check(){
+	uint16_t cfg_reg;
+	int flag = OPT_read(ADDR_REG, &cfg_reg);
+	if(flag != 0)
+		return flag;
+	if(cfg_reg & BYN_OPT) // стали ли мы измерять выше нижнего предела в 40 лк
+		return 1;
+	else
+		return 0;
 }
 
 
