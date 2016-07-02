@@ -3797,6 +3797,9 @@ drill 1.0 mm</description>
 <part name="VCC2" library="solpad" deviceset="LSP10" device=""/>
 <part name="LSP5" library="solpad" deviceset="LSP10" device=""/>
 <part name="LSP6" library="solpad" deviceset="LSP10" device=""/>
+<part name="VCC3" library="solpad" deviceset="LSP10" device=""/>
+<part name="VCC4" library="solpad" deviceset="LSP10" device=""/>
+<part name="VCC5" library="solpad" deviceset="LSP10" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -3821,6 +3824,9 @@ drill 1.0 mm</description>
 <instance part="VCC2" gate="1" x="111.76" y="81.28"/>
 <instance part="LSP5" gate="1" x="116.84" y="55.88"/>
 <instance part="LSP6" gate="1" x="116.84" y="66.04" rot="R180"/>
+<instance part="VCC3" gate="1" x="12.7" y="38.1" rot="R90"/>
+<instance part="VCC4" gate="1" x="53.34" y="38.1" rot="R90"/>
+<instance part="VCC5" gate="1" x="101.6" y="38.1" rot="R90"/>
 </instances>
 <busses>
 </busses>
@@ -3834,19 +3840,12 @@ drill 1.0 mm</description>
 </net>
 <net name="N$2" class="0">
 <segment>
-<pinref part="LSP2" gate="1" pin="MP"/>
-<wire x1="27.94" y1="68.58" x2="27.94" y2="76.2" width="0.1524" layer="91"/>
-<wire x1="27.94" y1="76.2" x2="22.86" y2="76.2" width="0.1524" layer="91"/>
-<wire x1="22.86" y1="76.2" x2="22.86" y2="78.74" width="0.1524" layer="91"/>
-<pinref part="VCC" gate="1" pin="MP"/>
-<wire x1="22.86" y1="76.2" x2="15.24" y2="76.2" width="0.1524" layer="91"/>
-<wire x1="15.24" y1="76.2" x2="15.24" y2="38.1" width="0.1524" layer="91"/>
-<junction x="22.86" y="76.2"/>
 <pinref part="U$1" gate="Q2" pin="G"/>
 <wire x1="15.24" y1="38.1" x2="22.86" y2="38.1" width="0.1524" layer="91"/>
 <wire x1="15.24" y1="38.1" x2="15.24" y2="35.56" width="0.1524" layer="91"/>
-<junction x="15.24" y="38.1"/>
 <pinref part="R1" gate="G$1" pin="2"/>
+<pinref part="VCC3" gate="1" pin="MP"/>
+<junction x="15.24" y="38.1"/>
 </segment>
 </net>
 <net name="N$3" class="0">
@@ -3875,14 +3874,6 @@ drill 1.0 mm</description>
 <wire x1="68.58" y1="76.2" x2="63.5" y2="76.2" width="0.1524" layer="91"/>
 <wire x1="63.5" y1="76.2" x2="63.5" y2="78.74" width="0.1524" layer="91"/>
 <pinref part="VCC1" gate="1" pin="MP"/>
-<wire x1="63.5" y1="76.2" x2="55.88" y2="76.2" width="0.1524" layer="91"/>
-<wire x1="55.88" y1="76.2" x2="55.88" y2="38.1" width="0.1524" layer="91"/>
-<junction x="63.5" y="76.2"/>
-<pinref part="U$2" gate="Q2" pin="G"/>
-<wire x1="55.88" y1="38.1" x2="63.5" y2="38.1" width="0.1524" layer="91"/>
-<wire x1="55.88" y1="38.1" x2="55.88" y2="35.56" width="0.1524" layer="91"/>
-<junction x="55.88" y="38.1"/>
-<pinref part="R2" gate="G$1" pin="2"/>
 </segment>
 </net>
 <net name="N$6" class="0">
@@ -3911,14 +3902,6 @@ drill 1.0 mm</description>
 <wire x1="116.84" y1="76.2" x2="111.76" y2="76.2" width="0.1524" layer="91"/>
 <wire x1="111.76" y1="76.2" x2="111.76" y2="78.74" width="0.1524" layer="91"/>
 <pinref part="VCC2" gate="1" pin="MP"/>
-<wire x1="111.76" y1="76.2" x2="104.14" y2="76.2" width="0.1524" layer="91"/>
-<wire x1="104.14" y1="76.2" x2="104.14" y2="38.1" width="0.1524" layer="91"/>
-<junction x="111.76" y="76.2"/>
-<pinref part="U$3" gate="Q2" pin="G"/>
-<wire x1="104.14" y1="38.1" x2="111.76" y2="38.1" width="0.1524" layer="91"/>
-<wire x1="104.14" y1="38.1" x2="104.14" y2="35.56" width="0.1524" layer="91"/>
-<junction x="104.14" y="38.1"/>
-<pinref part="R3" gate="G$1" pin="2"/>
 </segment>
 </net>
 <net name="N$9" class="0">
@@ -3931,6 +3914,35 @@ drill 1.0 mm</description>
 <wire x1="116.84" y1="20.32" x2="129.54" y2="20.32" width="0.1524" layer="91"/>
 <junction x="116.84" y="20.32"/>
 <pinref part="GND2" gate="1" pin="MP"/>
+</segment>
+</net>
+<net name="N$10" class="0">
+<segment>
+<pinref part="VCC" gate="1" pin="MP"/>
+<wire x1="22.86" y1="76.2" x2="22.86" y2="78.74" width="0.1524" layer="91"/>
+<wire x1="27.94" y1="76.2" x2="22.86" y2="76.2" width="0.1524" layer="91"/>
+<pinref part="LSP2" gate="1" pin="MP"/>
+<wire x1="27.94" y1="68.58" x2="27.94" y2="76.2" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$11" class="0">
+<segment>
+<pinref part="U$2" gate="Q2" pin="G"/>
+<wire x1="55.88" y1="38.1" x2="63.5" y2="38.1" width="0.1524" layer="91"/>
+<wire x1="55.88" y1="38.1" x2="55.88" y2="35.56" width="0.1524" layer="91"/>
+<pinref part="R2" gate="G$1" pin="2"/>
+<pinref part="VCC4" gate="1" pin="MP"/>
+<junction x="55.88" y="38.1"/>
+</segment>
+</net>
+<net name="N$12" class="0">
+<segment>
+<pinref part="U$3" gate="Q2" pin="G"/>
+<wire x1="104.14" y1="38.1" x2="111.76" y2="38.1" width="0.1524" layer="91"/>
+<wire x1="104.14" y1="38.1" x2="104.14" y2="35.56" width="0.1524" layer="91"/>
+<pinref part="R3" gate="G$1" pin="2"/>
+<pinref part="VCC5" gate="1" pin="MP"/>
+<junction x="104.14" y="38.1"/>
 </segment>
 </net>
 </nets>
