@@ -12,10 +12,11 @@
 
 #include "opt3001.h"
 #include "i2c.h"
+#include "uart-debug.h"
 
 bool OPT_needinit = true;
 
-#define OPT3001_ADDR 0x10  // АДРЕСС ДАТЧИКА
+#define OPT3001_ADDR 0x44  // АДРЕСС ДАТЧИКА
 #define ADDR_REG 0x01 // адрес регистра в котором лежит конфигурация в hex
 #define ADDR_RES 0x00 //адрес регистра из которого мы хотим прочитать результат в hex
 #define BYN_OPT (1 << 5)
@@ -118,10 +119,12 @@ int OPT_read(uint8_t ADDR_read, uint16_t * value){
 
 	flag = i2c_start();
 	if(flag != 0)
+		//GR_DEBUG("Start error %d",flag);
 		return flag;
 
 	flag = i2c_send_slaw(OPT3001_ADDR, false);
 	if(flag != 0){
+		GR_DEBUG("Snd slaw error %d",flag);
 		i2c_stop();
 		return flag;
 	}
@@ -129,6 +132,7 @@ int OPT_read(uint8_t ADDR_read, uint16_t * value){
 	uint8_t target_register_addr = ADDR_read;
 	flag = i2c_write(&target_register_addr, 1);
 	if(flag != 0 ){
+		GR_DEBUG("Write error %d",flag);
 		i2c_stop();
 		return flag;
 	}

@@ -6,24 +6,39 @@
 #include <avr/io.h>
 #include <util/delay.h>
 #include <stdbool.h>
+#include <avr/interrupt.h>
 
 #include "uart-debug.h"
 #include "config.h"
 
 bool radio_needinit = true;
 
+uint8_t rxbuf[10];
+int rxbufi;
+bool OnLaunchpad = false;
+
+ISR (USART_RX_vect) {
+	rxbuf[rxbufi] = UDR0;
+	rxbufi++;
+	if(rxbufi == 4) {
+		if((rxbuf[0]==RXMES0) && (rxbuf[1]==RXMES1) && (rxbuf[2]==RXMES2) && (rxbuf[3]==RXMES3)) OnLaunchpad = true;
+		rxbufi = 0;
+	}
+}
+
 void radio_write(const uint8_t *value, size_t size){
 
 	for(size_t i = 0; i < size; i++){
-		while(CTSPIN & (1<<CTSLEG)) GR_DEBUG("CTS wait\n");
-		while ( !(UCSR0A & (1 << UDRE0)) ) GR_DEBUG("FREE WAIT\n");
-		GR_DEBUG("Wait complete\n");
+		while(CTSPIN & (1<<CTSLEG)) {}//GR_DEBUG("CTS wait\n");
+		while ( !(UCSR0A & (1 << UDRE0)) ) {}//GR_DEBUG("FREE WAIT\n");
+		//GR_DEBUG("Wait complete\n");
 		UDR0 = *(value+i);
 	}
 }
 
 void radio_init(){
 	if(radio_needinit){
+		sei();
 		PDDDR |=(1<<PDLEG);
 		PDPORT |= (1<<PDLEG);
 
@@ -34,7 +49,7 @@ void radio_init(){
 		CTSDDR = CTSDDR & ~(1 << CTSLEG);
 
 		// инициализация уарт
-		UCSR0B = (1 << TXEN0) | (1 << RXC0);// включаем только TX
+		UCSR0B = (1 << TXEN0) | (1<<RXEN0) |(1<<RXCIE0);// включаем только TX //(нет)
 
 		UCSR0C = (1 << UCSZ00) | (1 << UCSZ01) // Размер символа - 8 бит
 			| (0 << UPM00) | (0 << UPM01)      // Бит четности отключен

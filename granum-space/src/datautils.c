@@ -19,12 +19,12 @@ uint16_t bib = 0;
 void du_init() {
 	if(du_needinit){
 		radio_init();
-		GR_DEBUG("Radio init completed!");
+		//GR_DEBUG("Radio init completed!");
 
 		for(int i=0;i<10;i++) {
-			GR_DEBUG("I'm there99\n");
+			//GR_DEBUG("I'm there99\n");
 			if(sd_init()==0x00) {
-				GR_DEBUG("I'm there66\n");
+				//GR_DEBUG("I'm there66\n");
 				break;
 			}
 			_delay_ms(100);
@@ -49,10 +49,10 @@ void du_write(const void* data, int length) {
 			uint8_t Answ[6];
 			spi_exchange(CMD24, sizeof(CMD24),Answ);
 			for(int i = 0; i<6;i++) GR_DEBUG("CMD24 transfer %d: %d\n", i, Answ[i]);
-			GR_DEBUG("Start of new packet\n");
+			//GR_DEBUG("Start of new packet\n");
 			for(int i=0;i<10;i++) {
 				uint8_t answer = spi_sendbyte(0xFF);
-				GR_DEBUG("CMD24 answer %d\n", answer);
+				//GR_DEBUG("CMD24 answer %d\n", answer);
 				if(answer==0x00) break;
 			}
 			spi_sendbyte(0xFF);
@@ -70,10 +70,10 @@ void du_write(const void* data, int length) {
 			spi_sendbyte(*(ptr+i));
 			spi_sendbyte(0x99);
 			spi_sendbyte(0x99);
-			GR_DEBUG("It data answer was %d\n",spi_sendbyte(0xFF));
+			//GR_DEBUG("It data answer was %d\n",spi_sendbyte(0xFF));
 			for(int ii=0;ii<10;ii++) {
 				uint8_t answer = spi_sendbyte(0xFF);
-				GR_DEBUG("%d\n", answer);
+				//GR_DEBUG("%d\n", answer);
 				if(answer) break;
 			}
 			bib = 0;

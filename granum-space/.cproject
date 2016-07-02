@@ -58,7 +58,7 @@
 					</folderInfo>
 					<sourceEntries>
 						<entry excluding="src|SRC" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
-						<entry excluding="ringBuffer.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
+						<entry excluding="uart.c|time.c|soilres.c|ringBuffer.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>

@@ -6,10 +6,15 @@
  */
 #include <avr/io.h>
 #include <stdbool.h>
+#include <avr/interrupt.h>
+
+#include "config.h"
 
 bool uart_needinit = true;
 
 #define TARGET_BAUD_RATE 9600
+
+
 
 void uart_send(uint8_t value) {
 	/*#if defined __AVR_ATmega128__ // для атмеги128 используем UART1 (не UART0)

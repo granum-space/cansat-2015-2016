@@ -42,10 +42,10 @@ uint8_t sd_init() {
 		spi_exchange(CMD0, sizeof(CMD0),0);
 		for(int i = 0; i<16;i++) {
 			answer = spi_sendbyte(0xFF);
-			GR_DEBUG("It answered %d\n", answer);
+			//GR_DEBUG("It answered %d\n", answer);
 			if(answer != 0xFF) break;
 		}
-		GR_DEBUG("CMD0 answer %d\n", answer);
+		//GR_DEBUG("CMD0 answer %d\n", answer);
 		if(answer != 0x01) return answer;
 		uint8_t CMD1[] = {
 				0x41,
@@ -61,7 +61,7 @@ uint8_t sd_init() {
 				answer = spi_sendbyte(0xFF);
 				if(answer != 0xFF) break;
 			}
-			GR_DEBUG("CMD1 answer %d\n", answer);
+			//GR_DEBUG("CMD1 answer %d\n", answer);
 			if(answer == 0x00) break;
 		}
 		sd_needinit = false;

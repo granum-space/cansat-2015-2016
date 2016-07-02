@@ -14,15 +14,20 @@
 
 uint8_t calc_crc8(const void * data_ptr, size_t data_size);
 
-int32_t get_temperature()
-{
+
+int32_t start_temperature() {
 	uint8_t number  = OneWireReset();
 	if(number == 0)
 		return reset_error;
 	OneWireWriteByte(0xCC);
 	OneWireWriteByte(0x44);
-	_delay_ms(1000);
-	OneWireReset();
+	return 0;
+}
+int32_t get_temperature()
+{
+	uint8_t number  = OneWireReset();
+	if(number == 0)
+		return reset_error;
 	OneWireWriteByte(0xCC);
 	OneWireWriteByte(0xBE);
 
