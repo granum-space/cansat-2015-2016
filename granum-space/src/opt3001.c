@@ -111,7 +111,62 @@ bool OPT_needinit = true;
 #define OPT_FL_TE1 1
 #define OPT_FL_TE0 0
 
+int OPT_write(uint8_t ADDR_write, const uint16_t * value){
+	int flag = 0;
 
+	flag = i2c_start();
+	if(flag != 0)
+		return flag;
+
+	flag = i2c_send_slaw(OPT3001_ADDR, false);
+	if(flag != 0){
+		i2c_stop();
+		return flag;
+	}
+
+	uint8_t target_register_addr = ADDR_write;
+	flag = i2c_write(&target_register_addr, 1);
+	if (flag != 0)
+	{
+		i2c_stop();
+	    return flag;
+	}
+
+	uint8_t * value_ptr = (uint8_t*)value;
+	flag = i2c_write(value_ptr+1, 1);
+	flag = i2c_write(value_ptr, 1);
+	i2c_stop();
+	return flag;
+}
+
+int OPT_CONFIG(){
+	uint16_t result_conf;
+	int flag = OPT_result (&result_conf);
+		if(flag != 0)
+			return flag;
+		// сырое значение данных полученное из регистра
+
+
+		// Маскируем биты порядка и записываем результат в отдельную переменную.
+		uint16_t mantisa = result_conf & ~((1 << 15) | (1 << 14) | (1 << 13) | (1 << 12));
+
+		// сдвигаем нулевой бит порядка на место и опять записываем в отдельную переменную.
+		uint16_t order = result_conf >> 12;
+
+		// считаем люксы по формуле
+		uint16_t lux = 0.01f * mantisa * pow(2.0f, order); // pow - функция возведения в степерь.
+		if(lux <= 40.95){
+			uint16_t FL_limit = ((lux+5) * 100) | (0 << 12);
+			return flag = OPT_write(Low_Limit_ADDR, &FL_limit); // отправляем значение нижнего прдела на запись
+
+		}
+		else if(lux <= 81.90){
+			uint16_t FL_limit = ((lux+5) * 50) | (0 << OPT_FL_LE3) | (0 << OPT_FL_LE2) | (0 << OPT_FL_LE1) | (1 << OPT_FL_LE0);
+			return flag = OPT_write(Low_Limit_ADDR, &FL_limit);
+		}
+		return flag;
+
+}
 
 int OPT_read(uint8_t ADDR_read, uint16_t * value){
 
@@ -144,7 +199,12 @@ int OPT_read(uint8_t ADDR_read, uint16_t * value){
 	        return flag;
 	 }
 
-	 flag = i2c_read(&value, 2, true);
+	 flag = i2c_read(value, 2, true);
+
+	 uint8_t * value_ptr = (uint8_t*)value;
+	 uint8_t b = value_ptr[0];
+	 value_ptr[0] = value_ptr[1];
+	 value_ptr[1] = b;
 
 	 i2c_stop();
 	 return flag;
@@ -154,36 +214,9 @@ int OPT_result(uint16_t * result){
 	return OPT_read(ADDR_RES, result);
 }
 
-int OPT_write(uint8_t ADDR_write, uint16_t * value){
-	int flag = 0;
-
-	flag = i2c_start();
-	if(flag != 0)
-		return flag;
-
-	flag = i2c_send_slaw(OPT3001_ADDR, false);
-	if(flag != 0){
-		i2c_stop();
-		return flag;
-	}
-
-	uint8_t target_register_addr = ADDR_write;
-	flag = i2c_write(&target_register_addr, 1);
-	if (flag != 0)
-	{
-		i2c_stop();
-	    return flag;
-	}
-	flag = i2c_write(value, 2);
-	i2c_stop();
-	return flag;
-}
-
 void OPT_init(){
 	if(OPT_needinit){
-		// нижний лимит равен 40 люкс ( табл на стр 20 )
-		//40 / 0,01 = 4000 в бинарном это  111110100000
-		uint16_t FL_limit = 4000 | (0 << 12);
+
 		uint16_t cfg_reg =
 				// автоматическое определение пределов измерения
 				(0 << OPT_CFG_RN0) | (0 << OPT_CFG_RN1) | (1 << OPT_CFG_RN2) | (1 << OPT_CFG_RN3) |
@@ -205,7 +238,7 @@ void OPT_init(){
 
 		// меняем конфигурацию
 		OPT_write(ADDR_REG, &cfg_reg);  // отправлеям новую конфу на запись
-		OPT_write(Low_Limit_ADDR, &FL_limit); // отправляем значение нижнего прдела на запись
+
 		OPT_needinit = false;
 	}
 }

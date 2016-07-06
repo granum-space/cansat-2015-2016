@@ -11,6 +11,7 @@
 #include <stdint.h>
 #include <stddef.h>
 
+int32_t start_temperature();
 int32_t get_temperature();
 
 // Подсчет контрольной суммы алгоритмом CRC-8

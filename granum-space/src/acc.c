@@ -25,7 +25,7 @@ void acc_init() {
 		acc_writereg(BW_RATE, &datarate, 1);
 		uint8_t fifoset = FIFOSET;
 		acc_writereg(FIFO_CTL, &fifoset, 1);
-		uint8_t dataformat = (1<<3);
+		uint8_t dataformat = (1<<3)|(1<<1)|(1<<0);
 		acc_writereg(DATA_FORMAT, &dataformat, 1);
 		uint8_t devid = 0;
 		acc_readreg(DEVID,&devid,1);
@@ -74,7 +74,7 @@ void acc_readreg(uint8_t registry, void * data_ptr, size_t data_size) {
 	/*GR_DEBUG("Read start status %d\n",i2c_start());
 	GR_DEBUG("Read snd slaw status %d\n",i2c_send_slaw(ACC_ADRESS, false));*/
 	i2c_start();
-	i2c_send_slaw(ACC_ADRESS, false);
+	GR_DEBUG("SND slaw error %d\n",i2c_send_slaw(ACC_ADRESS, false));
 	i2c_write(&registry, 1);
 	i2c_start();
 	/*GR_DEBUG("Read snd slaw status %d\n",i2c_send_slaw(ACC_ADRESS, true));

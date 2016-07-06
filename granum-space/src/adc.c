@@ -65,8 +65,8 @@ int16_t adc_read(adc_channel_t channel)
 	switch(channel)
 	{
 	case ADC_CHANNEL_PRESSURE: //ADC7
-		ADMUX |= (1 << MUX0) | (1 << MUX1) | (1 << MUX2) | (0 << MUX3) | (0 << MUX4);
-		//ADMUX |= (0 << MUX0) | (0 << MUX1) | (0 << MUX2) | (0 << MUX3) | (0 << MUX4);
+		//ADMUX |= (1 << MUX0) | (1 << MUX1) | (1 << MUX2) | (0 << MUX3) | (0 << MUX4);
+		ADMUX |= (0 << MUX0) | (0 << MUX1) | (0 << MUX2) | (0 << MUX3) | (0 << MUX4);
 
 		break;
 

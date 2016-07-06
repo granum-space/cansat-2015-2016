@@ -12,6 +12,8 @@
 #include <avr/io.h>
 
 
+int OPT_CONFIG();
+
 // инициализация
 void OPT_init();
 
@@ -20,5 +22,7 @@ int OPT_check();
 
 // возвращает результат измерения
 int OPT_result(uint16_t * result);
+
+int OPT_read(uint8_t ADDR_read, uint16_t * value);
 
 #endif /* OPT3001_H_ */

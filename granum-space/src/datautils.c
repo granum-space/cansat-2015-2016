@@ -19,7 +19,7 @@ uint16_t bib = 0;
 void du_init() {
 	if(du_needinit){
 		radio_init();
-		//GR_DEBUG("Radio init completed!");
+		GR_DEBUG("Radio init completed!");
 
 		for(int i=0;i<10;i++) {
 			//GR_DEBUG("I'm there99\n");

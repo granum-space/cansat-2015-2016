@@ -17,7 +17,7 @@ uint8_t rxbuf[10];
 int rxbufi;
 bool OnLaunchpad = false;
 
-ISR (USART_RX_vect) {
+ISR (USART0_RX_vect) {
 	rxbuf[rxbufi] = UDR0;
 	rxbufi++;
 	if(rxbufi == 4) {

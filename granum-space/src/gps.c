@@ -10,6 +10,7 @@
 #include <stdbool.h>
 
 #include "spi.h"
+#include "config.h"
 
 bool gps_needinit = true;
 
@@ -32,6 +33,7 @@ char lat_side,long_side;
 void GPS_Init()
 {
 	if(gps_needinit){
+		SPI_DDRX |= (1<<GPSSS);
 		spi_init();
 		gps_status = SEARCHING;
 		gps_needinit = false;
@@ -44,6 +46,7 @@ void parse_RMC();
 
 bool GPS_update(int cycles)
 {
+	SPI_PORTX |= (1<<GPSSS);
 	bool updated;
 	char symbol;
 	int i=0;
@@ -148,6 +151,7 @@ bool GPS_update(int cycles)
 			break;
 		}
 	}
+	SPI_PORTX &= ~(1<<GPSSS);
 	return updated;
 }
 

@@ -19,7 +19,7 @@
 // i2c
 #define I2C_TIMEOUT_COUNT 10000
 #define I2C_TIMEOUT_US 10
-#define F_SCL 400000
+#define F_SCL 4000000
 
 // onewire
 #define ONE_WIRE_PORT PORTC
@@ -38,7 +38,7 @@
 #define RF_POWER 3 // Мощность радиопередатчика. Значения 0: -10dBm, 1: -2dBm, 2: +6dBm, 3: +10dBm
 #define RF_RX_PACKET 30 // размер принимаемых  пакетов (30 максимум)
 #define RF_TX_PACKET 30 // размер отсылаемых пакетов (30 максимум)
-#define RF_SELF_ADDR  0x01, 0x02, 0x03, 0x04 // адрес модуля
+#define RF_SELF_ADDR  0x7e, 0x7e, 0x7e, 0x7e // адрес модуля
 #define RF_TARGET_ADDR 0x7e, 0x7e, 0x7e, 0x7e // адрес получателя
 
 #define CTSDDR DDRC
@@ -88,7 +88,7 @@
 #define FIFOSET (1<<7)|32
 #define POWERCTL (1<<3)
 
-#define ACC_ADRESS 0x53
+#define ACC_ADRESS 0x1D
 
 #define DEVID 0x00
 #define THRESH_SHOCK 0x1D
@@ -134,4 +134,14 @@
 #define RXMES1 0xF2
 #define RXMES2 0xF3
 #define RXMES3 0xF4
+
+//GPS
+#define GPSSS 4
+
+//Firerers
+#define FRDDR DDRA
+#define FRPORT PORTA
+#define FRLEGS 6
+#define FRSEEDS 7
+
 #endif /* CONFIG_H_ */

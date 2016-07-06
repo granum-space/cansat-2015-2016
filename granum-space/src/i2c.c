@@ -47,7 +47,7 @@ i2c_error_t i2c_status_to_error(uint8_t status)
 void i2c_init()
 {
 	if(i2c_needinit){
-		TWBR = (uint8_t)(F_CPU/F_SCL - 16)/2/1;
+		TWBR = 0xFF;//(uint8_t)(F_CPU/F_SCL - 16)/2/1;
 		i2c_needinit = false;
 	}
 }
