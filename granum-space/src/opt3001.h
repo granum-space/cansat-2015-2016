@@ -11,7 +11,7 @@
 #include <util/delay.h>
 #include <avr/io.h>
 
-
+/*
 int OPT_CONFIG();
 
 // инициализация
@@ -24,5 +24,5 @@ int OPT_check();
 int OPT_result(uint16_t * result);
 
 int OPT_read(uint8_t ADDR_read, uint16_t * value);
-
+*/
 #endif /* OPT3001_H_ */

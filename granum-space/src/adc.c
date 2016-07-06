@@ -87,12 +87,12 @@ int16_t adc_read(adc_channel_t channel)
 		ADMUX |= (1 << MUX0) | (0 << MUX1) | (0 << MUX2) | (0 << MUX3) | (1 << MUX4);
 	  break;
 
-	case ADC_CHANNEL_O2_SENS : //ADC5
-		ADMUX |= (1 << MUX0) | (0 << MUX1) | ( 1 << MUX2) | (0 << MUX3) | (0 << MUX4);
+	case ADC_CHANNEL_O2_SENS : //ADC2
+		ADMUX |= (0 << MUX0) | (1 << MUX1) | (0 << MUX2) | (0 << MUX3) | (0 << MUX4);
 	break;
 
-	case ADC_CHANNEL_CO2_SENS : //ADC6
-		ADMUX |= (0 << MUX0) | (1 << MUX1) | ( 1 << MUX2) | (0 << MUX3) | (0 << MUX4);
+	case ADC_CHANNEL_CO2_SENS : //ADC3
+		ADMUX |= (1 << MUX0) | (1 << MUX1) | (0 << MUX2) | (0 << MUX3) | (0 << MUX4);
 	break;
 	};
 

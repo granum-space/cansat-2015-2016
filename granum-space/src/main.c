@@ -21,7 +21,7 @@
 #include "gps.h"
 #include "i2c.h"
 #include "onewire.h"
-#include "opt3001.h"
+//#include "opt3001.h"
 #include "pkt_types.h"
 #include "radio-module.h"
 #include "sd.h"
@@ -39,9 +39,11 @@ timeData_t startOfConv_time;
 timeData_t startOfSeeds_time;
 bool SeedStarted = 0;
 
-timeData_t BigLuxTime;
-bool isBigLux;
-bool needCloseLEGFR = 0;
+//timeData_t BigLuxTime;
+//bool isBigLux;
+//bool needCloseLEGFR = 0;
+
+bool Started = false;
 
 uint16_t PresBuf[5];
 int PresBufi;
@@ -61,7 +63,7 @@ int main(){
 	//GPS_Init();
 	i2c_init();
 	OneWireInit();
-	OPT_init();
+	//OPT_init();
 	radio_init();
 	sd_init();
 	//soilres_init();
@@ -81,7 +83,7 @@ int main(){
 	cli();
 	start_temperature();
 
-	isBigLux = false;
+	//isBigLux = false;
 
 	sei();
 	_delay_ms(1);
@@ -92,6 +94,7 @@ int main(){
 	pkt.temperature2 = 0;
 	while(1){
 		for(int i = 0;i<1;i++) {
+			PORTG ^= 0xFF;
 			dataaval = acc_read(accpkt.datax,accpkt.datay,accpkt.dataz);
 			TempTime = TimeServiceGet();
 			accpkt.time = TempTime.seconds;
@@ -124,7 +127,7 @@ int main(){
 		pkt.pressure = adc_read(ADC_CHANNEL_PRESSURE);
 		pkt.O2 = adc_read(ADC_CHANNEL_O2_SENS);
 		pkt.CO2 = adc_read(ADC_CHANNEL_CO2_SENS);
-		OPT_result(&pkt.lum);
+		//OPT_result(&pkt.lum);
 		TempTime = TimeServiceGet();
 		pkt.time = TempTime.seconds;
 		pkt.time_part = TempTime.subseconds;
@@ -151,25 +154,18 @@ int main(){
 			}
 			du_write(&accpkt.cntrl, 2);
 		}
-
-		if(needCloseLEGFR){
-			if(BigLuxTime.seconds-TimeServiceGet().seconds){
-				FRPORT &= ~(1<<FRLEGS);
-				needCloseLEGFR = 0;
-				pkt.legs = 1;
+		if(OnLaunchpad) {
+			if(StartPres - adc_read(ADC_CHANNEL_PRESSURE) > 20) {
+				OnLaunchpad = 0;
+				Started = 1;
 			}
 		}
-		if(OPT_check() && (!isBigLux) && OnLaunchpad) {
-			FRPORT |= (1<<FRLEGS);
-			BigLuxTime = TimeServiceGet();
-			needCloseLEGFR = 1;
-			isBigLux = 1;
-		}
-		if(pkt.legs){
+		if(Started){
 			if(WaitLand){
 				PresBuf[PresBufi] = pkt.pressure;
-				if(((((PresBuf[2]-PresBuf[0])<5))&&(((PresBuf[0]-PresBuf[2])<5)))&&((((PresBuf[2]-PresBuf[1])<5))&&(((PresBuf[1]-PresBuf[2])<5)))&&((((PresBuf[2]-PresBuf[3])<5))&&(((PresBuf[3]-PresBuf[2])<5)))&&((((PresBuf[2]-PresBuf[4])<5))&&(((PresBuf[4]-PresBuf[2])<5)))){
+				if(((((PresBuf[2]-PresBuf[0])<1))&&(((PresBuf[0]-PresBuf[2])<1)))&&((((PresBuf[2]-PresBuf[1])<1))&&(((PresBuf[1]-PresBuf[2])<1)))&&((((PresBuf[2]-PresBuf[3])<1))&&(((PresBuf[3]-PresBuf[2])<1)))&&((((PresBuf[2]-PresBuf[4])<1))&&(((PresBuf[4]-PresBuf[2])<1)))){
 					FRPORT |= (1<<FRSEEDS);
+					Started = 0;
 					SeedStarted = 1;
 					startOfSeeds_time = TimeServiceGet();
 				}

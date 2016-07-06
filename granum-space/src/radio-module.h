@@ -13,6 +13,7 @@
 #include <stdbool.h>
 
 extern bool OnLaunchpad;
+extern uint16_t StartPres;
 
 void radio_init();
 void radio_write(const uint8_t *value, size_t size);

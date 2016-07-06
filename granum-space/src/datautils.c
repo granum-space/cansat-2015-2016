@@ -48,7 +48,7 @@ void du_write(const void* data, int length) {
 			};
 			uint8_t Answ[6];
 			spi_exchange(CMD24, sizeof(CMD24),Answ);
-			for(int i = 0; i<6;i++) GR_DEBUG("CMD24 transfer %d: %d\n", i, Answ[i]);
+			//for(int i = 0; i<6;i++) GR_DEBUG("CMD24 transfer %d: %d\n", i, Answ[i]);
 			//GR_DEBUG("Start of new packet\n");
 			for(int i=0;i<10;i++) {
 				uint8_t answer = spi_sendbyte(0xFF);

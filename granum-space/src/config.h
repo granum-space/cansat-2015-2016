@@ -141,7 +141,7 @@
 //Firerers
 #define FRDDR DDRA
 #define FRPORT PORTA
-#define FRLEGS 6
-#define FRSEEDS 7
+#define FRLEGS 7
+#define FRSEEDS 6
 
 #endif /* CONFIG_H_ */

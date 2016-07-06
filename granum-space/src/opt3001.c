@@ -110,7 +110,7 @@ bool OPT_needinit = true;
 #define OPT_FL_TE2 2
 #define OPT_FL_TE1 1
 #define OPT_FL_TE0 0
-
+/*
 int OPT_write(uint8_t ADDR_write, const uint16_t * value){
 	int flag = 0;
 
@@ -214,6 +214,7 @@ int OPT_result(uint16_t * result){
 	return OPT_read(ADDR_RES, result);
 }
 
+
 void OPT_init(){
 	if(OPT_needinit){
 
@@ -253,6 +254,6 @@ int OPT_check(){
 	else
 		return 0;
 }
-
+*/
 
 

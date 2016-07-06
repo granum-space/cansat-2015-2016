@@ -10,20 +10,26 @@
 
 #include "uart-debug.h"
 #include "config.h"
+#include "adc.h"
 
 bool radio_needinit = true;
 
 uint8_t rxbuf[10];
 int rxbufi;
 bool OnLaunchpad = false;
+uint16_t StartPres;
 
 ISR (USART0_RX_vect) {
 	rxbuf[rxbufi] = UDR0;
 	rxbufi++;
 	if(rxbufi == 4) {
-		if((rxbuf[0]==RXMES0) && (rxbuf[1]==RXMES1) && (rxbuf[2]==RXMES2) && (rxbuf[3]==RXMES3)) OnLaunchpad = true;
+		if((rxbuf[0]==RXMES0) && (rxbuf[1]==RXMES1) && (rxbuf[2]==RXMES2) && (rxbuf[3]==RXMES3)) {
+			OnLaunchpad = true;
+			StartPres = adc_read(ADC_CHANNEL_PRESSURE);
+		}
 		rxbufi = 0;
 	}
+	if(rxbufi == 9) rxbufi = 0;
 }
 
 void radio_write(const uint8_t *value, size_t size){
