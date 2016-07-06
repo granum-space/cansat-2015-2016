@@ -70,12 +70,12 @@ int main(){
 	spi_init();
 	TimeServiceInit();
 	dtpkt_t pkt;
-	accpkt_t accpkt;
+	/*accpkt_t accpkt;
 	accpkt.beacon = 0xACCC;
 	accpkt.number = 0;
 	accpkt.entries = 0;
 
-	uint8_t dataaval=0;
+	uint8_t dataaval=0;*/
 
 	pkt.beacon = 0xFFFF;
 	pkt.number = 0;
@@ -93,8 +93,8 @@ int main(){
 	pkt.humidity = 0;
 	pkt.temperature2 = 0;
 	while(1){
-		for(int i = 0;i<1;i++) {
-			PORTG ^= 0xFF;
+		PORTG ^= 0xFF;
+		/*for(int i = 0;i<1;i++) {
 			dataaval = acc_read(accpkt.datax,accpkt.datay,accpkt.dataz);
 			TempTime = TimeServiceGet();
 			accpkt.time = TempTime.seconds;
@@ -111,7 +111,7 @@ int main(){
 				}
 				du_write(&accpkt.cntrl, 2);
 			}
-		}
+		}*/
 		TempTime = TimeServiceGet();
 		if(TempTime.seconds-startOfConv_time.seconds){
 			cli();
@@ -120,7 +120,7 @@ int main(){
 			startOfConv_time = TimeServiceGet();
 		}
 		cli();
-		int rc = DHT_Read(&pkt.humidity,&pkt.temperature2);
+		DHT_Read(&pkt.humidity,&pkt.temperature2);
 		sei();
 //		if (rc != 0)
 //			GR_DEBUG("dht22 error = %d\n", rc);
@@ -138,7 +138,7 @@ int main(){
 		du_write(&pkt, sizeof(pkt));
 		//GR_DEBUG("Number %d, %d sec %d subsec, temp1 %d, temp2 %d, pres %d, hum %d, O2 %d, CO2 %d, lum %d\n", pkt.number, pkt.time, pkt.time_part, pkt.temperature1,pkt.temperature2,pkt.pressure,pkt.humidity,pkt.O2,pkt.CO2,pkt.lum);
 
-		dataaval = acc_read(accpkt.datax,accpkt.datay,accpkt.dataz);
+		/*dataaval = acc_read(accpkt.datax,accpkt.datay,accpkt.dataz);
 		TempTime = TimeServiceGet();
 		accpkt.time = TempTime.seconds;
 		accpkt.time_part = TempTime.subseconds;
@@ -153,17 +153,22 @@ int main(){
 				accpkt.cntrl += *((uint8_t*)(&accpkt)+i);
 			}
 			du_write(&accpkt.cntrl, 2);
-		}
+		}*/
 		if(OnLaunchpad) {
-			if(StartPres - adc_read(ADC_CHANNEL_PRESSURE) > 20) {
+			//if(StartPres - adc_read(ADC_CHANNEL_PRESSURE) > 20) {
 				OnLaunchpad = 0;
 				Started = 1;
-			}
+			//}
 		}
 		if(Started){
 			if(WaitLand){
+				int treshhold = 100;
 				PresBuf[PresBufi] = pkt.pressure;
-				if(((((PresBuf[2]-PresBuf[0])<1))&&(((PresBuf[0]-PresBuf[2])<1)))&&((((PresBuf[2]-PresBuf[1])<1))&&(((PresBuf[1]-PresBuf[2])<1)))&&((((PresBuf[2]-PresBuf[3])<1))&&(((PresBuf[3]-PresBuf[2])<1)))&&((((PresBuf[2]-PresBuf[4])<1))&&(((PresBuf[4]-PresBuf[2])<1)))){
+				bool onePres = 1;
+				for(int i = 1;i<5;i++){
+					if((PresBuf[0]-PresBuf[i]>treshhold)||(PresBuf[i]-PresBuf[0])>treshhold) onePres=0;
+				}
+				if(onePres){
 					FRPORT |= (1<<FRSEEDS);
 					Started = 0;
 					SeedStarted = 1;
@@ -184,6 +189,7 @@ int main(){
 				pkt.seeds = 1;
 			}
 		}
+		_delay_ms(900);
 	}
 }
 

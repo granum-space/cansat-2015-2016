@@ -18,7 +18,7 @@ typedef struct {
 		O2, CO2,
 		lum,
 		term;
-	uint8_t legs, seeds;
+	uint8_t seeds;
 	uint16_t cntrl;
 } dtpkt_t;
 

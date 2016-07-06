@@ -16,7 +16,7 @@ bool radio_needinit = true;
 
 uint8_t rxbuf[10];
 int rxbufi;
-bool OnLaunchpad = false;
+bool OnLaunchpad = true;
 uint16_t StartPres;
 
 ISR (USART0_RX_vect) {
