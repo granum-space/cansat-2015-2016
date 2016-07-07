@@ -155,14 +155,14 @@ int main(){
 			du_write(&accpkt.cntrl, 2);
 		}*/
 		if(OnLaunchpad) {
-			//if(StartPres - adc_read(ADC_CHANNEL_PRESSURE) > 20) {
+			if(StartPres - adc_read(ADC_CHANNEL_PRESSURE) > 20) {
 				OnLaunchpad = 0;
 				Started = 1;
-			//}
+			}
 		}
 		if(Started){
 			if(WaitLand){
-				int treshhold = 100;
+				int treshhold = 1;
 				PresBuf[PresBufi] = pkt.pressure;
 				bool onePres = 1;
 				for(int i = 1;i<5;i++){
